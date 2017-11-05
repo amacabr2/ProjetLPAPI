@@ -73,3 +73,10 @@ swiftmailer:
 sensio_framework_extra:
     request: { converters: true }
 
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: UserBundle\Entity\User
+    from_email:
+        address: "amacabr2@gmail.com"
+        sender_name: "amacabr2"
