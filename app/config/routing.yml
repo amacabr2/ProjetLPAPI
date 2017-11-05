@@ -1,7 +1,9 @@
-auth:
-    resource: "@AuthBundle/Controller/"
+user:
+    resource: "@UserBundle/Controller/"
     type:     annotation
-    prefix:   /
+    prefix:   /users
+    defaults:
+        _format: json
 
 app:
     resource: '@AppBundle/Controller/'
