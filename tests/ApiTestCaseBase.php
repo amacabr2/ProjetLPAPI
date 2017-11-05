@@ -43,7 +43,6 @@ class ApiTestCaseBase extends WebTestCase {
      * @return User
      */
     protected function createUser(string $username, string $password): User {
-        var_dump("createUser");
         $userManager = $this->getService('fos_user.user_manager');
         $user = $userManager->createUser();
         $user->setEnabled(true);

@@ -2,10 +2,11 @@
 
 namespace UserBundle\Controller;
 
-use GuzzleHttp\Psr7\Request;
+use FOS\UserBundle\Model\UserInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 use UserBundle\Entity\User;
@@ -33,13 +34,13 @@ class LoginController extends Controller {
             $this->createNotFoundException();
         }
 
-        $isValid = $this->get('security.password_encoder')->isPasswordValid($user, $password);
-        if (!$isValid) {
+        //$isPasswordValid = $this->get('security.password_encoder')->isPasswordValid($user, $password);
+        if ($user->getPassword() != $password) {
             throw new BadCredentialsException();
         }
 
         return $this->setBaseHeaders(new Response(
-            $this->serialize(['token',  $this->getToken($user)]),
+            $this->serialize(['token' => $this->getToken($user)]),
             Response::HTTP_OK
         ));
     }

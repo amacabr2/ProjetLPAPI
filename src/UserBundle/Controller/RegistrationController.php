@@ -5,7 +5,6 @@ namespace UserBundle\Controller;
 use FOS\UserBundle\Controller\RegistrationController as BaseController;
 use FOS\UserBundle\Form\Factory\FactoryInterface;
 use FOS\UserBundle\Model\UserManagerInterface;
-use JMS\Serializer\SerializationContext;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -82,19 +81,6 @@ class RegistrationController extends BaseController {
         throw new BadRequestHttpException(
             $this->serialize($this->getErrorsFromForm($form))
         );
-    }
-
-    /**
-     * Data serializing via JMS serializer.
-     *
-     * @param mixed $data
-     *
-     * @return string JSON string
-     */
-    public function serialize($data): string{
-        $context = new SerializationContext();
-        $context->setSerializeNull(true);
-        return $this->get('jms_serializer')->serialize($data, 'json', $context);
     }
 
     /**

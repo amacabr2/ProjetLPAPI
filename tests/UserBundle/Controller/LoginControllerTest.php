@@ -14,14 +14,12 @@ use Tests\ApiTestCaseBase;
 class LoginControllerTest extends ApiTestCaseBase {
 
     public function testPOSTLoginUser() {
-        $username = "amacabr2";
-        $password = "azerty";
-        $user = $this->createUser($username, $password);
+        $user = $this->createUser("amacabr2", "test123");
 
-        $this->client->request('POST', 'users/login', [], [], [
+        $this->client->request('POST', '/users/login', [], [], [
             'CONTENT_TYPE' => 'application/json',
-            'PHP_AUTH_USER' => $username,
-            'PHP_AUTH_PW' => $password
+            'PHP_AUTH_USER' => $user->getUsername(),
+            'PHP_AUTH_PW'   => $user->getPassword(),
         ]);
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
