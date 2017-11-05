@@ -3,7 +3,7 @@
 security:
 
     encoders:
-        FOS\UserBundle\Model\UserInterface: bcript
+        FOS\UserBundle\Model\UserInterface: sha512
 
     role_hierarchy:
         ROLE_ADMIN: ROLE_USER
