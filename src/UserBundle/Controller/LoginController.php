@@ -22,13 +22,13 @@ class LoginController extends Controller {
      * @return Response
      */
     public function loginAction(Request $request): Response {
-        $username = $request->getUser();
-        $password = $request->getPassword();
+        $data = json_decode($request->getContent());
+        $username = $data->username;
+        $password = $data->password;
 
         $user = $this->getDoctrine()
             ->getRepository('UserBundle:User')
             ->findOneBy(['username' => $username]);
-
 
         if (!$user) {
             throw $this->createNotFoundException();

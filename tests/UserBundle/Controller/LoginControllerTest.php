@@ -23,9 +23,10 @@ class LoginControllerTest extends ApiTestCaseBase {
 
         $this->client->request('POST', '/users/login', [], [], [
             'CONTENT_TYPE' => 'application/json',
-            'PHP_AUTH_USER' => $user->getUsername(),
-            'PHP_AUTH_PW'   => $user->getPassword(),
-        ]);
+        ], json_encode([
+            'username' => $user->getUsername(),
+            'password'=> $user->getPassword()
+        ]));
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
@@ -38,9 +39,10 @@ class LoginControllerTest extends ApiTestCaseBase {
 
         $this->client->request('POST', '/users/login', [], [], [
                 'CONTENT_TYPE' => 'application/json',
-                'PHP_AUTH_USER' => $user->getUsername() . 'wrong_username',
-                'PHP_AUTH_PW'   => $user->getPassword(),
-            ]
+            ], json_encode([
+                'username' => $user->getUsername() . 'bad_username',
+                'password'=> $user->getPassword()
+            ])
         );
 
         $this->assertEquals(404, $this->client->getResponse()->getStatusCode());
@@ -53,9 +55,10 @@ class LoginControllerTest extends ApiTestCaseBase {
 
         $this->client->request('POST', '/users/login', [], [], [
                 'CONTENT_TYPE' => 'application/json',
-                'PHP_AUTH_USER' => $user->getUsername(),
-                'PHP_AUTH_PW'   => $user->getPassword() . 'wrong_password',
-            ]
+            ], json_encode([
+                'username' => $user->getUsername(),
+                'password'=> $user->getPassword() . 'bad_password'
+            ])
         );
 
         $this->assertEquals(400, $this->client->getResponse()->getStatusCode());
