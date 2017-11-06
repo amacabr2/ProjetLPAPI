@@ -7,7 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Security\Core\Exception\BadCredentialsException;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use UserBundle\Entity\User;
 use UserBundle\Helper\ControllerHelper;
 
@@ -29,13 +29,13 @@ class LoginController extends Controller {
             ->getRepository('UserBundle:User')
             ->findOneBy(['username' => $username]);
 
+
         if (!$user) {
-            $this->createNotFoundException();
+            throw $this->createNotFoundException();
         }
 
-        $isPasswordValid = $this->get('security.password_encoder')->isPasswordValid($user, $password);
-        if ($isPasswordValid) {
-            throw new BadCredentialsException();
+        if ($password !== $user->getPassword()) {
+            throw new BadRequestHttpException();
         }
 
         return $this->setBaseHeaders(new Response(
