@@ -2,7 +2,6 @@
 
 namespace UserBundle\Controller;
 
-use FOS\UserBundle\Model\UserInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -34,8 +33,8 @@ class LoginController extends Controller {
             $this->createNotFoundException();
         }
 
-        //$isPasswordValid = $this->get('security.password_encoder')->isPasswordValid($user, $password);
-        if ($user->getPassword() != $password) {
+        $isPasswordValid = $this->get('security.password_encoder')->isPasswordValid($user, $password);
+        if ($isPasswordValid) {
             throw new BadCredentialsException();
         }
 
@@ -47,9 +46,9 @@ class LoginController extends Controller {
 
     /**
      * @param User $user
-     * @return array
+     * @return string
      */
-    private function getToken(User $user): array {
+    private function getToken(User $user): string {
         return $this->container->get('lexik_jwt_authentication.encoder')
             ->encode([
                 'username' => $user->getUsername(),
