@@ -51,7 +51,7 @@ class RegistrationController extends BaseController {
             $event = new FormEvent($form, $request);
             $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
             $userManager->updateUser($user);
-            $response = new Response($this->serialize('User created.'), Response::HTTP_CREATED);
+            $response = new Response($this->serialize('Votre compte a été crée.'), Response::HTTP_CREATED);
         } else {
             throw $this->throwApiProblemValidationException($form);
         }
