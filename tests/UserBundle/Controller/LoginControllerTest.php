@@ -21,11 +21,13 @@ class LoginControllerTest extends ApiTestCaseBase {
     public function testPOSTLoginUser() {
         $user = $this->createUser($this->username, $this->password);
 
+        var_dump($user->getPlainPassword());
+
         $this->client->request('POST', '/users/login', [], [], [
             'CONTENT_TYPE' => 'application/json',
         ], json_encode([
             'username' => $user->getUsername(),
-            'password'=> $user->getPassword()
+            'password'=> $this->password
         ]));
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
@@ -41,7 +43,7 @@ class LoginControllerTest extends ApiTestCaseBase {
                 'CONTENT_TYPE' => 'application/json',
             ], json_encode([
                 'username' => $user->getUsername() . 'bad_username',
-                'password'=> $user->getPassword()
+                'password'=> $this->password
             ])
         );
 
@@ -57,7 +59,7 @@ class LoginControllerTest extends ApiTestCaseBase {
                 'CONTENT_TYPE' => 'application/json',
             ], json_encode([
                 'username' => $user->getUsername(),
-                'password'=> $user->getPassword() . 'bad_password'
+                'password'=> $this->password . 'bad_password'
             ])
         );
 

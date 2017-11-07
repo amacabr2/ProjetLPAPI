@@ -34,7 +34,7 @@ class LoginController extends Controller {
             throw $this->createNotFoundException();
         }
 
-        if ($password !== $user->getPassword()) {
+        if (!$this->get('security.password_encoder')->isPasswordValid($user, $password)) {
             throw new BadRequestHttpException();
         }
 
