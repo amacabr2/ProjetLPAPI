@@ -9,7 +9,6 @@
 namespace Tests\UserBundle\Controller;
 
 
-use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 use Tests\ApiTestCaseBase;
 
 class LoginControllerTest extends ApiTestCaseBase {
@@ -20,8 +19,6 @@ class LoginControllerTest extends ApiTestCaseBase {
 
     public function testPOSTLoginUser() {
         $user = $this->createUser($this->username, $this->password);
-
-        var_dump($user->getPlainPassword());
 
         $this->client->request('POST', '/users/login', [], [], [
             'CONTENT_TYPE' => 'application/json',
