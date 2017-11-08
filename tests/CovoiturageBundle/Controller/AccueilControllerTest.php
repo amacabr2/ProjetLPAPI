@@ -18,6 +18,14 @@ class AccueilControllerTest extends ApiTestCaseBase {
         $this->assertEquals('Hello user.', json_decode($this->client->getResponse()->getContent(), true));
     }
 
+    public function testGETWelocmeMessageAsUnauthorizedUser() {
+        $this->client->request('GET', '/covoiturages/accueil', [], [], [
+            'CONTENT_TYPE' => 'application/json'
+        ], []);
+
+        $this->assertEquals(401, $this->client->getResponse()->getStatusCode());
+    }
+
     /**
      * Creates some user and returns his token
      *

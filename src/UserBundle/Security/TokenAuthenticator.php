@@ -57,7 +57,7 @@ class TokenAuthenticator extends AbstractGuardAuthenticator{
      * @return Response
      */
     public function start(Request $request, AuthenticationException $authException = null) {
-        // TODO: Implement start() method.
+        return new Response('Token is missing!', Response::HTTP_UNAUTHORIZED);
     }
 
     /**
