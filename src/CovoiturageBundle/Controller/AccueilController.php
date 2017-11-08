@@ -18,7 +18,7 @@ class AccueilController extends Controller {
     use ControllerHelper;
 
     /**
-     * @Route("/accueil", name="user_welcome")
+     * @Route("/accueil", name="covoiturage_accueil")
      * @Method("GET")
      * @param Request $request
      * @return Response

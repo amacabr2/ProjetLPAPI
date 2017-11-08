@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use JMS\Serializer\SerializationContext;
 
 trait ControllerHelper {
+
     /**
      * Set base HTTP headers.
      *
