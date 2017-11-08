@@ -7,18 +7,16 @@ use Tests\ApiTestCaseBase;
 class AccueilControllerTest extends ApiTestCaseBase {
 
     public function testGETAccueilMessageForUser() {
-        $token = $this->getTokenForTestUser();
-
         $this->client->request('GET', '/covoiturages/accueil', [], [], [
             'CONTENT_TYPE' => 'application/json',
-            'HTTP_AUTHORIZATION' => 'Bearer '.$token
+            'HTTP_AUTHORIZATION' => 'Bearer '. $this->getTokenForTestUser()
         ], []);
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
         $this->assertEquals('Hello user.', json_decode($this->client->getResponse()->getContent(), true));
     }
 
-    public function testGETWelocmeMessageAsUnauthorizedUser() {
+    public function testGETAccueilMessageAsUnauthorizedUser() {
         $this->client->request('GET', '/covoiturages/accueil', [], [], [
             'CONTENT_TYPE' => 'application/json'
         ], []);
@@ -37,8 +35,6 @@ class AccueilControllerTest extends ApiTestCaseBase {
 
         $user = $this->createUser($userName, $password);
 
-        $token = $this->getService('lexik_jwt_authentication.encoder')->encode(['username' => 'drle_torca']);
-
-        return $token;
+        return $this->getService('lexik_jwt_authentication.encoder')->encode(['username' => $userName]);
     }
 }
