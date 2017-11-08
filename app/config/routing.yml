@@ -1,7 +1,9 @@
 covoiturage:
     resource: "@CovoiturageBundle/Controller/"
     type:     annotation
-    prefix:   /
+    prefix:   /covoiturages
+    defaults:
+        _format: json
 
 user:
     resource: "@UserBundle/Controller/"

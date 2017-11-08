@@ -21,3 +21,6 @@ security:
             stateless: true
             logout: true
             anonymous: true
+            guard:
+                authenticators:
+                    - 'token_authenticator'

@@ -33,3 +33,7 @@ services:
     # AppBundle\Service\ExampleService:
     #     arguments:
     #         $someArgument: 'some_value'
+
+    token_authenticator:
+        class: UserBundle\Security\TokenAuthenticator
+        arguments: ['@lexik_jwt_authentication.encoder.default', '@doctrine.orm.entity_manager']
