@@ -67,6 +67,7 @@ doctrine:
 swiftmailer:
     transport: '%mailer_transport%'
     host: '%mailer_host%'
+    port: '%mailer_port%'
     username: '%mailer_user%'
     password: '%mailer_password%'
     spool: { type: memory }
@@ -81,6 +82,9 @@ fos_user:
     from_email:
         address: "amacabr2@gmail.com"
         sender_name: "amacabr2"
+    resetting:
+        email:
+            template: '@User/email/password_resetting.email.twig'
 
 lexik_jwt_authentication:
     private_key_path: '%kernel.root_dir%/../var/jwt/private.pem'

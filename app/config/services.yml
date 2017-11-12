@@ -37,3 +37,8 @@ services:
     token_authenticator:
         class: UserBundle\Security\TokenAuthenticator
         arguments: ['@lexik_jwt_authentication.encoder.default', '@doctrine.orm.entity_manager']
+
+    forgot_password_email:
+        class: UserBundle\Email\ForgotPasswordEmail
+        arguments: ["@mailer", "@templating"]
+        public: true

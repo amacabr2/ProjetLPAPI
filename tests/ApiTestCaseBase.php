@@ -48,9 +48,38 @@ class ApiTestCaseBase extends WebTestCase {
         $user->setEnabled(true);
         $user->setUsername($username);
         $user->setPlainPassword($password);
-        $user->setEmail('email@email.com');
+        $user->setEmail('matko@gmail.com');
         $userManager->updateUser($user);
         return $user;
+    }
+
+    /**
+     * @param array $data
+     * @return void
+     */
+    protected function makePOSTRequest(array $data): void {
+        $this->client = static::createClient();
+        $this->client->request('POST', '/users/register', [], [], [
+            'CONTENT_TYPE' => 'application/json'
+        ], json_encode($data));
+    }
+
+    /**
+     * @param null|string $username
+     * @param null|string $email
+     * @param null|string $first
+     * @param null|string $second
+     * @return array
+     */
+    protected function getData(?string $username = null, ?string $email = null, ?string $first =null, ?string $second = null): array {
+        return [
+            'username' => $username ?: 'matko',
+            'email' => $email ?: 'matko@gmail.com',
+            'plainPassword' => [
+                'first' => $first ?: 'test123',
+                'second' => $second ?: 'test123'
+            ]
+        ];
     }
 
     protected function getService(string $id) {
