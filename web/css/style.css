@@ -1,0 +1,48 @@
+html {
+    height: 100%;
+}
+
+body {
+    padding: 0;
+    margin-top: 3em;
+    height: 100%;
+}
+
+.slide {
+    z-index: 0;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    height: 100%;
+    transition: opacity 1s ease-in-out;
+    background: no-repeat center center;
+    background-size: cover;
+    opacity: 0;
+}
+
+.show {
+    opacity: 1;
+}
+
+#f1 {
+    background-image: url('../img/fond1.jpg');
+}
+
+#f2 {
+    background-image: url('../img/fond2.jpg');
+}
+
+#f3 {
+    background-image: url('../img/fond3.jpg');
+}
+
+.content {
+    z-index: 10;
+}
+
+.well {
+    padding: 5%;
+    background-color: rgba(196,172,174,0.8);
+    border-radius: 10px;
+}

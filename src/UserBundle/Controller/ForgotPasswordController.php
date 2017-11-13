@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use UserBundle\Form\ForgotPasswordType;
 
 class ForgotPasswordController extends Controller {
 
@@ -29,5 +30,23 @@ class ForgotPasswordController extends Controller {
         $this->get('forgot_password_email')->sendForgotPasswordMessage($user);
 
         return new Response($data->email);
+    }
+
+    /**
+     * @Route("/change-password", name="users_resetting_password")
+     * @Method({"GET", "POST"})
+     * @param Request $request
+     * @return Response
+     */
+    public function changePasswordAction(Request $request): Response {
+        if ($request->getMethod() == "POST") {
+            return new Response();
+        }
+
+        $form = $this->get('form.factory')->create(ForgotPasswordType::class, null);
+
+        return $this->render("UserBundle:form:change_password.html.twig", [
+            'form' => $form->createView()
+        ]);
     }
 }

@@ -38,6 +38,7 @@ framework:
 twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
+    form_themes: ['bootstrap_3_layout.html.twig']
 
 # Doctrine Configuration
 doctrine:
@@ -112,5 +113,5 @@ fos_rest:
         serialize_null: true
     format_listener:
         rules:
-            - { path: '^/', priorities: ['json'], fallback_format: 'json'}
+            - { path: '^/', priorities: ['json', 'html'], fallback_format: 'json'}
     param_fetcher_listener: force

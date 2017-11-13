@@ -41,7 +41,7 @@ class ForgotPasswordEmail {
         $from = $user->getEmail();
         $to = "admin@admin.com";
         $subject = "Réinitialisation de votre mot de passe";
-        $body = $this->templating->render($template, []);
+        $body = $this->templating->render($template, compact('user'));
         $this->send($from, $to, $subject, $body);
     }
 
