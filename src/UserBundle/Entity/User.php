@@ -43,12 +43,33 @@ class User extends BaseUser {
     protected $id;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="password_reset_token", type="string", nullable=true)
+     */
+    private $passwordResetToken;
+
+    /**
      * Get id
      *
      * @return int
      */
     public function getId() {
         return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPasswordResetToken(): string {
+        return $this->passwordResetToken;
+    }
+
+    /**
+     * @param string $passwordResetToken
+     */
+    public function setPasswordResetToken(string $passwordResetToken) {
+        $this->passwordResetToken = $passwordResetToken;
     }
 }
 

@@ -35,13 +35,18 @@ class ForgotPasswordEmail {
 
     /**
      * @param User $user
+     * @param string $token
      */
-    public function sendForgotPasswordMessage(User $user): void{
+    public function sendForgotPasswordMessage(User $user, string $token): void{
         $template = 'UserBundle:email:password_resetting.email.twig';
         $from = $user->getEmail();
         $to = "admin@admin.com";
         $subject = "Réinitialisation de votre mot de passe";
-        $body = $this->templating->render($template, compact('user'));
+
+        $body = $this->templating->render($template, [
+            'user' => $user,
+            'token_resetting' => $token
+        ]);
         $this->send($from, $to, $subject, $body);
     }
 
