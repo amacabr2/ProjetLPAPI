@@ -67,7 +67,7 @@ class ForgotPasswordController extends Controller {
         if ($request->isMethod("POST")) {
             $form->handleRequest($request);
 
-            if ($form->isValid()) {
+            if ($form->isSubmitted() and $form->isValid()) {
                 $data = $form->getData();
                 $user = $this->getDoctrine()
                     ->getRepository('UserBundle:User')
@@ -89,18 +89,14 @@ class ForgotPasswordController extends Controller {
 
                 $event = new FormEvent($form, $request);
                 $dispatcher->dispatch(FOSUserEvents::CHANGE_PASSWORD_SUCCESS, $event);
+                $user->setPlainPassword($data['password']);
+                $user->setPasswordResetToken(null);
                 $userManager->updateUser($user);
 
-                if (null === $response = $event->getResponse()) {
-                    $url = $this->generateUrl('users_resetting_password', [
-                        'id' => $id,
-                        'token_resetting' => $token_resetting
-                    ]);
-                    $response = new RedirectResponse($url);
+                if (null === $event->getResponse()) {
+                    //$dispatcher->dispatch(FOSUserEvents::CHANGE_PASSWORD_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
+                    return $this->redirectToRoute('covoiturage_neutral');
                 }
-
-                $dispatcher->dispatch(FOSUserEvents::CHANGE_PASSWORD_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
-                return $response;
             }
 
         }

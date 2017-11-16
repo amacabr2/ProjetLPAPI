@@ -14,6 +14,8 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints as Assert;
+use UserBundle\Validator\SamePassword;
 
 class ForgotPasswordType extends AbstractType {
 
@@ -24,6 +26,10 @@ class ForgotPasswordType extends AbstractType {
                 'attr' => [
                     'class' => 'form-control ',
                     'value' => "",
+                ],
+                'constraints' => [
+                    new Assert\NotBlank(['message' => 'Ce champ n\'est pas remplit']),
+                    new SamePassword()
                 ]
             ])
             ->add('password_confirmation', PasswordType::class, [
@@ -31,6 +37,10 @@ class ForgotPasswordType extends AbstractType {
                 'attr' => [
                     'class' => 'form-control ',
                     'value' => "",
+                ],
+                'constraints' => [
+                    new Assert\NotBlank(['message' => 'Ce champ n\'est pas remplit']),
+                    new SamePassword()
                 ]
             ])
             ->add('user', HiddenType::class, [

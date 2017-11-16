@@ -68,7 +68,7 @@ class User extends BaseUser {
     /**
      * @param string $passwordResetToken
      */
-    public function setPasswordResetToken(string $passwordResetToken) {
+    public function setPasswordResetToken(?string $passwordResetToken) {
         $this->passwordResetToken = $passwordResetToken;
     }
 }
