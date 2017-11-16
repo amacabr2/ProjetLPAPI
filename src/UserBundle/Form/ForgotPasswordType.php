@@ -33,6 +33,11 @@ class ForgotPasswordType extends AbstractType {
                     'value' => "",
                 ]
             ])
+            ->add('user', HiddenType::class, [
+                'attr' => [
+                    'value' => $options['data']['id']
+                ]
+            ])
             ->add('token', HiddenType::class, [
                 'attr' => [
                     'value' => $options['data']['token_resetting']
