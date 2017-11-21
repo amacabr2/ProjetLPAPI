@@ -61,7 +61,7 @@ class User extends BaseUser {
     /**
      * @return string
      */
-    public function getPasswordResetToken(): string {
+    public function getPasswordResetToken(): ?string {
         return $this->passwordResetToken;
     }
 

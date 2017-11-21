@@ -17,7 +17,6 @@ class NeutralController extends Controller {
      * @return Response
      */
     public function neutralAction(Request $request): Response {
-        $this->addFlash('success', 'Votre mot de passe a été modifié avec succés');
         return $this->render('@Covoiturage/Default/index.html.twig');
     }
 }

@@ -16,6 +16,10 @@ use UserBundle\Entity\User;
 
 class ApiTestCaseBase extends WebTestCase {
 
+    protected $container;
+
+    protected $em;
+
     /**
      * @var Client
      */
@@ -33,6 +37,11 @@ class ApiTestCaseBase extends WebTestCase {
     }
 
     protected function setUp() {
+        $kernel = static::$kernel;
+        $this->container = $kernel->getContainer();
+        $this->em = $kernel->getContainer()
+            ->get('doctrine')
+            ->getManager();
         $this->client = self::$staticClient;
         $this->purgeDatabase();
     }

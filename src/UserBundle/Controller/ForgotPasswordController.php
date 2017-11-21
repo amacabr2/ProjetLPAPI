@@ -35,8 +35,7 @@ class ForgotPasswordController extends Controller {
             throw $this->createNotFoundException();
         }
 
-        $generator = new RandomTokenGenerator();
-        $token = $generator->generate(48);
+        $token = $this->get('token_change_password')->generate(48);
 
         $user->setPasswordResetToken($token);
         $em->persist($user);
@@ -84,7 +83,8 @@ class ForgotPasswordController extends Controller {
                 }
 
                 if ($user->getPasswordResetToken() != $token_resetting) {
-                    throw new \Exception();
+                    $this->addFlash('info', 'Vous avez déjà changer votre mot de passe');
+                    return $this->redirectToRoute('covoiturage_neutral');
                 }
 
                 $event = new FormEvent($form, $request);
@@ -94,7 +94,10 @@ class ForgotPasswordController extends Controller {
                 $userManager->updateUser($user);
 
                 if (null === $event->getResponse()) {
-                    //$dispatcher->dispatch(FOSUserEvents::CHANGE_PASSWORD_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
+//                    $url = $this->generateUrl('covoiturage_neutral');
+//                    $response = new RedirectResponse($url);
+//                    $dispatcher->dispatch(FOSUserEvents::CHANGE_PASSWORD_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
+                    $this->addFlash('success', 'Votre mot de passe a été modifié avec succés');
                     return $this->redirectToRoute('covoiturage_neutral');
                 }
             }

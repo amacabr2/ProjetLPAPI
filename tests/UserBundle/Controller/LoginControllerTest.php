@@ -60,8 +60,8 @@ class LoginControllerTest extends ApiTestCaseBase {
             ])
         );
 
-        $this->assertEquals(400, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(404, $this->client->getResponse()->getStatusCode());
         $responseArr = json_decode($this->client->getResponse()->getContent(), true);
-        $this->assertEquals('Bad Request', $responseArr['error']['message']);
+        $this->assertEquals('Not Found', $responseArr['error']['message']);
     }
 }

@@ -9,7 +9,9 @@
 namespace Tests\UserBundle\Controller;
 
 
+use Symfony\Component\DomCrawler\Crawler;
 use Tests\ApiTestCaseBase;
+use UserBundle\Entity\User;
 
 class ForgotPasswordControllerTest extends ApiTestCaseBase {
 
@@ -40,5 +42,52 @@ class ForgotPasswordControllerTest extends ApiTestCaseBase {
         $this->assertEquals(404, $this->client->getResponse()->getStatusCode());
         $responseArr = json_decode($this->client->getResponse()->getContent(), true);
         $this->assertEquals('Not Found', $responseArr['error']['message']);
+    }
+
+    public function testPOSTChangePasswordGood() {
+        $crawler = $this->buildForForm();
+
+        $form = $crawler->filter('button:contains("Valider")')->form();
+        $this->client->submit($form, [
+            'forgot_password[password]' => "change_password",
+            'forgot_password[password_confirmation]' => "change_password"
+        ]);
+
+        $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
+    }
+
+    public function testPOSTChangePasswordWrongPasswordConfirm() {
+        $crawler = $this->buildForForm();
+
+        $form = $crawler->filter('button:contains("Valider")')->form();
+        $this->client->submit($form, [
+            'forgot_password[password]' => "change_password",
+            'forgot_password[password_confirmation]' => "change_password_bad"
+        ]);
+
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+    }
+
+    /**
+     * @param null|string $url
+     * @return Crawler
+     */
+    private function buildForForm(?string $url = null): Crawler {
+        $user = $this->createUser("matko", "test123");
+        $this->makePOSTRequest($this->getData());
+
+        $token_resetting = $this->container->get('token_change_password')->generate(48);
+        $user->setPasswordResetToken($token_resetting);
+
+        $id = $user->getId();
+        $uri = $url != null ? $url : "change-password/{$id}/{$token_resetting}";
+
+        $crawler = $this->client->request('POST', $uri, [], [], [
+            'CONTENT_TYPE' => 'application/json',
+        ], json_encode([
+            'email' => 'matko@gmail.com'
+        ]));
+
+        return $crawler;
     }
 }
