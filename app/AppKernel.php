@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new \FOS\UserBundle\FOSUserBundle(),
             new \Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new \Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle(),
+            new \Vich\UploaderBundle\VichUploaderBundle(),
             new AppBundle\AppBundle(),
             new UserBundle\UserBundle(),
             new CovoiturageBundle\CovoiturageBundle(),
