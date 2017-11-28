@@ -53,14 +53,14 @@ class Localisation
      *
      * @ORM\Column(name="isDepart", type="boolean", nullable=true)
      */
-    private $isdepart;
+    private $isDepart;
 
     /**
      * @var boolean
      *
      * @ORM\Column(name="isArrive", type="boolean", nullable=true)
      */
-    private $isarrive;
+    private $isArrivee;
 
     /**
      * @var integer
@@ -210,13 +210,13 @@ class Localisation
     /**
      * Set isdepart
      *
-     * @param boolean $isdepart
+     * @param boolean $isDepart
      *
      * @return Localisation
      */
-    public function setIsdepart($isdepart)
+    public function setIsDepart($isDepart)
     {
-        $this->isdepart = $isdepart;
+        $this->isDepart = $isDepart;
 
         return $this;
     }
@@ -226,21 +226,21 @@ class Localisation
      *
      * @return boolean
      */
-    public function getIsdepart()
+    public function getIsDepart()
     {
-        return $this->isdepart;
+        return $this->isDepart;
     }
 
     /**
      * Set isarrive
      *
-     * @param boolean $isarrive
+     * @param boolean $isArrivee
      *
      * @return Localisation
      */
-    public function setIsarrive($isarrive)
+    public function setIsArrivee($isArrivee)
     {
-        $this->isarrive = $isarrive;
+        $this->isArrivee = $isArrivee;
 
         return $this;
     }
@@ -250,9 +250,9 @@ class Localisation
      *
      * @return boolean
      */
-    public function getIsarrive()
+    public function getIsArrivee()
     {
-        return $this->isarrive;
+        return $this->isArrivee;
     }
 
     /**

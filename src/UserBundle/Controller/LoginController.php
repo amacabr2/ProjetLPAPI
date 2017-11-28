@@ -39,7 +39,10 @@ class LoginController extends Controller {
         }
 
         return $this->setBaseHeaders(new Response(
-            $this->serialize(['token' => $this->getToken($user)]),
+            $this->serialize([
+                'user_id' => $user->getId(),
+                'token' => $this->getToken($user)
+            ]),
             Response::HTTP_OK
         ));
     }
