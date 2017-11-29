@@ -15,9 +15,16 @@ use UserBundle\Entity\User;
 class UserFixtures extends FakerFixture {
 
     /**
-     * @var User
+     * @var User[]
      */
-    private $user;
+    private static $users = [];
+
+    /**
+     * @return User[]
+     */
+    public static function getUsers(): array {
+        return self::$users;
+    }
 
     /**
      * Load data fixtures with the passed EntityManager
@@ -25,36 +32,34 @@ class UserFixtures extends FakerFixture {
      * @param ObjectManager $manager
      */
     public function load(ObjectManager $manager) {
-        $randomSex = random_int(0, 1);
-        $prenom = $randomSex ? $this->getFaker()->firstnameMale : $this->getFaker()->firstnameFemale;
-        $nom = $this->getFaker()->lastname;
-        $dateNaissance = $this->getFaker()->date($format = 'Y-m-d', $max = 'now');
+        for ($i = 0; $i < 50; $i++) {
+            $randomSex = random_int(0, 1);
+            $prenom = $randomSex ? $this->getFaker()->firstnameMale : $this->getFaker()->firstnameFemale;
+            $nom = $this->getFaker()->lastname;
+            $dateNaissance = $this->getFaker()->date($format = 'Y-m-d', $max = 'now');
 
-        $this->user = new User();
-        $this->user->setCivilite($randomSex ? "Monsieur" : "Madame");
-        $this->user->setUsername($this->getFaker()->username);
-        $this->user->setPrenom($prenom);
-        $this->user->setNom($nom);
-        $this->user->setEmail($prenom . "." . $nom . "@gmail.com");
-        $this->user->setDateNaissance($dateNaissance);
-        $this->user->setPlainPassword("azerty");
-        $this->user->setTelFixe($this->getFaker()->phoneNumber);
-        $this->user->setTelPortable($this->getFaker()->e164PhoneNumber);
-        $this->user->setFichier($this->getFaker()->imageUrl($width = 640, $height = 480));
-        $this->user->setNewsletter((bool)rand(0,1));
-        $this->user->setPresentation($this->getFaker()->realText($maxNbChars = 200, $indexSize = 2));
-        $this->user->setCreatedAt($this->buildCreatedAt($dateNaissance));
+            $user = new User();
+            $user->setCivilite($randomSex ? "Monsieur" : "Madame");
+            $user->setUsername($this->getFaker()->username);
+            $user->setPrenom($prenom);
+            $user->setNom($nom);
+            $user->setEmail($prenom . "." . $nom . "@gmail.com");
+            $user->setDateNaissance($dateNaissance);
+            $user->setPlainPassword("azerty");
+            $user->setTelFixe($this->getFaker()->phoneNumber);
+            $user->setTelPortable($this->getFaker()->e164PhoneNumber);
+            $user->setFichier($this->getFaker()->imageUrl($width = 640, $height = 480));
+            $user->setNewsletter((bool)rand(0,1));
+            $user->setPresentation($this->getFaker()->realText($maxNbChars = 200, $indexSize = 2));
+            $user->setCreatedAt($this->buildCreatedAt($dateNaissance));
 
-        $manager->persist($this->user);
+            self::$users = $user;
+            $manager->persist($user);
+        }
+
         $manager->flush();
     }
 
-    /**
-     * @return User
-     */
-    public function getUser(): User {
-        return $this->user;
-    }
 
     /**
      * @param $dateNaissance

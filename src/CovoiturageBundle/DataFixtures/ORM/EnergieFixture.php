@@ -15,10 +15,19 @@ use UserBundle\DataFixtures\FakerFixture;
 
 class EnergieFixture extends FakerFixture {
 
+    // implements DependentFixtureInterface
+
     /**
      * @var Energie[]
      */
-    private static $energies;
+    private static $energies = [];
+
+    /**
+     * @return Energie[]
+     */
+    public static function getEnergies(): array {
+        return self::$energies;
+    }
 
     /**
      * Load data fixtures with the passed EntityManager

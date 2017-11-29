@@ -16,9 +16,16 @@ use UserBundle\DataFixtures\FakerFixture;
 class AssuranceFixture extends FakerFixture {
 
     /**
-     * @var Assurance
+     * @var Assurance[]
      */
-    private $assurance;
+    private static $assurances;
+
+    /**
+     * @return Assurance[]
+     */
+    public static function getAssurances(): array {
+        return self::$assurances;
+    }
 
     /**
      * Load data fixtures with the passed EntityManager
@@ -26,18 +33,16 @@ class AssuranceFixture extends FakerFixture {
      * @param ObjectManager $manager
      */
     public function load(ObjectManager $manager) {
-        $this->assurance->setFichier($this->getFaker()->imageUrl($width = 640, $height = 480));
-        $this->assurance->setValide(true);
-        $this->assurance->setDateObtention($this->getFaker()->date($format = 'Y-m-d', $max = 'now'));
+        for ($i = 0; $i < 30; $i++) {
+            $assurance = new Assurance();
+            $assurance->setFichier($this->getFaker()->imageUrl($width = 640, $height = 480));
+            $assurance->setValide(true);
+            $assurance->setDateObtention($this->getFaker()->date($format = 'Y-m-d', $max = 'now'));
 
-        $manager->persist($this->assurance);
+            self::$assurances[] = $assurance;
+            $manager->persist($assurance);
+        }
+
         $manager->flush();
-    }
-
-    /**
-     * @return Assurance
-     */
-    public function getAssurance(): Assurance {
-        return $this->assurance;
     }
 }

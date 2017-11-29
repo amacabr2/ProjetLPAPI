@@ -9,7 +9,40 @@
 namespace CovoiturageBundle\DataFixtures\ORM;
 
 
-class EtatFixture
-{
+use CovoiturageBundle\Entity\Etat;
+use Doctrine\Common\Persistence\ObjectManager;
+use UserBundle\DataFixtures\FakerFixture;
 
+class EtatFixture extends FakerFixture {
+
+    /**
+     * @var Etat[]
+     */
+    private static $etats;
+
+    /**
+     * @return Etat[]
+     */
+    public static function getEtats(): array {
+        return self::$etats;
+    }
+
+    /**
+     * Load data fixtures with the passed EntityManager
+     *
+     * @param ObjectManager $manager
+     */
+    public function load(ObjectManager $manager) {
+        $etats = ["bon", "moyen", "mauvais", "delabré"];
+
+        for ($i = 0; sizeof($etats); $i++) {
+            $etat = new Etat();
+            $etat->setLabel($etats[$i]);
+
+            self::$etats[] = $etat;
+            $manager->persist($etat);
+        }
+
+        $manager->flush();
+    }
 }
