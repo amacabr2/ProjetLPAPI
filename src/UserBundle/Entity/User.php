@@ -422,7 +422,7 @@ class User extends BaseUser{
      *
      * @return User
      */
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
 
@@ -446,7 +446,7 @@ class User extends BaseUser{
      *
      * @return User
      */
-    public function setUpdatedAt($updatedAt)
+    public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
 

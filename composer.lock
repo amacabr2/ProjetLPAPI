@@ -4,53 +4,9 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "95742d1a1c8dc4aab830f89241efde2f",
-    "content-hash": "8fd9ccc803d0873c65dc4ad0217793db",
+    "hash": "b1a62abb7b654f857c63371476611934",
+    "content-hash": "1bd7006b2e10654e72e3228d74e4dd35",
     "packages": [
-        {
-            "name": "behat/transliterator",
-            "version": "v1.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Behat/Transliterator.git",
-                "reference": "826ce7e9c2a6664c0d1f381cbb38b1fb80a7ee2c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Behat/Transliterator/zipball/826ce7e9c2a6664c0d1f381cbb38b1fb80a7ee2c",
-                "reference": "826ce7e9c2a6664c0d1f381cbb38b1fb80a7ee2c",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3"
-            },
-            "require-dev": {
-                "chuyskywalker/rolling-curl": "^3.1",
-                "php-yaoi/php-yaoi": "^1.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.2-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Behat\\Transliterator": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Artistic-1.0"
-            ],
-            "description": "String transliterator",
-            "keywords": [
-                "i18n",
-                "slug",
-                "transliterator"
-            ],
-            "time": "2017-04-04 11:38:05"
-        },
         {
             "name": "composer/ca-bundle",
             "version": "1.0.8",
@@ -109,6 +65,49 @@
                 "tls"
             ],
             "time": "2017-09-11 07:24:36"
+        },
+        {
+            "name": "davidbadura/faker-bundle",
+            "version": "1.1.0",
+            "target-dir": "DavidBadura/FakerBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/DavidBadura/FakerBundle.git",
+                "reference": "0d15887f89b0b61bc79a3dbc7a23140564cdd50e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/DavidBadura/FakerBundle/zipball/0d15887f89b0b61bc79a3dbc7a23140564cdd50e",
+                "reference": "0d15887f89b0b61bc79a3dbc7a23140564cdd50e",
+                "shasum": ""
+            },
+            "require": {
+                "fzaninotto/faker": "~1.0",
+                "php": ">=5.3.0",
+                "symfony/symfony": ">=2.6"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "DavidBadura\\FakerBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "David Badura",
+                    "email": "d.badura@gmx.de"
+                }
+            ],
+            "keywords": [
+                "Symfony2",
+                "faker",
+                "fixtures"
+            ],
+            "time": "2015-09-14 08:59:32"
         },
         {
             "name": "doctrine/annotations",
@@ -1244,6 +1243,56 @@
                 "User management"
             ],
             "time": "2017-05-31 11:50:14"
+        },
+        {
+            "name": "fzaninotto/faker",
+            "version": "v1.7.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fzaninotto/Faker.git",
+                "reference": "d3ed4cc37051c1ca52d22d76b437d14809fc7e0d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/d3ed4cc37051c1ca52d22d76b437d14809fc7e0d",
+                "reference": "d3ed4cc37051c1ca52d22d76b437d14809fc7e0d",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.3.3 || ^7.0"
+            },
+            "require-dev": {
+                "ext-intl": "*",
+                "phpunit/phpunit": "^4.0 || ^5.0",
+                "squizlabs/php_codesniffer": "^1.5"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.8-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Faker\\": "src/Faker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "François Zaninotto"
+                }
+            ],
+            "description": "Faker is a PHP library that generates fake data for you.",
+            "keywords": [
+                "data",
+                "faker",
+                "fixtures"
+            ],
+            "time": "2017-08-15 16:48:10"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -3512,91 +3561,6 @@
             "time": "2017-09-27 18:06:46"
         },
         {
-            "name": "vich/uploader-bundle",
-            "version": "1.6.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/dustin10/VichUploaderBundle.git",
-                "reference": "5a5f27598ba3885104bce447539b5227704f0aa5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/dustin10/VichUploaderBundle/zipball/5a5f27598ba3885104bce447539b5227704f0aa5",
-                "reference": "5a5f27598ba3885104bce447539b5227704f0aa5",
-                "shasum": ""
-            },
-            "require": {
-                "behat/transliterator": "^1.2",
-                "doctrine/annotations": "^1.3",
-                "jms/metadata": "^1.6",
-                "php": "^7.0",
-                "symfony/asset": "^2.8|^3.1",
-                "symfony/dependency-injection": "^2.8|^3.1",
-                "symfony/finder": "^2.8|^3.1",
-                "symfony/framework-bundle": "^2.8|^3.1",
-                "symfony/property-access": "^2.8|^3.1",
-                "symfony/security": "^2.8|^3.1",
-                "symfony/templating": "^2.8|^3.1"
-            },
-            "require-dev": {
-                "doctrine/doctrine-bundle": "^1.6",
-                "doctrine/mongodb-odm": "^1.1",
-                "doctrine/orm": "^2.5",
-                "ext-sqlite3": "*",
-                "knplabs/knp-gaufrette-bundle": "^0.4",
-                "matthiasnoback/symfony-dependency-injection-test": "^2.0",
-                "mikey179/vfsstream": "^1.6",
-                "oneup/flysystem-bundle": "^1.7",
-                "phpunit/phpunit": "^6.0",
-                "symfony/browser-kit": "^2.8|^3.1",
-                "symfony/css-selector": "^2.8|^3.1",
-                "symfony/dom-crawler": "^2.8|^3.1",
-                "symfony/form": "^2.8|^3.1",
-                "symfony/twig-bridge": "^2.8.10|^3.1",
-                "symfony/twig-bundle": "^2.8|^3.1",
-                "symfony/validator": "^2.8|^3.1",
-                "symfony/yaml": "^2.8|^3.1"
-            },
-            "suggest": {
-                "doctrine/doctrine-bundle": "^1.6",
-                "doctrine/mongodb-odm-bundle": "*",
-                "doctrine/orm": "^2.5",
-                "doctrine/phpcr-odm": "^1.0",
-                "knplabs/knp-gaufrette-bundle": "^0.4",
-                "liip/imagine-bundle": "^1.7",
-                "symfony/yaml": "^2.8|^3.1",
-                "willdurand/propel-eventdispatcher-bundle": "^1.2"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.7.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Vich\\UploaderBundle\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Dustin Dobervich",
-                    "email": "ddobervich@gmail.com"
-                }
-            ],
-            "description": "Ease file uploads attached to entities",
-            "homepage": "https://github.com/dustin10/VichUploaderBundle",
-            "keywords": [
-                "file uploads",
-                "upload"
-            ],
-            "time": "2017-07-08 08:10:50"
-        },
-        {
             "name": "willdurand/jsonp-callback-validator",
             "version": "v1.1.0",
             "source": {
@@ -3797,6 +3761,50 @@
         }
     ],
     "packages-dev": [
+        {
+            "name": "behat/transliterator",
+            "version": "v1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Behat/Transliterator.git",
+                "reference": "826ce7e9c2a6664c0d1f381cbb38b1fb80a7ee2c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Behat/Transliterator/zipball/826ce7e9c2a6664c0d1f381cbb38b1fb80a7ee2c",
+                "reference": "826ce7e9c2a6664c0d1f381cbb38b1fb80a7ee2c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "chuyskywalker/rolling-curl": "^3.1",
+                "php-yaoi/php-yaoi": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.2-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Behat\\Transliterator": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Artistic-1.0"
+            ],
+            "description": "String transliterator",
+            "keywords": [
+                "i18n",
+                "slug",
+                "transliterator"
+            ],
+            "time": "2017-04-04 11:38:05"
+        },
         {
             "name": "doctrine/data-fixtures",
             "version": "v1.2.2",
@@ -5376,6 +5384,91 @@
             ],
             "description": "A small library for converting tokenized PHP source code into XML and potentially other formats",
             "time": "2017-04-07 12:08:54"
+        },
+        {
+            "name": "vich/uploader-bundle",
+            "version": "1.6.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dustin10/VichUploaderBundle.git",
+                "reference": "5a5f27598ba3885104bce447539b5227704f0aa5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dustin10/VichUploaderBundle/zipball/5a5f27598ba3885104bce447539b5227704f0aa5",
+                "reference": "5a5f27598ba3885104bce447539b5227704f0aa5",
+                "shasum": ""
+            },
+            "require": {
+                "behat/transliterator": "^1.2",
+                "doctrine/annotations": "^1.3",
+                "jms/metadata": "^1.6",
+                "php": "^7.0",
+                "symfony/asset": "^2.8|^3.1",
+                "symfony/dependency-injection": "^2.8|^3.1",
+                "symfony/finder": "^2.8|^3.1",
+                "symfony/framework-bundle": "^2.8|^3.1",
+                "symfony/property-access": "^2.8|^3.1",
+                "symfony/security": "^2.8|^3.1",
+                "symfony/templating": "^2.8|^3.1"
+            },
+            "require-dev": {
+                "doctrine/doctrine-bundle": "^1.6",
+                "doctrine/mongodb-odm": "^1.1",
+                "doctrine/orm": "^2.5",
+                "ext-sqlite3": "*",
+                "knplabs/knp-gaufrette-bundle": "^0.4",
+                "matthiasnoback/symfony-dependency-injection-test": "^2.0",
+                "mikey179/vfsstream": "^1.6",
+                "oneup/flysystem-bundle": "^1.7",
+                "phpunit/phpunit": "^6.0",
+                "symfony/browser-kit": "^2.8|^3.1",
+                "symfony/css-selector": "^2.8|^3.1",
+                "symfony/dom-crawler": "^2.8|^3.1",
+                "symfony/form": "^2.8|^3.1",
+                "symfony/twig-bridge": "^2.8.10|^3.1",
+                "symfony/twig-bundle": "^2.8|^3.1",
+                "symfony/validator": "^2.8|^3.1",
+                "symfony/yaml": "^2.8|^3.1"
+            },
+            "suggest": {
+                "doctrine/doctrine-bundle": "^1.6",
+                "doctrine/mongodb-odm-bundle": "*",
+                "doctrine/orm": "^2.5",
+                "doctrine/phpcr-odm": "^1.0",
+                "knplabs/knp-gaufrette-bundle": "^0.4",
+                "liip/imagine-bundle": "^1.7",
+                "symfony/yaml": "^2.8|^3.1",
+                "willdurand/propel-eventdispatcher-bundle": "^1.2"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.7.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Vich\\UploaderBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dustin Dobervich",
+                    "email": "ddobervich@gmail.com"
+                }
+            ],
+            "description": "Ease file uploads attached to entities",
+            "homepage": "https://github.com/dustin10/VichUploaderBundle",
+            "keywords": [
+                "file uploads",
+                "upload"
+            ],
+            "time": "2017-07-08 08:10:50"
         },
         {
             "name": "webmozart/assert",

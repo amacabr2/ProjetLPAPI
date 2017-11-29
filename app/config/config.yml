@@ -127,3 +127,6 @@ vich_uploader:
             delete_on_update:   false
             delete_on_remove: true
             namer: vich_uploader.namer_uniqid
+
+david_badura_faker:
+  locale: fr_FR
