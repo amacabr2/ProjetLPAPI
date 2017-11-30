@@ -10,8 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="energies")
  * @ORM\Entity
  */
-class Energie
-{
+class Energie {
+
     /**
      * @var string
      *
@@ -28,7 +28,14 @@ class Energie
      */
     private $id;
 
-
+    /**
+     * Get libelle
+     *
+     * @return string
+     */
+    public function getLibelle(): string {
+        return $this->libelle;
+    }
 
     /**
      * Set libelle
@@ -37,21 +44,10 @@ class Energie
      *
      * @return Energie
      */
-    public function setLibelle($libelle)
-    {
+    public function setLibelle(string $libelle): self {
         $this->libelle = $libelle;
 
         return $this;
-    }
-
-    /**
-     * Get libelle
-     *
-     * @return string
-     */
-    public function getLibelle()
-    {
-        return $this->libelle;
     }
 
     /**
@@ -59,8 +55,7 @@ class Energie
      *
      * @return integer
      */
-    public function getId()
-    {
+    public function getId(): int {
         return $this->id;
     }
 }

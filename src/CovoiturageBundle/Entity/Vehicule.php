@@ -3,6 +3,7 @@
 namespace CovoiturageBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use UserBundle\Entity\User;
 
@@ -13,6 +14,7 @@ use UserBundle\Entity\User;
  * @ORM\Entity
  */
 class Vehicule {
+
     /**
      * @var string
      *
@@ -120,7 +122,7 @@ class Vehicule {
      *
      * @return string
      */
-    public function getMarque() {
+    public function getMarque(): string {
         return $this->marque;
     }
 
@@ -131,7 +133,7 @@ class Vehicule {
      *
      * @return Vehicule
      */
-    public function setMarque($marque) {
+    public function setMarque(string $marque): self {
         $this->marque = $marque;
 
         return $this;
@@ -142,7 +144,7 @@ class Vehicule {
      *
      * @return string
      */
-    public function getImmatriculation() {
+    public function getImmatriculation(): string {
         return $this->immatriculation;
     }
 
@@ -153,7 +155,7 @@ class Vehicule {
      *
      * @return Vehicule
      */
-    public function setImmatriculation($immatriculation) {
+    public function setImmatriculation($immatriculation): self {
         $this->immatriculation = $immatriculation;
 
         return $this;
@@ -164,7 +166,7 @@ class Vehicule {
      *
      * @return string
      */
-    public function getModele() {
+    public function getModele(): string {
         return $this->modele;
     }
 
@@ -175,7 +177,7 @@ class Vehicule {
      *
      * @return Vehicule
      */
-    public function setModele($modele) {
+    public function setModele(string $modele) {
         $this->modele = $modele;
 
         return $this;
@@ -186,7 +188,7 @@ class Vehicule {
      *
      * @return string
      */
-    public function getCouleur() {
+    public function getCouleur(): string {
         return $this->couleur;
     }
 
@@ -197,7 +199,7 @@ class Vehicule {
      *
      * @return Vehicule
      */
-    public function setCouleur($couleur) {
+    public function setCouleur(string $couleur): self {
         $this->couleur = $couleur;
 
         return $this;
@@ -208,7 +210,7 @@ class Vehicule {
      *
      * @return integer
      */
-    public function getNbPlace() {
+    public function getNbPlace(): int {
         return $this->nbPlace;
     }
 
@@ -219,7 +221,7 @@ class Vehicule {
      *
      * @return Vehicule
      */
-    public function setNbPlace($nbPlace) {
+    public function setNbPlace(int $nbPlace): self {
         $this->nbPlace = $nbPlace;
 
         return $this;
@@ -230,7 +232,7 @@ class Vehicule {
      *
      * @return string
      */
-    public function getFichier() {
+    public function getFichier(): string {
         return $this->fichier;
     }
 
@@ -241,7 +243,7 @@ class Vehicule {
      *
      * @return Vehicule
      */
-    public function setFichier($fichier) {
+    public function setFichier(string $fichier): self {
         $this->fichier = $fichier;
 
         return $this;
@@ -252,7 +254,7 @@ class Vehicule {
      *
      * @return string
      */
-    public function getPuissanceChevaux() {
+    public function getPuissanceChevaux(): string {
         return $this->puissanceChevaux;
     }
 
@@ -263,7 +265,7 @@ class Vehicule {
      *
      * @return Vehicule
      */
-    public function setPuissanceChevaux($puissanceChevaux) {
+    public function setPuissanceChevaux($puissanceChevaux): self {
         $this->puissanceChevaux = $puissanceChevaux;
 
         return $this;
@@ -274,7 +276,7 @@ class Vehicule {
      *
      * @return integer
      */
-    public function getId() {
+    public function getId(): int {
         return $this->id;
     }
 
@@ -285,7 +287,7 @@ class Vehicule {
      *
      * @return Vehicule
      */
-    public function setId($id) {
+    public function setId($id): self {
         $this->id = $id;
 
         return $this;
@@ -296,7 +298,7 @@ class Vehicule {
      *
      * @return Assurance
      */
-    public function getAssurances() {
+    public function getAssurances(): Assurance {
         return $this->assurances;
     }
 
@@ -307,7 +309,7 @@ class Vehicule {
      *
      * @return Vehicule
      */
-    public function setAssurances(Assurance $assurances) {
+    public function setAssurances(Assurance $assurances): self {
         $this->assurances = $assurances;
 
         return $this;
@@ -318,7 +320,7 @@ class Vehicule {
      *
      * @return Energie
      */
-    public function getEnergies() {
+    public function getEnergies(): Energie {
         return $this->energies;
     }
 
@@ -329,7 +331,7 @@ class Vehicule {
      * @return Vehicule
      *
      */
-    public function setEnergies(Energie $energies = null) {
+    public function setEnergies(Energie $energies = null): self {
         $this->energies = $energies;
 
         return $this;
@@ -340,7 +342,7 @@ class Vehicule {
      *
      * @return Etat
      */
-    public function getEtats() {
+    public function getEtats(): Etat {
         return $this->etats;
     }
 
@@ -350,7 +352,7 @@ class Vehicule {
      * @param \CovoiturageBundle\Entity\Etat|null $etats
      * @return Vehicule
      */
-    public function setEtats(Etat $etats = null) {
+    public function setEtats(Etat $etats = null): self {
         $this->etats = $etats;
 
         return $this;
@@ -362,7 +364,7 @@ class Vehicule {
      * @param User $user
      * @return Vehicule
      */
-    public function addUser(User $user) {
+    public function addUser(User $user): self {
         $this->users[] = $user;
 
         return $this;
@@ -382,7 +384,7 @@ class Vehicule {
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getUsers() {
+    public function getUsers(): Collection {
         return $this->users;
     }
 }

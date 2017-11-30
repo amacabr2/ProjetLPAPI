@@ -3,6 +3,7 @@
 namespace CovoiturageBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -11,8 +12,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="localisations")
  * @ORM\Entity
  */
-class Localisation
-{
+class Localisation {
+
     /**
      * @var string
      *
@@ -81,11 +82,18 @@ class Localisation
     /**
      * Constructor
      */
-    public function __construct()
-    {
+    public function __construct() {
         $this->trajets = new ArrayCollection();
     }
 
+    /**
+     * Get adresse
+     *
+     * @return string
+     */
+    public function getAdresse(): string {
+        return $this->adresse;
+    }
 
     /**
      * Set adresse
@@ -94,33 +102,8 @@ class Localisation
      *
      * @return Localisation
      */
-    public function setAdresse($adresse)
-    {
+    public function setAdresse(string $adresse): self {
         $this->adresse = $adresse;
-
-        return $this;
-    }
-
-    /**
-     * Get adresse
-     *
-     * @return string
-     */
-    public function getAdresse()
-    {
-        return $this->adresse;
-    }
-
-    /**
-     * Set ville
-     *
-     * @param string $ville
-     *
-     * @return Localisation
-     */
-    public function setVille($ville)
-    {
-        $this->ville = $ville;
 
         return $this;
     }
@@ -130,21 +113,19 @@ class Localisation
      *
      * @return string
      */
-    public function getVille()
-    {
+    public function getVille(): string {
         return $this->ville;
     }
 
     /**
-     * Set pays
+     * Set ville
      *
-     * @param string $pays
+     * @param string $ville
      *
      * @return Localisation
      */
-    public function setPays($pays)
-    {
-        $this->pays = $pays;
+    public function setVille(string $ville): self {
+        $this->ville = $ville;
 
         return $this;
     }
@@ -154,21 +135,19 @@ class Localisation
      *
      * @return string
      */
-    public function getPays()
-    {
+    public function getPays(): string {
         return $this->pays;
     }
 
     /**
-     * Set latitude
+     * Set pays
      *
-     * @param float $latitude
+     * @param string $pays
      *
      * @return Localisation
      */
-    public function setLatitude($latitude)
-    {
-        $this->latitude = $latitude;
+    public function setPays(string $pays): self {
+        $this->pays = $pays;
 
         return $this;
     }
@@ -178,21 +157,19 @@ class Localisation
      *
      * @return float
      */
-    public function getLatitude()
-    {
+    public function getLatitude(): float {
         return $this->latitude;
     }
 
     /**
-     * Set longitude
+     * Set latitude
      *
-     * @param float $longitude
+     * @param float $latitude
      *
      * @return Localisation
      */
-    public function setLongitude($longitude)
-    {
-        $this->longitude = $longitude;
+    public function setLatitude(float $latitude): self {
+        $this->latitude = $latitude;
 
         return $this;
     }
@@ -202,21 +179,19 @@ class Localisation
      *
      * @return float
      */
-    public function getLongitude()
-    {
+    public function getLongitude(): float {
         return $this->longitude;
     }
 
     /**
-     * Set isdepart
+     * Set longitude
      *
-     * @param boolean $isDepart
+     * @param float $longitude
      *
      * @return Localisation
      */
-    public function setIsDepart($isDepart)
-    {
-        $this->isDepart = $isDepart;
+    public function setLongitude(float $longitude): self {
+        $this->longitude = $longitude;
 
         return $this;
     }
@@ -226,21 +201,19 @@ class Localisation
      *
      * @return boolean
      */
-    public function getIsDepart()
-    {
+    public function getIsDepart(): bool {
         return $this->isDepart;
     }
 
     /**
-     * Set isarrive
+     * Set isdepart
      *
-     * @param boolean $isArrivee
+     * @param boolean $isDepart
      *
      * @return Localisation
      */
-    public function setIsArrivee($isArrivee)
-    {
-        $this->isArrivee = $isArrivee;
+    public function setIsDepart(bool $isDepart): self {
+        $this->isDepart = $isDepart;
 
         return $this;
     }
@@ -250,9 +223,21 @@ class Localisation
      *
      * @return boolean
      */
-    public function getIsArrivee()
-    {
+    public function getIsArrivee(): bool {
         return $this->isArrivee;
+    }
+
+    /**
+     * Set isarrive
+     *
+     * @param boolean $isArrivee
+     *
+     * @return Localisation
+     */
+    public function setIsArrivee(bool $isArrivee): self {
+        $this->isArrivee = $isArrivee;
+
+        return $this;
     }
 
     /**
@@ -260,8 +245,7 @@ class Localisation
      *
      * @return integer
      */
-    public function getId()
-    {
+    public function getId(): int {
         return $this->id;
     }
 
@@ -272,8 +256,7 @@ class Localisation
      * @return Localisation
      *
      */
-    public function addTrajet(Trajet $trajet)
-    {
+    public function addTrajet(Trajet $trajet): self {
         $this->trajets[] = $trajet;
 
         return $this;
@@ -284,8 +267,7 @@ class Localisation
      *
      * @param Trajet $trajet
      */
-    public function removeTrajet(Trajet $trajet)
-    {
+    public function removeTrajet(Trajet $trajet) {
         $this->trajets->removeElement($trajet);
     }
 
@@ -294,8 +276,7 @@ class Localisation
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getTrajets()
-    {
+    public function getTrajets(): Collection {
         return $this->trajets;
     }
 }

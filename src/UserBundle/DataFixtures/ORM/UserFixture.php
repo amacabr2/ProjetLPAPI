@@ -10,8 +10,10 @@ namespace UserBundle\DataFixtures\ORM;
 
 use CovoiturageBundle\DataFixtures\ORM\LocalisationFixture;
 use CovoiturageBundle\DataFixtures\ORM\PermisFixture;
+use CovoiturageBundle\DataFixtures\ORM\VehiculeFixture;
 use CovoiturageBundle\Entity\Localisation;
 use CovoiturageBundle\Entity\Permis;
+use CovoiturageBundle\Entity\Vehicule;
 use Doctrine\Common\Persistence\ObjectManager;
 use UserBundle\DataFixtures\FakerFixture;
 use UserBundle\Entity\User;
@@ -58,9 +60,10 @@ class UserFixture extends FakerFixture {
             $user->setCreatedAt();
             $user->setPermis($this->getPermis($i));
             $user->setLocalisations($this->getLocalisation($i));
+            $user->addVehicule($this->getVehicule($i));
 
             self::$users[] = $user;
-            $manager->persist($user);
+            $manager->merge($user);
         }
 
         $manager->flush();
@@ -72,7 +75,8 @@ class UserFixture extends FakerFixture {
     public function getDependencies(): array {
         return [
             PermisFixture::class,
-            LocalisationFixture::class
+            LocalisationFixture::class,
+            VehiculeFixture::class
         ];
     }
 
@@ -90,5 +94,9 @@ class UserFixture extends FakerFixture {
      */
     private function getLocalisation(int $i): Localisation {
         return LocalisationFixture::getLocalisations()[$i];
+    }
+
+    private function getVehicule(int $i): Vehicule {
+        return VehiculeFixture::getVehicules()[$i];
     }
 }

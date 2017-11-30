@@ -10,8 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="etats")
  * @ORM\Entity
  */
-class Etat
-{
+class Etat {
+
     /**
      * @var string
      *
@@ -28,7 +28,14 @@ class Etat
      */
     private $id;
 
-
+    /**
+     * Get label
+     *
+     * @return string
+     */
+    public function getLabel(): string {
+        return $this->label;
+    }
 
     /**
      * Set label
@@ -37,21 +44,10 @@ class Etat
      *
      * @return Etat
      */
-    public function setLabel($label)
-    {
+    public function setLabel(string $label) {
         $this->label = $label;
 
         return $this;
-    }
-
-    /**
-     * Get label
-     *
-     * @return string
-     */
-    public function getLabel()
-    {
-        return $this->label;
     }
 
     /**
@@ -59,8 +55,7 @@ class Etat
      *
      * @return integer
      */
-    public function getId()
-    {
+    public function getId(): int {
         return $this->id;
     }
 }

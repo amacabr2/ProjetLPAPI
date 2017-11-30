@@ -7,6 +7,7 @@ use CovoiturageBundle\Entity\Permis;
 use CovoiturageBundle\Entity\Trajet;
 use CovoiturageBundle\Entity\Vehicule;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
 
@@ -58,9 +59,9 @@ class User extends BaseUser {
     private $civilite;
 
     /**
-     * @var string
+     * @var \DateTime
      *
-     * @ORM\Column(name="date_naissance", type="string", length=45, nullable=true)
+     * @ORM\Column(name="date_naissance", type="date", length=45, nullable=true)
      */
     private $dateNaissance;
 
@@ -176,7 +177,7 @@ class User extends BaseUser {
      *
      * @return string
      */
-    public function getPasswordResetToken() {
+    public function getPasswordResetToken(): string {
         return $this->passwordResetToken;
     }
 
@@ -187,7 +188,7 @@ class User extends BaseUser {
      *
      * @return User
      */
-    public function setPasswordResetToken($passwordResetToken) {
+    public function setPasswordResetToken(string $passwordResetToken): self {
         $this->passwordResetToken = $passwordResetToken;
 
         return $this;
@@ -198,7 +199,7 @@ class User extends BaseUser {
      *
      * @return string
      */
-    public function getPrenom() {
+    public function getPrenom(): string {
         return $this->prenom;
     }
 
@@ -209,7 +210,7 @@ class User extends BaseUser {
      *
      * @return User
      */
-    public function setPrenom($prenom) {
+    public function setPrenom(string $prenom): self {
         $this->prenom = $prenom;
 
         return $this;
@@ -220,7 +221,7 @@ class User extends BaseUser {
      *
      * @return string
      */
-    public function getNom() {
+    public function getNom(): string {
         return $this->nom;
     }
 
@@ -231,7 +232,7 @@ class User extends BaseUser {
      *
      * @return User
      */
-    public function setNom($nom) {
+    public function setNom(string $nom): self {
         $this->nom = $nom;
 
         return $this;
@@ -242,7 +243,7 @@ class User extends BaseUser {
      *
      * @return string
      */
-    public function getCivilite() {
+    public function getCivilite(): string {
         return $this->civilite;
     }
 
@@ -253,7 +254,7 @@ class User extends BaseUser {
      *
      * @return User
      */
-    public function setCivilite($civilite) {
+    public function setCivilite(string $civilite): self {
         $this->civilite = $civilite;
 
         return $this;
@@ -262,9 +263,9 @@ class User extends BaseUser {
     /**
      * Get dateNaissance
      *
-     * @return string
+     * @return \DateTime
      */
-    public function getDateNaissance() {
+    public function getDateNaissance(): \DateTime {
         return $this->dateNaissance;
     }
 
@@ -275,8 +276,8 @@ class User extends BaseUser {
      *
      * @return User
      */
-    public function setDateNaissance($dateNaissance) {
-        $this->dateNaissance = $dateNaissance;
+    public function setDateNaissance($dateNaissance): self {
+        $this->dateNaissance = new \DateTime($dateNaissance);
 
         return $this;
     }
@@ -286,7 +287,7 @@ class User extends BaseUser {
      *
      * @return string
      */
-    public function getTelFixe() {
+    public function getTelFixe(): string {
         return $this->telFixe;
     }
 
@@ -297,7 +298,7 @@ class User extends BaseUser {
      *
      * @return User
      */
-    public function setTelFixe($telFixe) {
+    public function setTelFixe($telFixe): self {
         $this->telFixe = $telFixe;
 
         return $this;
@@ -308,7 +309,7 @@ class User extends BaseUser {
      *
      * @return string
      */
-    public function getTelPortable() {
+    public function getTelPortable(): string {
         return $this->telPortable;
     }
 
@@ -319,7 +320,7 @@ class User extends BaseUser {
      *
      * @return User
      */
-    public function setTelPortable($telPortable) {
+    public function setTelPortable($telPortable): self {
         $this->telPortable = $telPortable;
 
         return $this;
@@ -330,7 +331,7 @@ class User extends BaseUser {
      *
      * @return string
      */
-    public function getFichier() {
+    public function getFichier(): string {
         return $this->fichier;
     }
 
@@ -341,7 +342,7 @@ class User extends BaseUser {
      *
      * @return User
      */
-    public function setFichier($fichier) {
+    public function setFichier($fichier): self {
         $this->fichier = $fichier;
 
         return $this;
@@ -352,7 +353,7 @@ class User extends BaseUser {
      *
      * @return boolean
      */
-    public function getNewsletter() {
+    public function getNewsletter(): bool {
         return $this->newsletter;
     }
 
@@ -363,7 +364,7 @@ class User extends BaseUser {
      *
      * @return User
      */
-    public function setNewsletter($newsletter) {
+    public function setNewsletter($newsletter): self {
         $this->newsletter = $newsletter;
 
         return $this;
@@ -374,7 +375,7 @@ class User extends BaseUser {
      *
      * @return string
      */
-    public function getPresentation() {
+    public function getPresentation(): string {
         return $this->presentation;
     }
 
@@ -385,7 +386,7 @@ class User extends BaseUser {
      *
      * @return User
      */
-    public function setPresentation($presentation) {
+    public function setPresentation($presentation): self {
         $this->presentation = $presentation;
 
         return $this;
@@ -396,7 +397,7 @@ class User extends BaseUser {
      *
      * @return \DateTime
      */
-    public function getCreatedAt() {
+    public function getCreatedAt(): \DateTime {
         return $this->createdAt;
     }
 
@@ -405,7 +406,7 @@ class User extends BaseUser {
      *
      * @return User
      */
-    public function setCreatedAt() {
+    public function setCreatedAt(): self {
         $this->createdAt = new \DateTime();
 
         return $this;
@@ -416,19 +417,17 @@ class User extends BaseUser {
      *
      * @return \DateTime
      */
-    public function getUpdatedAt() {
+    public function getUpdatedAt(): \DateTime {
         return $this->updatedAt;
     }
 
     /**
      * Set updatedAt
      *
-     * @param \DateTime $updatedAt
-     *
      * @return User
      */
-    public function setUpdatedAt() {
-        $this->updatedAt = new Da;
+    public function setUpdatedAt(): self {
+        $this->updatedAt = new \DateTime();
 
         return $this;
     }
@@ -438,7 +437,7 @@ class User extends BaseUser {
      *
      * @return string
      */
-    public function getRole() {
+    public function getRole(): string {
         return $this->role;
     }
 
@@ -449,7 +448,7 @@ class User extends BaseUser {
      *
      * @return User
      */
-    public function setRole($role) {
+    public function setRole($role): self {
         $this->role = $role;
 
         return $this;
@@ -460,7 +459,7 @@ class User extends BaseUser {
      *
      * @return Localisation
      */
-    public function getLocalisations() {
+    public function getLocalisations(): Localisation {
         return $this->localisations;
     }
 
@@ -471,7 +470,7 @@ class User extends BaseUser {
      * @return User
      *
      */
-    public function setLocalisations(Localisation $localisations = null) {
+    public function setLocalisations(Localisation $localisations = null): self {
         $this->localisations = $localisations;
 
         return $this;
@@ -482,7 +481,7 @@ class User extends BaseUser {
      *
      * @return Permis
      */
-    public function getPermis() {
+    public function getPermis(): Permis {
         return $this->permis;
     }
 
@@ -493,7 +492,7 @@ class User extends BaseUser {
      *
      * @return User
      */
-    public function setPermis(Permis $permis = null) {
+    public function setPermis(Permis $permis = null): self {
         $this->permis = $permis;
 
         return $this;
@@ -506,7 +505,7 @@ class User extends BaseUser {
      * @return User
      *
      */
-    public function addTrajet(Trajet $trajet) {
+    public function addTrajet(Trajet $trajet): self {
         $this->trajets[] = $trajet;
 
         return $this;
@@ -526,7 +525,7 @@ class User extends BaseUser {
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getTrajets() {
+    public function getTrajets(): Collection {
         return $this->trajets;
     }
 
@@ -537,7 +536,7 @@ class User extends BaseUser {
      * @return User
      *
      */
-    public function addVehicule(Vehicule $vehicule) {
+    public function addVehicule(Vehicule $vehicule): self {
         $this->vehicules[] = $vehicule;
 
         return $this;
@@ -557,7 +556,7 @@ class User extends BaseUser {
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getVehicules() {
+    public function getVehicules(): Collection {
         return $this->vehicules;
     }
 }

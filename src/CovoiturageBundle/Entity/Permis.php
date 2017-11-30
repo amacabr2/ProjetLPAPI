@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  */
 class Permis {
+
     /**
      * @var string
      *
@@ -46,7 +47,7 @@ class Permis {
      *
      * @return string
      */
-    public function getFichier() {
+    public function getFichier(): string {
         return $this->fichier;
     }
 
@@ -57,7 +58,7 @@ class Permis {
      *
      * @return Permis
      */
-    public function setFichier($fichier) {
+    public function setFichier(string $fichier): self {
         $this->fichier = $fichier;
 
         return $this;
@@ -68,7 +69,7 @@ class Permis {
      *
      * @return boolean
      */
-    public function getValide() {
+    public function getValide(): bool {
         return $this->valide;
     }
 
@@ -79,7 +80,7 @@ class Permis {
      *
      * @return Permis
      */
-    public function setValide($valide) {
+    public function setValide(bool $valide): self {
         $this->valide = $valide;
 
         return $this;
@@ -101,7 +102,7 @@ class Permis {
      *
      * @return Permis
      */
-    public function setDateObtention(\DateTime $dateObtention) {
+    public function setDateObtention(\DateTime $dateObtention): self {
         $this->dateObtention = $dateObtention;
 
         return $this;
@@ -112,7 +113,7 @@ class Permis {
      *
      * @return integer
      */
-    public function getId() {
+    public function getId(): self {
         return $this->id;
     }
 }

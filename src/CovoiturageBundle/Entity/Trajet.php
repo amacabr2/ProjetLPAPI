@@ -3,6 +3,7 @@
 namespace CovoiturageBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use UserBundle\Entity\User;
 
@@ -32,7 +33,7 @@ class Trajet {
     /**
      * @var User
      *
-     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", cascade={"merge"})
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="user_conducteur_id", referencedColumnName="id")
      * })
@@ -82,7 +83,7 @@ class Trajet {
      *
      * @return integer
      */
-    public function getNbPlaceRestante() {
+    public function getNbPlaceRestante(): int {
         return $this->nbPlaceRestante;
     }
 
@@ -93,7 +94,7 @@ class Trajet {
      *
      * @return Trajet
      */
-    public function setNbPlaceRestante($nbPlaceRestante) {
+    public function setNbPlaceRestante(int $nbPlaceRestante): self {
         $this->nbPlaceRestante = $nbPlaceRestante;
 
         return $this;
@@ -104,7 +105,7 @@ class Trajet {
      *
      * @return integer
      */
-    public function getId() {
+    public function getId(): int {
         return $this->id;
     }
 
@@ -113,7 +114,7 @@ class Trajet {
      *
      * @return User
      */
-    public function getUserConducteur() {
+    public function getUserConducteur(): User{
         return $this->userConducteur;
     }
 
@@ -123,7 +124,7 @@ class Trajet {
      * @param User|null $userConducteur
      * @return Trajet
      */
-    public function setUserConducteur(User $userConducteur = null) {
+    public function setUserConducteur(User $userConducteur = null): self {
         $this->userConducteur = $userConducteur;
 
         return $this;
@@ -135,7 +136,7 @@ class Trajet {
      * @param \CovoiturageBundle\Entity\Localisation $localisation
      * @return Trajet
      */
-    public function addLocalisation(Localisation $localisation) {
+    public function addLocalisation(Localisation $localisation): self {
         $this->localisations[] = $localisation;
 
         return $this;
@@ -155,7 +156,7 @@ class Trajet {
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getLocalisations() {
+    public function getLocalisations(): Collection {
         return $this->localisations;
     }
 
@@ -166,7 +167,7 @@ class Trajet {
      *
      * @return Trajet
      */
-    public function addUser(User $user) {
+    public function addUser(User $user): self {
         $this->users[] = $user;
 
         return $this;
@@ -186,7 +187,7 @@ class Trajet {
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getUsers() {
+    public function getUsers(): Collection {
         return $this->users;
     }
 }

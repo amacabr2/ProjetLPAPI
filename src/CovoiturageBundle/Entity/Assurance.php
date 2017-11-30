@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  */
 class Assurance {
+
     /**
      * @var string
      *
@@ -46,7 +47,7 @@ class Assurance {
      *
      * @return string
      */
-    public function getFichier() {
+    public function getFichier(): string {
         return $this->fichier;
     }
 
@@ -57,7 +58,7 @@ class Assurance {
      *
      * @return Assurance
      */
-    public function setFichier($fichier) {
+    public function setFichier($fichier): self {
         $this->fichier = $fichier;
 
         return $this;
@@ -68,7 +69,7 @@ class Assurance {
      *
      * @return boolean
      */
-    public function getValide() {
+    public function getValide(): bool {
         return $this->valide;
     }
 
@@ -79,7 +80,7 @@ class Assurance {
      *
      * @return Assurance
      */
-    public function setValide($valide) {
+    public function setValide($valide): self {
         $this->valide = $valide;
 
         return $this;
@@ -90,7 +91,7 @@ class Assurance {
      *
      * @return string
      */
-    public function getDateObtention() {
+    public function getDateObtention(): string {
         return $this->dateObtention;
     }
 
@@ -101,7 +102,7 @@ class Assurance {
      *
      * @return Assurance
      */
-    public function setDateObtention($dateObtention) {
+    public function setDateObtention($dateObtention): self {
         $this->dateObtention = $dateObtention;
 
         return $this;
@@ -112,7 +113,7 @@ class Assurance {
      *
      * @return integer
      */
-    public function getId() {
+    public function getId(): int {
         return $this->id;
     }
 }
