@@ -9,11 +9,10 @@ use UserBundle\Entity\User;
 /**
  * Vehicule
  *
- * @ORM\Table(name="vehicules", indexes={@ORM\Index(name="fk_vehicules_etats1_idx", columns={"etats_id"}), @ORM\Index(name="fk_vehicules_energies1_idx", columns={"energies_id"}), @ORM\Index(name="fk_vehicules_voitures1_idx", columns={"voitures_id"}), @ORM\Index(name="fk_vehicules_cyclomoteurs1_idx", columns={"cyclomoteurs_id"}), @ORM\Index(name="fk_vehicules_assurances1_idx", columns={"assurances_id"})})
+ * @ORM\Table(name="vehicules", indexes={@ORM\Index(name="fk_vehicules_etats1_idx", columns={"etats_id"}), @ORM\Index(name="fk_vehicules_energies1_idx", columns={"energies_id"}), @ORM\Index(name="fk_vehicules_assurances1_idx", columns={"assurances_id"})})
  * @ORM\Entity
  */
-class Vehicule
-{
+class Vehicule {
     /**
      * @var string
      *
@@ -68,54 +67,19 @@ class Vehicule
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="types_id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     */
-    private $typesId;
-
-    /**
      * @var Assurance
      *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
      * @ORM\OneToOne(targetEntity="CovoiturageBundle\Entity\Assurance")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="assurances_id", referencedColumnName="id")
      * })
      */
     private $assurances;
-
-    /**
-     * @var Cyclomoteur
-     *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="CovoiturageBundle\Entity\Cyclomoteur")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="cyclomoteurs_id", referencedColumnName="id")
-     * })
-     */
-    private $cyclomoteurs;
-
-    /**
-     * @var Voiture
-     *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="CovoiturageBundle\Entity\Voiture")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="voitures_id", referencedColumnName="id")
-     * })
-     */
-    private $voitures;
 
     /**
      * @var Energie
@@ -130,7 +94,7 @@ class Vehicule
     /**
      * @var Etat
      *
-     * @ORM\ManyToOne(targetEntity="CovoiturageBundle\Entity\Etat")
+     * @ORM\ManyToOne(targetEntity="CovoiturageBundle\Entity\Etat", )
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="etats_id", referencedColumnName="id")
      * })
@@ -147,11 +111,18 @@ class Vehicule
     /**
      * Constructor
      */
-    public function __construct()
-    {
+    public function __construct() {
         $this->users = new ArrayCollection();
     }
 
+    /**
+     * Get marque
+     *
+     * @return string
+     */
+    public function getMarque() {
+        return $this->marque;
+    }
 
     /**
      * Set marque
@@ -160,33 +131,8 @@ class Vehicule
      *
      * @return Vehicule
      */
-    public function setMarque($marque)
-    {
+    public function setMarque($marque) {
         $this->marque = $marque;
-
-        return $this;
-    }
-
-    /**
-     * Get marque
-     *
-     * @return string
-     */
-    public function getMarque()
-    {
-        return $this->marque;
-    }
-
-    /**
-     * Set immatriculation
-     *
-     * @param string $immatriculation
-     *
-     * @return Vehicule
-     */
-    public function setImmatriculation($immatriculation)
-    {
-        $this->immatriculation = $immatriculation;
 
         return $this;
     }
@@ -196,21 +142,19 @@ class Vehicule
      *
      * @return string
      */
-    public function getImmatriculation()
-    {
+    public function getImmatriculation() {
         return $this->immatriculation;
     }
 
     /**
-     * Set modele
+     * Set immatriculation
      *
-     * @param string $modele
+     * @param string $immatriculation
      *
      * @return Vehicule
      */
-    public function setModele($modele)
-    {
-        $this->modele = $modele;
+    public function setImmatriculation($immatriculation) {
+        $this->immatriculation = $immatriculation;
 
         return $this;
     }
@@ -220,21 +164,19 @@ class Vehicule
      *
      * @return string
      */
-    public function getModele()
-    {
+    public function getModele() {
         return $this->modele;
     }
 
     /**
-     * Set couleur
+     * Set modele
      *
-     * @param string $couleur
+     * @param string $modele
      *
      * @return Vehicule
      */
-    public function setCouleur($couleur)
-    {
-        $this->couleur = $couleur;
+    public function setModele($modele) {
+        $this->modele = $modele;
 
         return $this;
     }
@@ -244,21 +186,19 @@ class Vehicule
      *
      * @return string
      */
-    public function getCouleur()
-    {
+    public function getCouleur() {
         return $this->couleur;
     }
 
     /**
-     * Set nbPlace
+     * Set couleur
      *
-     * @param integer $nbPlace
+     * @param string $couleur
      *
      * @return Vehicule
      */
-    public function setNbPlace($nbPlace)
-    {
-        $this->nbPlace = $nbPlace;
+    public function setCouleur($couleur) {
+        $this->couleur = $couleur;
 
         return $this;
     }
@@ -268,21 +208,19 @@ class Vehicule
      *
      * @return integer
      */
-    public function getNbPlace()
-    {
+    public function getNbPlace() {
         return $this->nbPlace;
     }
 
     /**
-     * Set fichier
+     * Set nbPlace
      *
-     * @param string $fichier
+     * @param integer $nbPlace
      *
      * @return Vehicule
      */
-    public function setFichier($fichier)
-    {
-        $this->fichier = $fichier;
+    public function setNbPlace($nbPlace) {
+        $this->nbPlace = $nbPlace;
 
         return $this;
     }
@@ -292,21 +230,19 @@ class Vehicule
      *
      * @return string
      */
-    public function getFichier()
-    {
+    public function getFichier() {
         return $this->fichier;
     }
 
     /**
-     * Set puissanceChevaux
+     * Set fichier
      *
-     * @param string $puissanceChevaux
+     * @param string $fichier
      *
      * @return Vehicule
      */
-    public function setPuissanceChevaux($puissanceChevaux)
-    {
-        $this->puissanceChevaux = $puissanceChevaux;
+    public function setFichier($fichier) {
+        $this->fichier = $fichier;
 
         return $this;
     }
@@ -316,21 +252,19 @@ class Vehicule
      *
      * @return string
      */
-    public function getPuissanceChevaux()
-    {
+    public function getPuissanceChevaux() {
         return $this->puissanceChevaux;
     }
 
     /**
-     * Set id
+     * Set puissanceChevaux
      *
-     * @param integer $id
+     * @param string $puissanceChevaux
      *
      * @return Vehicule
      */
-    public function setId($id)
-    {
-        $this->id = $id;
+    public function setPuissanceChevaux($puissanceChevaux) {
+        $this->puissanceChevaux = $puissanceChevaux;
 
         return $this;
     }
@@ -340,33 +274,30 @@ class Vehicule
      *
      * @return integer
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
     /**
-     * Set typesId
+     * Set id
      *
-     * @param integer $typesId
+     * @param integer $id
      *
      * @return Vehicule
      */
-    public function setTypesId($typesId)
-    {
-        $this->typesId = $typesId;
+    public function setId($id) {
+        $this->id = $id;
 
         return $this;
     }
 
     /**
-     * Get typesId
+     * Get assurances
      *
-     * @return integer
+     * @return Assurance
      */
-    public function getTypesId()
-    {
-        return $this->typesId;
+    public function getAssurances() {
+        return $this->assurances;
     }
 
     /**
@@ -376,69 +307,19 @@ class Vehicule
      *
      * @return Vehicule
      */
-    public function setAssurances(Assurance $assurances)
-    {
+    public function setAssurances(Assurance $assurances) {
         $this->assurances = $assurances;
 
         return $this;
     }
 
     /**
-     * Get assurances
+     * Get energies
      *
-     * @return Assurance.php
+     * @return Energie
      */
-    public function getAssurances()
-    {
-        return $this->assurances;
-    }
-
-    /**
-     * Set cyclomoteurs
-     *
-     * @param \CovoiturageBundle\Entity\Cyclomoteur $cyclomoteurs
-     * @return Vehicule
-     *
-     */
-    public function setCyclomoteurs(Cyclomoteur $cyclomoteurs)
-    {
-        $this->cyclomoteurs = $cyclomoteurs;
-
-        return $this;
-    }
-
-    /**
-     * Get cyclomoteurs
-     *
-     * @return Cyclomoteur.php
-     */
-    public function getCyclomoteurs()
-    {
-        return $this->cyclomoteurs;
-    }
-
-    /**
-     * Set voitures
-     *
-     * @param Voiture $voitures
-     *
-     * @return Vehicule
-     */
-    public function setVoitures(Voiture $voitures)
-    {
-        $this->voitures = $voitures;
-
-        return $this;
-    }
-
-    /**
-     * Get voitures
-     *
-     * @return Voiture.php
-     */
-    public function getVoitures()
-    {
-        return $this->voitures;
+    public function getEnergies() {
+        return $this->energies;
     }
 
     /**
@@ -448,21 +329,19 @@ class Vehicule
      * @return Vehicule
      *
      */
-    public function setEnergies(Energie $energies = null)
-    {
+    public function setEnergies(Energie $energies = null) {
         $this->energies = $energies;
 
         return $this;
     }
 
     /**
-     * Get energies
+     * Get etats
      *
-     * @return Energie.php
+     * @return Etat
      */
-    public function getEnergies()
-    {
-        return $this->energies;
+    public function getEtats() {
+        return $this->etats;
     }
 
     /**
@@ -471,21 +350,10 @@ class Vehicule
      * @param \CovoiturageBundle\Entity\Etat|null $etats
      * @return Vehicule
      */
-    public function setEtats(Etat $etats = null)
-    {
+    public function setEtats(Etat $etats = null) {
         $this->etats = $etats;
 
         return $this;
-    }
-
-    /**
-     * Get etats
-     *
-     * @return Etat.php
-     */
-    public function getEtats()
-    {
-        return $this->etats;
     }
 
     /**
@@ -494,8 +362,7 @@ class Vehicule
      * @param User $user
      * @return Vehicule
      */
-    public function addUser(User $user)
-    {
+    public function addUser(User $user) {
         $this->users[] = $user;
 
         return $this;
@@ -506,8 +373,7 @@ class Vehicule
      *
      * @param User $user
      */
-    public function removeUser(User $user)
-    {
+    public function removeUser(User $user) {
         $this->users->removeElement($user);
     }
 
@@ -516,8 +382,7 @@ class Vehicule
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getUsers()
-    {
+    public function getUsers() {
         return $this->users;
     }
 }

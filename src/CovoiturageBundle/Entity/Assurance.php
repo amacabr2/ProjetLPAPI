@@ -10,8 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="assurances")
  * @ORM\Entity
  */
-class Assurance
-{
+class Assurance {
     /**
      * @var string
      *
@@ -42,7 +41,14 @@ class Assurance
      */
     private $id;
 
-
+    /**
+     * Get fichier
+     *
+     * @return string
+     */
+    public function getFichier() {
+        return $this->fichier;
+    }
 
     /**
      * Set fichier
@@ -51,33 +57,8 @@ class Assurance
      *
      * @return Assurance
      */
-    public function setFichier($fichier)
-    {
+    public function setFichier($fichier) {
         $this->fichier = $fichier;
-
-        return $this;
-    }
-
-    /**
-     * Get fichier
-     *
-     * @return string
-     */
-    public function getFichier()
-    {
-        return $this->fichier;
-    }
-
-    /**
-     * Set valide
-     *
-     * @param boolean $valide
-     *
-     * @return Assurance
-     */
-    public function setValide($valide)
-    {
-        $this->valide = $valide;
 
         return $this;
     }
@@ -87,21 +68,19 @@ class Assurance
      *
      * @return boolean
      */
-    public function getValide()
-    {
+    public function getValide() {
         return $this->valide;
     }
 
     /**
-     * Set dateObtention
+     * Set valide
      *
-     * @param string $dateObtention
+     * @param boolean $valide
      *
      * @return Assurance
      */
-    public function setDateObtention($dateObtention)
-    {
-        $this->dateObtention = $dateObtention;
+    public function setValide($valide) {
+        $this->valide = $valide;
 
         return $this;
     }
@@ -111,9 +90,21 @@ class Assurance
      *
      * @return string
      */
-    public function getDateObtention()
-    {
+    public function getDateObtention() {
         return $this->dateObtention;
+    }
+
+    /**
+     * Set dateObtention
+     *
+     * @param string $dateObtention
+     *
+     * @return Assurance
+     */
+    public function setDateObtention($dateObtention) {
+        $this->dateObtention = $dateObtention;
+
+        return $this;
     }
 
     /**
@@ -121,8 +112,7 @@ class Assurance
      *
      * @return integer
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 }

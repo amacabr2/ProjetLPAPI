@@ -15,8 +15,6 @@ use UserBundle\DataFixtures\FakerFixture;
 
 class EnergieFixture extends FakerFixture {
 
-    // implements DependentFixtureInterface
-
     /**
      * @var Energie[]
      */
@@ -40,12 +38,11 @@ class EnergieFixture extends FakerFixture {
         for ($i = 0; $i < sizeof($energies); $i++) {
             $energie = new Energie();
             $energie->setLibelle($energies[$i]);
-            $manager->persist($energie);
+
             self::$energies[] = $energie;
+            $manager->persist($energie);
         }
 
         $manager->flush();
     }
-
-
 }

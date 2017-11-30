@@ -12,8 +12,7 @@ use UserBundle\Entity\User;
  * @ORM\Table(name="trajets", indexes={@ORM\Index(name="fk_trajets_users1_idx", columns={"user_conducteur_id"})})
  * @ORM\Entity
  */
-class Trajet
-{
+class Trajet {
     /**
      * @var integer
      *
@@ -73,12 +72,19 @@ class Trajet
     /**
      * Constructor
      */
-    public function __construct()
-    {
+    public function __construct() {
         $this->localisations = new ArrayCollection();
         $this->users = new ArrayCollection();
     }
 
+    /**
+     * Get nbPlaceRestante
+     *
+     * @return integer
+     */
+    public function getNbPlaceRestante() {
+        return $this->nbPlaceRestante;
+    }
 
     /**
      * Set nbPlaceRestante
@@ -87,21 +93,10 @@ class Trajet
      *
      * @return Trajet
      */
-    public function setNbPlaceRestante($nbPlaceRestante)
-    {
+    public function setNbPlaceRestante($nbPlaceRestante) {
         $this->nbPlaceRestante = $nbPlaceRestante;
 
         return $this;
-    }
-
-    /**
-     * Get nbPlaceRestante
-     *
-     * @return integer
-     */
-    public function getNbPlaceRestante()
-    {
-        return $this->nbPlaceRestante;
     }
 
     /**
@@ -109,9 +104,17 @@ class Trajet
      *
      * @return integer
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
+    }
+
+    /**
+     * Get userConducteur
+     *
+     * @return User
+     */
+    public function getUserConducteur() {
+        return $this->userConducteur;
     }
 
     /**
@@ -120,21 +123,10 @@ class Trajet
      * @param User|null $userConducteur
      * @return Trajet
      */
-    public function setUserConducteur(User $userConducteur = null)
-    {
+    public function setUserConducteur(User $userConducteur = null) {
         $this->userConducteur = $userConducteur;
 
         return $this;
-    }
-
-    /**
-     * Get userConducteur
-     *
-     * @return User
-     */
-    public function getUserConducteur()
-    {
-        return $this->userConducteur;
     }
 
     /**
@@ -143,8 +135,7 @@ class Trajet
      * @param \CovoiturageBundle\Entity\Localisation $localisation
      * @return Trajet
      */
-    public function addLocalisation(Localisation $localisation)
-    {
+    public function addLocalisation(Localisation $localisation) {
         $this->localisations[] = $localisation;
 
         return $this;
@@ -155,8 +146,7 @@ class Trajet
      *
      * @param Localisation $localisation
      */
-    public function removeLocalisation(Localisation $localisation)
-    {
+    public function removeLocalisation(Localisation $localisation) {
         $this->localisations->removeElement($localisation);
     }
 
@@ -165,8 +155,7 @@ class Trajet
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getLocalisations()
-    {
+    public function getLocalisations() {
         return $this->localisations;
     }
 
@@ -177,8 +166,7 @@ class Trajet
      *
      * @return Trajet
      */
-    public function addUser(User $user)
-    {
+    public function addUser(User $user) {
         $this->users[] = $user;
 
         return $this;
@@ -189,8 +177,7 @@ class Trajet
      *
      * @param User $user
      */
-    public function removeUser(User $user)
-    {
+    public function removeUser(User $user) {
         $this->users->removeElement($user);
     }
 
@@ -199,8 +186,7 @@ class Trajet
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getUsers()
-    {
+    public function getUsers() {
         return $this->users;
     }
 }

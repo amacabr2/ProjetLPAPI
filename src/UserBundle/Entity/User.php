@@ -7,11 +7,8 @@ use CovoiturageBundle\Entity\Permis;
 use CovoiturageBundle\Entity\Trajet;
 use CovoiturageBundle\Entity\Vehicule;
 use Doctrine\Common\Collections\ArrayCollection;
-use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\AttributeOverride;
-use Doctrine\ORM\Mapping\AttributeOverrides;
-use Doctrine\ORM\Mapping\Column;
+use FOS\UserBundle\Model\User as BaseUser;
 
 /**
  * User
@@ -19,7 +16,7 @@ use Doctrine\ORM\Mapping\Column;
  * @ORM\Table(name="users", indexes={@ORM\Index(name="fk_users_permis_idx", columns={"permis_id"}), @ORM\Index(name="fk_users_localisations1_idx", columns={"localisations_id"})})
  * @ORM\Entity
  */
-class User extends BaseUser{
+class User extends BaseUser {
 
     const ROLE_ADMIN = 'ROLE_ADMIN';
 
@@ -126,7 +123,7 @@ class User extends BaseUser{
     /**
      * @var Localisation
      *
-     * @ORM\ManyToOne(targetEntity="CovoiturageBundle\Entity\Localisation")
+     * @ORM\ManyToOne(targetEntity="CovoiturageBundle\Entity\Localisation", cascade={"persist"})
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="localisations_id", referencedColumnName="id")
      * })
@@ -136,7 +133,7 @@ class User extends BaseUser{
     /**
      * @var Permis
      *
-     * @ORM\ManyToOne(targetEntity="CovoiturageBundle\Entity\Permis")
+     * @ORM\ManyToOne(targetEntity="CovoiturageBundle\Entity\Permis", cascade={"persist"})
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="permis_id", referencedColumnName="id")
      * })
@@ -174,6 +171,14 @@ class User extends BaseUser{
         $this->vehicules = new ArrayCollection();
     }
 
+    /**
+     * Get passwordResetToken
+     *
+     * @return string
+     */
+    public function getPasswordResetToken() {
+        return $this->passwordResetToken;
+    }
 
     /**
      * Set passwordResetToken
@@ -182,33 +187,8 @@ class User extends BaseUser{
      *
      * @return User
      */
-    public function setPasswordResetToken($passwordResetToken)
-    {
+    public function setPasswordResetToken($passwordResetToken) {
         $this->passwordResetToken = $passwordResetToken;
-
-        return $this;
-    }
-
-    /**
-     * Get passwordResetToken
-     *
-     * @return string
-     */
-    public function getPasswordResetToken()
-    {
-        return $this->passwordResetToken;
-    }
-
-    /**
-     * Set prenom
-     *
-     * @param string $prenom
-     *
-     * @return User
-     */
-    public function setPrenom($prenom)
-    {
-        $this->prenom = $prenom;
 
         return $this;
     }
@@ -218,21 +198,19 @@ class User extends BaseUser{
      *
      * @return string
      */
-    public function getPrenom()
-    {
+    public function getPrenom() {
         return $this->prenom;
     }
 
     /**
-     * Set nom
+     * Set prenom
      *
-     * @param string $nom
+     * @param string $prenom
      *
      * @return User
      */
-    public function setNom($nom)
-    {
-        $this->nom = $nom;
+    public function setPrenom($prenom) {
+        $this->prenom = $prenom;
 
         return $this;
     }
@@ -242,21 +220,19 @@ class User extends BaseUser{
      *
      * @return string
      */
-    public function getNom()
-    {
+    public function getNom() {
         return $this->nom;
     }
 
     /**
-     * Set civilite
+     * Set nom
      *
-     * @param string $civilite
+     * @param string $nom
      *
      * @return User
      */
-    public function setCivilite($civilite)
-    {
-        $this->civilite = $civilite;
+    public function setNom($nom) {
+        $this->nom = $nom;
 
         return $this;
     }
@@ -266,21 +242,19 @@ class User extends BaseUser{
      *
      * @return string
      */
-    public function getCivilite()
-    {
+    public function getCivilite() {
         return $this->civilite;
     }
 
     /**
-     * Set dateNaissance
+     * Set civilite
      *
-     * @param string $dateNaissance
+     * @param string $civilite
      *
      * @return User
      */
-    public function setDateNaissance($dateNaissance)
-    {
-        $this->dateNaissance = $dateNaissance;
+    public function setCivilite($civilite) {
+        $this->civilite = $civilite;
 
         return $this;
     }
@@ -290,21 +264,19 @@ class User extends BaseUser{
      *
      * @return string
      */
-    public function getDateNaissance()
-    {
+    public function getDateNaissance() {
         return $this->dateNaissance;
     }
 
     /**
-     * Set telFixe
+     * Set dateNaissance
      *
-     * @param string $telFixe
+     * @param string $dateNaissance
      *
      * @return User
      */
-    public function setTelFixe($telFixe)
-    {
-        $this->telFixe = $telFixe;
+    public function setDateNaissance($dateNaissance) {
+        $this->dateNaissance = $dateNaissance;
 
         return $this;
     }
@@ -314,21 +286,19 @@ class User extends BaseUser{
      *
      * @return string
      */
-    public function getTelFixe()
-    {
+    public function getTelFixe() {
         return $this->telFixe;
     }
 
     /**
-     * Set telPortable
+     * Set telFixe
      *
-     * @param string $telPortable
+     * @param string $telFixe
      *
      * @return User
      */
-    public function setTelPortable($telPortable)
-    {
-        $this->telPortable = $telPortable;
+    public function setTelFixe($telFixe) {
+        $this->telFixe = $telFixe;
 
         return $this;
     }
@@ -338,21 +308,19 @@ class User extends BaseUser{
      *
      * @return string
      */
-    public function getTelPortable()
-    {
+    public function getTelPortable() {
         return $this->telPortable;
     }
 
     /**
-     * Set fichier
+     * Set telPortable
      *
-     * @param string $fichier
+     * @param string $telPortable
      *
      * @return User
      */
-    public function setFichier($fichier)
-    {
-        $this->fichier = $fichier;
+    public function setTelPortable($telPortable) {
+        $this->telPortable = $telPortable;
 
         return $this;
     }
@@ -362,21 +330,19 @@ class User extends BaseUser{
      *
      * @return string
      */
-    public function getFichier()
-    {
+    public function getFichier() {
         return $this->fichier;
     }
 
     /**
-     * Set newsletter
+     * Set fichier
      *
-     * @param boolean $newsletter
+     * @param string $fichier
      *
      * @return User
      */
-    public function setNewsletter($newsletter)
-    {
-        $this->newsletter = $newsletter;
+    public function setFichier($fichier) {
+        $this->fichier = $fichier;
 
         return $this;
     }
@@ -386,21 +352,19 @@ class User extends BaseUser{
      *
      * @return boolean
      */
-    public function getNewsletter()
-    {
+    public function getNewsletter() {
         return $this->newsletter;
     }
 
     /**
-     * Set presentation
+     * Set newsletter
      *
-     * @param string $presentation
+     * @param boolean $newsletter
      *
      * @return User
      */
-    public function setPresentation($presentation)
-    {
-        $this->presentation = $presentation;
+    public function setNewsletter($newsletter) {
+        $this->newsletter = $newsletter;
 
         return $this;
     }
@@ -410,21 +374,19 @@ class User extends BaseUser{
      *
      * @return string
      */
-    public function getPresentation()
-    {
+    public function getPresentation() {
         return $this->presentation;
     }
 
     /**
-     * Set createdAt
+     * Set presentation
      *
-     * @param \DateTime $createdAt
+     * @param string $presentation
      *
      * @return User
      */
-    public function setCreatedAt(\DateTime $createdAt)
-    {
-        $this->createdAt = $createdAt;
+    public function setPresentation($presentation) {
+        $this->presentation = $presentation;
 
         return $this;
     }
@@ -434,21 +396,17 @@ class User extends BaseUser{
      *
      * @return \DateTime
      */
-    public function getCreatedAt()
-    {
+    public function getCreatedAt() {
         return $this->createdAt;
     }
 
     /**
-     * Set updatedAt
-     *
-     * @param \DateTime $updatedAt
+     * Set createdAt
      *
      * @return User
      */
-    public function setUpdatedAt(\DateTime $updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
+    public function setCreatedAt() {
+        $this->createdAt = new \DateTime();
 
         return $this;
     }
@@ -458,21 +416,19 @@ class User extends BaseUser{
      *
      * @return \DateTime
      */
-    public function getUpdatedAt()
-    {
+    public function getUpdatedAt() {
         return $this->updatedAt;
     }
 
     /**
-     * Set role
+     * Set updatedAt
      *
-     * @param string $role
+     * @param \DateTime $updatedAt
      *
      * @return User
      */
-    public function setRole($role)
-    {
-        $this->role = $role;
+    public function setUpdatedAt() {
+        $this->updatedAt = new Da;
 
         return $this;
     }
@@ -482,21 +438,19 @@ class User extends BaseUser{
      *
      * @return string
      */
-    public function getRole()
-    {
+    public function getRole() {
         return $this->role;
     }
 
     /**
-     * Set localisations
+     * Set role
      *
-     * @param Localisation|null $localisations
+     * @param string $role
+     *
      * @return User
-     *
      */
-    public function setLocalisations(Localisation $localisations = null)
-    {
-        $this->localisations = $localisations;
+    public function setRole($role) {
+        $this->role = $role;
 
         return $this;
     }
@@ -506,21 +460,19 @@ class User extends BaseUser{
      *
      * @return Localisation
      */
-    public function getLocalisations()
-    {
+    public function getLocalisations() {
         return $this->localisations;
     }
 
     /**
-     * Set permis
+     * Set localisations
      *
-     * @param Permis $permis
-     *
+     * @param Localisation|null $localisations
      * @return User
+     *
      */
-    public function setPermis(Permis $permis = null)
-    {
-        $this->permis = $permis;
+    public function setLocalisations(Localisation $localisations = null) {
+        $this->localisations = $localisations;
 
         return $this;
     }
@@ -530,9 +482,21 @@ class User extends BaseUser{
      *
      * @return Permis
      */
-    public function getPermis()
-    {
+    public function getPermis() {
         return $this->permis;
+    }
+
+    /**
+     * Set permis
+     *
+     * @param Permis $permis
+     *
+     * @return User
+     */
+    public function setPermis(Permis $permis = null) {
+        $this->permis = $permis;
+
+        return $this;
     }
 
     /**
@@ -542,8 +506,7 @@ class User extends BaseUser{
      * @return User
      *
      */
-    public function addTrajet(Trajet $trajet)
-    {
+    public function addTrajet(Trajet $trajet) {
         $this->trajets[] = $trajet;
 
         return $this;
@@ -554,8 +517,7 @@ class User extends BaseUser{
      *
      * @param Trajet $trajet
      */
-    public function removeTrajet(Trajet $trajet)
-    {
+    public function removeTrajet(Trajet $trajet) {
         $this->trajets->removeElement($trajet);
     }
 
@@ -564,8 +526,7 @@ class User extends BaseUser{
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getTrajets()
-    {
+    public function getTrajets() {
         return $this->trajets;
     }
 
@@ -576,8 +537,7 @@ class User extends BaseUser{
      * @return User
      *
      */
-    public function addVehicule(Vehicule $vehicule)
-    {
+    public function addVehicule(Vehicule $vehicule) {
         $this->vehicules[] = $vehicule;
 
         return $this;
@@ -588,8 +548,7 @@ class User extends BaseUser{
      *
      * @param Vehicule $vehicule
      */
-    public function removeVehicule(Vehicule $vehicule)
-    {
+    public function removeVehicule(Vehicule $vehicule) {
         $this->vehicules->removeElement($vehicule);
     }
 
@@ -598,8 +557,7 @@ class User extends BaseUser{
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getVehicules()
-    {
+    public function getVehicules() {
         return $this->vehicules;
     }
 }

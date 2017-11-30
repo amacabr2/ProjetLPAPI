@@ -9,12 +9,10 @@
 namespace CovoiturageBundle\DataFixtures\ORM;
 
 
-use CovoiturageBundle\Entity\Localisation;
 use CovoiturageBundle\Entity\Trajet;
-use CovoiturageBundle\Entity\Vehicule;
-use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use UserBundle\DataFixtures\FakerFixture;
+use UserBundle\DataFixtures\ORM\UserFixture;
 use UserBundle\Entity\User;
 
 class TrajetFixture extends FakerFixture {
@@ -30,13 +28,33 @@ class TrajetFixture extends FakerFixture {
      * @param ObjectManager $manager
      */
     public function load(ObjectManager $manager) {
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < 30; $i++) {
             $trajet = new Trajet();
+            $trajet->setUserConducteur($this->getUser($i));
             $trajet->setNbPlaceRestante(4);
+
+            self::$trajets[] = $trajet;
+            $manager->merge($trajet);
         }
 
         $manager->flush();
     }
 
+    /**
+     * @return array
+     */
+    public function getDependencies(): array {
+        return [
+            UserFixture::class,
+            LocalisationFixture::class
+        ];
+    }
 
+    /**
+     * @param int $i
+     * @return User
+     */
+    private function getUser(int $i): User {
+        return UserFixture::getUsers()[$i];
+    }
 }

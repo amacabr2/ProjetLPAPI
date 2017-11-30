@@ -10,8 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="permis")
  * @ORM\Entity
  */
-class Permis
-{
+class Permis {
     /**
      * @var string
      *
@@ -42,7 +41,14 @@ class Permis
      */
     private $id;
 
-
+    /**
+     * Get fichier
+     *
+     * @return string
+     */
+    public function getFichier() {
+        return $this->fichier;
+    }
 
     /**
      * Set fichier
@@ -51,33 +57,8 @@ class Permis
      *
      * @return Permis
      */
-    public function setFichier($fichier)
-    {
+    public function setFichier($fichier) {
         $this->fichier = $fichier;
-
-        return $this;
-    }
-
-    /**
-     * Get fichier
-     *
-     * @return string
-     */
-    public function getFichier()
-    {
-        return $this->fichier;
-    }
-
-    /**
-     * Set valide
-     *
-     * @param boolean $valide
-     *
-     * @return Permis
-     */
-    public function setValide($valide)
-    {
-        $this->valide = $valide;
 
         return $this;
     }
@@ -87,21 +68,19 @@ class Permis
      *
      * @return boolean
      */
-    public function getValide()
-    {
+    public function getValide() {
         return $this->valide;
     }
 
     /**
-     * Set dateObtention
+     * Set valide
      *
-     * @param \DateTime $dateObtention
+     * @param boolean $valide
      *
      * @return Permis
      */
-    public function setDateObtention($dateObtention)
-    {
-        $this->dateObtention = $dateObtention;
+    public function setValide($valide) {
+        $this->valide = $valide;
 
         return $this;
     }
@@ -111,9 +90,21 @@ class Permis
      *
      * @return \DateTime
      */
-    public function getDateObtention()
-    {
+    public function getDateObtention(): \DateTime {
         return $this->dateObtention;
+    }
+
+    /**
+     * Set dateObtention
+     *
+     * @param \DateTime $dateObtention
+     *
+     * @return Permis
+     */
+    public function setDateObtention(\DateTime $dateObtention) {
+        $this->dateObtention = $dateObtention;
+
+        return $this;
     }
 
     /**
@@ -121,8 +112,7 @@ class Permis
      *
      * @return integer
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 }

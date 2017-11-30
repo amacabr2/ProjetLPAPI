@@ -35,7 +35,7 @@ class EtatFixture extends FakerFixture {
     public function load(ObjectManager $manager) {
         $etats = ["bon", "moyen", "mauvais", "delabré"];
 
-        for ($i = 0; sizeof($etats); $i++) {
+        for ($i = 0; $i < sizeof($etats); $i++) {
             $etat = new Etat();
             $etat->setLabel($etats[$i]);
 

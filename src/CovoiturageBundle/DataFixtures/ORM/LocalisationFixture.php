@@ -33,7 +33,7 @@ class LocalisationFixture extends FakerFixture {
      * @param ObjectManager $manager
      */
     public function load(ObjectManager $manager) {
-        for ($i = 0; $i < 50; $i++) {
+        for ($i = 0; $i < 30; $i++) {
             $isDepart = (bool)rand(0, 1);
 
             $localisation = new Localisation();
