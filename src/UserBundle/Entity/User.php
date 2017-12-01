@@ -151,7 +151,7 @@ class User extends BaseUser {
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="CovoiturageBundle\Entity\Vehicule", inversedBy="users")
+     * @ORM\ManyToMany(targetEntity="CovoiturageBundle\Entity\Vehicule", inversedBy="users", cascade={"persist"})
      * @ORM\JoinTable(name="users_vehicules",
      *   joinColumns={
      *     @ORM\JoinColumn(name="users_id", referencedColumnName="id")
@@ -538,6 +538,7 @@ class User extends BaseUser {
      */
     public function addVehicule(Vehicule $vehicule): self {
         $this->vehicules[] = $vehicule;
+        $vehicule->addUser($this);
 
         return $this;
     }

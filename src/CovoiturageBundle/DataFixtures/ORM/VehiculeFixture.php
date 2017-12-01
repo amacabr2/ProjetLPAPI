@@ -36,6 +36,10 @@ class VehiculeFixture extends FakerFixture {
      * @param ObjectManager $manager
      */
     public function load(ObjectManager $manager) {
+        $energies = $manager->getRepository('CovoiturageBundle:Energie')->findAll();
+        $etats = $manager->getRepository('CovoiturageBundle:Etat')->findAll();
+        $assurances = $manager->getRepository('CovoiturageBundle:Assurance')->findAll();
+
         for ($i = 0; $i < 30; $i++) {
             $marque = $this->getMarque();
 
@@ -47,12 +51,12 @@ class VehiculeFixture extends FakerFixture {
             $vehicule->setImmatriculation($this->getImmatriculation());
             $vehicule->setNbPlace(4);
             $vehicule->setPuissanceChevaux(random_int(80, 160));
-            $vehicule->setEnergies($this->getEnergie());
-            $vehicule->setEtats($this->getEtat());
-            $vehicule->setAssurances($this->getAssurance($i));
+            $vehicule->setEnergies($energies[random_int(0, sizeof($energies) - 1)]);
+            $vehicule->setEtats($etats[random_int(0, sizeof($etats) - 1)]);
+            $vehicule->setAssurances($assurances[$i]);
 
             self::$vehicules[] = $vehicule;
-            $manager->merge($vehicule);
+            $manager->persist($vehicule);
         }
 
         $manager->flush();
@@ -92,29 +96,5 @@ class VehiculeFixture extends FakerFixture {
         }
 
         return $lettres[0] . $lettres[1] . '-' . $chiffres[0] . $chiffres[0] . $chiffres[2] . '-' . $lettres[2] . $lettres[3];
-    }
-
-    /**
-     * @return Energie
-     */
-    private function getEnergie(): Energie {
-        $energies = EnergieFixture::getEnergies();
-        return $energies[random_int(0, sizeof($energies) - 1)];
-    }
-
-    /**
-     * @return Etat
-     */
-    private function getEtat(): Etat {
-        $etats = EtatFixture::getEtats();
-        return $etats[random_int(0, sizeof($etats) - 1)];
-    }
-
-    /**
-     * @param int $i
-     * @return Assurance
-     */
-    private function getAssurance(int $i): Assurance {
-        return AssuranceFixture::getAssurances()[$i];
     }
 }

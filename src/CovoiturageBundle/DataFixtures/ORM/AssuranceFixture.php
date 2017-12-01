@@ -16,18 +16,6 @@ use UserBundle\DataFixtures\FakerFixture;
 class AssuranceFixture extends FakerFixture {
 
     /**
-     * @var Assurance[]
-     */
-    private static $assurances;
-
-    /**
-     * @return Assurance[]
-     */
-    public static function getAssurances(): array {
-        return self::$assurances;
-    }
-
-    /**
      * Load data fixtures with the passed EntityManager
      *
      * @param ObjectManager $manager
@@ -39,7 +27,6 @@ class AssuranceFixture extends FakerFixture {
             $assurance->setValide(true);
             $assurance->setDateObtention($this->getFaker()->date($format = 'Y-m-d', $max = 'now'));
 
-            self::$assurances[] = $assurance;
             $manager->persist($assurance);
         }
 

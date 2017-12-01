@@ -16,18 +16,6 @@ use UserBundle\DataFixtures\FakerFixture;
 class LocalisationFixture extends FakerFixture {
 
     /**
-     * @var Localisation[]
-     */
-    private static $localisations = [];
-
-    /**
-     * @return Localisation[]
-     */
-    public static function getLocalisations(): array {
-        return self::$localisations;
-    }
-
-    /**
      * Load data fixtures with the passed EntityManager
      *
      * @param ObjectManager $manager
@@ -46,7 +34,6 @@ class LocalisationFixture extends FakerFixture {
             $localisation->setIsArrivee(!$isDepart);
 
             $manager->persist($localisation);
-            self::$localisations[] = $localisation;
         }
 
         $manager->flush();

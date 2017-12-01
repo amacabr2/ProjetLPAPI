@@ -15,17 +15,6 @@ use UserBundle\DataFixtures\FakerFixture;
 
 class EnergieFixture extends FakerFixture {
 
-    /**
-     * @var Energie[]
-     */
-    private static $energies = [];
-
-    /**
-     * @return Energie[]
-     */
-    public static function getEnergies(): array {
-        return self::$energies;
-    }
 
     /**
      * Load data fixtures with the passed EntityManager
@@ -39,7 +28,6 @@ class EnergieFixture extends FakerFixture {
             $energie = new Energie();
             $energie->setLibelle($energies[$i]);
 
-            self::$energies[] = $energie;
             $manager->persist($energie);
         }
 

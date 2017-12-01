@@ -16,18 +16,6 @@ use UserBundle\DataFixtures\FakerFixture;
 class EtatFixture extends FakerFixture {
 
     /**
-     * @var Etat[]
-     */
-    private static $etats;
-
-    /**
-     * @return Etat[]
-     */
-    public static function getEtats(): array {
-        return self::$etats;
-    }
-
-    /**
      * Load data fixtures with the passed EntityManager
      *
      * @param ObjectManager $manager
@@ -39,7 +27,6 @@ class EtatFixture extends FakerFixture {
             $etat = new Etat();
             $etat->setLabel($etats[$i]);
 
-            self::$etats[] = $etat;
             $manager->persist($etat);
         }
 

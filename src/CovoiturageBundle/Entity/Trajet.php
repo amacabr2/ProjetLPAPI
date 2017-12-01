@@ -33,7 +33,7 @@ class Trajet {
     /**
      * @var User
      *
-     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", cascade={"merge"})
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="user_conducteur_id", referencedColumnName="id")
      * })
@@ -121,10 +121,10 @@ class Trajet {
     /**
      * Set userConducteur
      *
-     * @param User|null $userConducteur
+     * @param User $userConducteur
      * @return Trajet
      */
-    public function setUserConducteur(User $userConducteur = null): self {
+    public function setUserConducteur(User $userConducteur): self {
         $this->userConducteur = $userConducteur;
 
         return $this;

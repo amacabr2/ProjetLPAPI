@@ -16,18 +16,6 @@ use UserBundle\DataFixtures\FakerFixture;
 class PermisFixture extends FakerFixture {
 
     /**
-     * @var Permis[]
-     */
-    private static $permis = [];
-
-    /**
-     * @return Permis[]
-     */
-    public static function getPermis(): array {
-        return self::$permis;
-    }
-
-    /**
      * Load data fixtures with the passed EntityManager
      *
      * @param ObjectManager $manager
@@ -39,7 +27,6 @@ class PermisFixture extends FakerFixture {
             $permis->setValide(true);
             $permis->setFichier($this->getFaker()->imageUrl($width = 640, $height = 480));
 
-            self::$permis[] = $permis;
             $manager->persist($permis);
         }
 

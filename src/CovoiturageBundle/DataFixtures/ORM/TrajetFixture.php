@@ -18,23 +18,19 @@ use UserBundle\Entity\User;
 class TrajetFixture extends FakerFixture {
 
     /**
-     * @var Trajet[]
-     */
-    private static $trajets = [];
-
-    /**
      * Load data fixtures with the passed EntityManager
      *
      * @param ObjectManager $manager
      */
     public function load(ObjectManager $manager) {
+        $users = $manager->getRepository('UserBundle:User')->findAll();
+
         for ($i = 0; $i < 30; $i++) {
             $trajet = new Trajet();
-            $trajet->setUserConducteur($this->getUser($i));
+            $trajet->setUserConducteur($users[$i]);
             $trajet->setNbPlaceRestante(4);
 
-            self::$trajets[] = $trajet;
-            $manager->merge($trajet);
+            $manager->persist($trajet);
         }
 
         $manager->flush();
@@ -48,13 +44,5 @@ class TrajetFixture extends FakerFixture {
             UserFixture::class,
             LocalisationFixture::class
         ];
-    }
-
-    /**
-     * @param int $i
-     * @return User
-     */
-    private function getUser(int $i): User {
-        return UserFixture::getUsers()[$i];
     }
 }

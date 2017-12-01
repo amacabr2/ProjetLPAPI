@@ -21,23 +21,15 @@ use UserBundle\Entity\User;
 class UserFixture extends FakerFixture {
 
     /**
-     * @var User[]
-     */
-    private static $users = [];
-
-    /**
-     * @return User[]
-     */
-    public static function getUsers(): array {
-        return self::$users;
-    }
-
-    /**
      * Load data fixtures with the passed EntityManager
      *
      * @param ObjectManager $manager
      */
     public function load(ObjectManager $manager) {
+        $permis = $manager->getRepository('CovoiturageBundle:Permis')->findAll();
+        $localisations = $manager->getRepository('CovoiturageBundle:Localisation')->findAll();
+        $vehicules = $manager->getRepository('CovoiturageBundle:Vehicule')->findAll();
+
         for ($i = 0; $i < 30; $i++) {
             $randomSex = random_int(0, 1);
             $prenom = $randomSex ? $this->getFaker()->firstnameMale : $this->getFaker()->firstnameFemale;
@@ -58,12 +50,11 @@ class UserFixture extends FakerFixture {
             $user->setNewsletter((bool)rand(0, 1));
             $user->setPresentation($this->getFaker()->realText($maxNbChars = 200, $indexSize = 2));
             $user->setCreatedAt();
-            $user->setPermis($this->getPermis($i));
-            $user->setLocalisations($this->getLocalisation($i));
-            $user->addVehicule($this->getVehicule($i));
+            $user->setPermis($permis[$i]);
+            $user->setLocalisations($localisations[$i]);
+            $user->addVehicule($vehicules[$i]);
 
-            self::$users[] = $user;
-            $manager->merge($user);
+            $manager->persist($user);
         }
 
         $manager->flush();
@@ -78,25 +69,5 @@ class UserFixture extends FakerFixture {
             LocalisationFixture::class,
             VehiculeFixture::class
         ];
-    }
-
-    /**
-     * @param int $i
-     * @return Permis
-     */
-    private function getPermis(int $i): Permis {
-        return PermisFixture::getPermis()[$i];
-    }
-
-    /**
-     * @param int $i
-     * @return Localisation
-     */
-    private function getLocalisation(int $i): Localisation {
-        return LocalisationFixture::getLocalisations()[$i];
-    }
-
-    private function getVehicule(int $i): Vehicule {
-        return VehiculeFixture::getVehicules()[$i];
     }
 }

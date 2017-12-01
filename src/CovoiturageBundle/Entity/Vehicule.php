@@ -96,7 +96,7 @@ class Vehicule {
     /**
      * @var Etat
      *
-     * @ORM\ManyToOne(targetEntity="CovoiturageBundle\Entity\Etat", )
+     * @ORM\ManyToOne(targetEntity="CovoiturageBundle\Entity\Etat")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="etats_id", referencedColumnName="id")
      * })
