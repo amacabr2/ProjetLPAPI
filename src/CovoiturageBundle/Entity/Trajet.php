@@ -5,6 +5,7 @@ namespace CovoiturageBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
 use UserBundle\Entity\User;
 
 /**
@@ -14,10 +15,13 @@ use UserBundle\Entity\User;
  * @ORM\Entity
  */
 class Trajet {
+
     /**
      * @var integer
      *
      * @ORM\Column(name="nb_place_restante", type="integer", nullable=true)
+     *
+     * @Serializer\Groups({"trajet_list", "trajet_detail"})
      */
     private $nbPlaceRestante;
 
@@ -27,6 +31,8 @@ class Trajet {
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     *
+     * @Serializer\Groups({"trajet_list"})
      */
     private $id;
 
@@ -37,6 +43,8 @@ class Trajet {
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="user_conducteur_id", referencedColumnName="id")
      * })
+     *
+     * @Serializer\Groups({"trajet_list", "trajet_detail"})
      */
     private $userConducteur;
 
@@ -52,6 +60,8 @@ class Trajet {
      *     @ORM\JoinColumn(name="localisations_id", referencedColumnName="id")
      *   }
      * )
+     *
+     * @Serializer\Groups({"trajet_list", "trajet_detail"})
      */
     private $localisations;
 
@@ -67,6 +77,8 @@ class Trajet {
      *     @ORM\JoinColumn(name="users_id", referencedColumnName="id")
      *   }
      * )
+     *
+     * @Serializer\Groups({"trajet_detail"})
      */
     private $users;
 

@@ -15,6 +15,7 @@ use FOS\UserBundle\Event\GetResponseUserEvent;
 use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\FOSUserEvents;
 use Symfony\Component\Form\FormInterface;
+use UserBundle\Entity\User;
 use UserBundle\Helper\ControllerHelper;
 
 class RegistrationController extends BaseController {
@@ -35,6 +36,7 @@ class RegistrationController extends BaseController {
         /** @var EventDispatcherInterface */
         $dispatcher = $this->get('event_dispatcher');
 
+        /** @var User $user */
         $user = $userManager->createUser();
         $event = new GetResponseUserEvent($user, $request);
         $dispatcher->dispatch(FOSUserEvents::REGISTRATION_INITIALIZE, $event);

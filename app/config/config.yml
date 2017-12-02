@@ -129,4 +129,4 @@ vich_uploader:
             namer: vich_uploader.namer_uniqid
 
 david_badura_faker:
-  locale: fr_FR
+    locale: fr_FR

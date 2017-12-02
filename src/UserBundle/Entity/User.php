@@ -10,6 +10,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * User
@@ -27,6 +28,8 @@ class User extends BaseUser {
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     *
+     * @Serializer\Groups({"user_list", "user_trajet"})
      */
     protected $id;
 
@@ -41,6 +44,8 @@ class User extends BaseUser {
      * @var string
      *
      * @ORM\Column(name="prenom", type="string", length=255, nullable=true)
+     *
+     * @Serializer\Groups({"user_list", "user_detail", "user_trajet"})
      */
     private $prenom;
 
@@ -48,6 +53,8 @@ class User extends BaseUser {
      * @var string
      *
      * @ORM\Column(name="nom", type="string", length=255, nullable=true)
+     *
+     * @Serializer\Groups({"user_list", "user_detail", "user_trajet"})
      */
     private $nom;
 
@@ -55,6 +62,8 @@ class User extends BaseUser {
      * @var string
      *
      * @ORM\Column(name="civilite", type="string", length=45, nullable=true)
+     *
+     * @Serializer\Groups({"user_detail"})
      */
     private $civilite;
 
@@ -62,6 +71,8 @@ class User extends BaseUser {
      * @var \DateTime
      *
      * @ORM\Column(name="date_naissance", type="date", length=45, nullable=true)
+     *
+     * @Serializer\Groups({"user_detail"})
      */
     private $dateNaissance;
 
@@ -69,6 +80,8 @@ class User extends BaseUser {
      * @var string
      *
      * @ORM\Column(name="tel_fixe", type="string", length=45, nullable=true)
+     *
+     * @Serializer\Groups({"user_detail"})
      */
     private $telFixe;
 
@@ -76,6 +89,8 @@ class User extends BaseUser {
      * @var string
      *
      * @ORM\Column(name="tel_portable", type="string", length=45, nullable=true)
+     *
+     * @Serializer\Groups({"user_detail"})
      */
     private $telPortable;
 
@@ -83,6 +98,8 @@ class User extends BaseUser {
      * @var string
      *
      * @ORM\Column(name="fichier", type="string", length=255, nullable=true)
+     *
+     * @Serializer\Groups({"user_list", "user_detail"})
      */
     private $fichier;
 
@@ -90,6 +107,8 @@ class User extends BaseUser {
      * @var boolean
      *
      * @ORM\Column(name="newsletter", type="boolean", nullable=true)
+     *
+     * @Serializer\Groups({"user_detail"})
      */
     private $newsletter;
 
@@ -97,6 +116,8 @@ class User extends BaseUser {
      * @var string
      *
      * @ORM\Column(name="presentation", type="text", nullable=true)
+     *
+     * @Serializer\Groups({"user_detail"})
      */
     private $presentation;
 
@@ -104,6 +125,8 @@ class User extends BaseUser {
      * @var \DateTime
      *
      * @ORM\Column(name="created_at", type="date", nullable=true)
+     *
+     * @Serializer\Groups({"user_detail"})
      */
     private $createdAt;
 
@@ -111,6 +134,8 @@ class User extends BaseUser {
      * @var \DateTime
      *
      * @ORM\Column(name="updated_at", type="date", nullable=true)
+     *
+     * @Serializer\Groups({"user_detail"})
      */
     private $updatedAt;
 
@@ -128,6 +153,8 @@ class User extends BaseUser {
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="localisations_id", referencedColumnName="id")
      * })
+     *
+     * @Serializer\Groups({"user_detail"})
      */
     private $localisations;
 
@@ -138,6 +165,8 @@ class User extends BaseUser {
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="permis_id", referencedColumnName="id")
      * })
+     *
+     * @Serializer\Groups({"user_detail"})
      */
     private $permis;
 
@@ -145,6 +174,8 @@ class User extends BaseUser {
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="CovoiturageBundle\Entity\Trajet", mappedBy="users")
+     *
+     * @Serializer\Groups({"user_list", "user_detail"})
      */
     private $trajets;
 
@@ -160,6 +191,8 @@ class User extends BaseUser {
      *     @ORM\JoinColumn(name="vehicules_id", referencedColumnName="id")
      *   }
      * )
+     *
+     * @Serializer\Groups({"user_detail"})
      */
     private $vehicules;
 
