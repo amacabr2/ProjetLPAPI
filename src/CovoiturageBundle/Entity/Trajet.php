@@ -19,15 +19,6 @@ class Trajet {
     /**
      * @var integer
      *
-     * @ORM\Column(name="nb_place_restante", type="integer", nullable=true)
-     *
-     * @Serializer\Groups({"trajet_list", "trajet_detail"})
-     */
-    private $nbPlaceRestante;
-
-    /**
-     * @var integer
-     *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
@@ -35,6 +26,15 @@ class Trajet {
      * @Serializer\Groups({"trajet_list"})
      */
     private $id;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="nb_place_restante", type="integer", nullable=true)
+     *
+     * @Serializer\Groups({"trajet_list", "trajet_detail"})
+     */
+    private $nbPlaceRestante;
 
     /**
      * @var User
