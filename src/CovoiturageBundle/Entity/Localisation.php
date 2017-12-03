@@ -5,6 +5,7 @@ namespace CovoiturageBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Localisation
@@ -18,6 +19,8 @@ class Localisation {
      * @var string
      *
      * @ORM\Column(name="adresse", type="string", length=255, nullable=true)
+     *
+     * @Serializer\Groups({"localisation_always"})
      */
     private $adresse;
 
@@ -25,6 +28,8 @@ class Localisation {
      * @var string
      *
      * @ORM\Column(name="ville", type="string", length=255, nullable=true)
+     *
+     * @Serializer\Groups({"localisation_always"})
      */
     private $ville;
 
@@ -32,6 +37,8 @@ class Localisation {
      * @var string
      *
      * @ORM\Column(name="pays", type="string", length=255, nullable=true)
+     *
+     * @Serializer\Groups({"localisation_always"})
      */
     private $pays;
 
@@ -39,6 +46,8 @@ class Localisation {
      * @var float
      *
      * @ORM\Column(name="latitude", type="float", precision=10, scale=6, nullable=true)
+     *
+     * @Serializer\Groups({"localisation_always"})
      */
     private $latitude;
 
@@ -46,6 +55,8 @@ class Localisation {
      * @var float
      *
      * @ORM\Column(name="longitude", type="float", precision=10, scale=6, nullable=true)
+     *
+     * @Serializer\Groups({"localisation_always"})
      */
     private $longitude;
 
@@ -53,6 +64,8 @@ class Localisation {
      * @var boolean
      *
      * @ORM\Column(name="isDepart", type="boolean", nullable=true)
+     *
+     * @Serializer\Groups({"localisation_always"})
      */
     private $isDepart;
 
@@ -60,6 +73,8 @@ class Localisation {
      * @var boolean
      *
      * @ORM\Column(name="isArrive", type="boolean", nullable=true)
+     *
+     * @Serializer\Groups({"localisation_always"})
      */
     private $isArrivee;
 
@@ -276,7 +291,7 @@ class Localisation {
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getTrajets(): Collection {
+    public function getTrajets(): Collectionalisation {
         return $this->trajets;
     }
 }

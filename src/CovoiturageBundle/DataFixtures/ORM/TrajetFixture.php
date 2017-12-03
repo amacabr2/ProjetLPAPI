@@ -24,11 +24,14 @@ class TrajetFixture extends FakerFixture {
      */
     public function load(ObjectManager $manager) {
         $users = $manager->getRepository('UserBundle:User')->findAll();
+        $localisations = $manager->getRepository('CovoiturageBundle:Localisation')->findAll();
 
         for ($i = 0; $i < 30; $i++) {
             $trajet = new Trajet();
             $trajet->setUserConducteur($users[$i]);
             $trajet->setNbPlaceRestante(4);
+            $trajet->addLocalisation($localisations[$i + 30]);
+            $trajet->addLocalisation($localisations[$i + 60]);
 
             $manager->persist($trajet);
         }

@@ -21,8 +21,15 @@ class LocalisationFixture extends FakerFixture {
      * @param ObjectManager $manager
      */
     public function load(ObjectManager $manager) {
-        for ($i = 0; $i < 30; $i++) {
-            $isDepart = (bool)rand(0, 1);
+        for ($i = 0; $i < 90; $i++) {
+            if ($i < 30) {
+                $isDepart = false;
+                $isArrive = false;
+            } else {
+                $isDepart = (bool)rand(0, 1);
+                $isArrive = !$isDepart;
+            }
+
 
             $localisation = new Localisation();
             $localisation->setAdresse($this->getFaker()->streetAddress);
@@ -31,7 +38,7 @@ class LocalisationFixture extends FakerFixture {
             $localisation->setLatitude($this->getFaker()->latitude(-5, 8));
             $localisation->setLongitude($this->getFaker()->longitude(40, 50));
             $localisation->setIsDepart($isDepart);
-            $localisation->setIsArrivee(!$isDepart);
+            $localisation->setIsArrivee($isArrive);
 
             $manager->persist($localisation);
         }
