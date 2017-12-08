@@ -83,6 +83,17 @@ class Trajet {
     private $users;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date", type="date", nullable=true)
+     *
+     *
+     * @Serializer\Groups({"trajet_list", "trajet_detail"})
+     */
+    private $date;
+
+
+    /**
      * Constructor
      */
     public function __construct() {
@@ -201,5 +212,21 @@ class Trajet {
      */
     public function getUsers(): Collection {
         return $this->users;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDate(): \DateTime
+    {
+        return $this->date;
+    }
+
+    /**
+     * @param \DateTime $date
+     */
+    public function setDate(\DateTime $date): void
+    {
+        $this->date = $date;
     }
 }

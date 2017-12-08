@@ -50,6 +50,7 @@ class LoginController extends Controller {
     /**
      * @param User $user
      * @return string
+     * @throws \Lexik\Bundle\JWTAuthenticationBundle\Exception\JWTEncodeFailureException
      */
     private function getToken(User $user): string {
         return $this->container->get('lexik_jwt_authentication.encoder')
