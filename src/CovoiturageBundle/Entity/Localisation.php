@@ -88,7 +88,7 @@ class Localisation {
     private $id;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * @var Trajet[]
      *
      * @ORM\ManyToMany(targetEntity="CovoiturageBundle\Entity\Trajet", mappedBy="localisations")
      */
@@ -289,9 +289,9 @@ class Localisation {
     /**
      * Get trajets
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return array
      */
-    public function getTrajets(): Collectionalisation {
+    public function getTrajets(): array {
         return $this->trajets;
     }
 }
