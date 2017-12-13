@@ -137,7 +137,7 @@ class Trajet {
      *
      * @return User
      */
-    public function getUserConducteur(): User{
+    public function getUserConducteur(): User {
         return $this->userConducteur;
     }
 
@@ -217,16 +217,14 @@ class Trajet {
     /**
      * @return \DateTime
      */
-    public function getDate(): \DateTime
-    {
+    public function getDate(): \DateTime {
         return $this->date;
     }
 
     /**
      * @param \DateTime $date
      */
-    public function setDate(\DateTime $date): void
-    {
+    public function setDate(\DateTime $date): void {
         $this->date = $date;
     }
 }
