@@ -83,6 +83,9 @@ fos_user:
     from_email:
         address: "amacabr2@gmail.com"
         sender_name: "amacabr2"
+    registration:
+        form:
+            type: UserBundle\Form\RegistrationType
     resetting:
         email:
             template: '@User/email/password_resetting.email.twig'

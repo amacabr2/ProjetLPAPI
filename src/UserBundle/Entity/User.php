@@ -68,9 +68,9 @@ class User extends BaseUser {
     private $civilite;
 
     /**
-     * @var \DateTime
+     * @var string
      *
-     * @ORM\Column(name="date_naissance", type="date", length=45, nullable=true)
+     * @ORM\Column(name="date_naissance", type="string", length=45, nullable=true)
      *
      * @Serializer\Groups({"user_detail"})
      */
@@ -210,7 +210,7 @@ class User extends BaseUser {
      *
      * @return string
      */
-    public function getPasswordResetToken(): string {
+    public function getPasswordResetToken(): ?string {
         return $this->passwordResetToken;
     }
 
@@ -296,9 +296,9 @@ class User extends BaseUser {
     /**
      * Get dateNaissance
      *
-     * @return \DateTime
+     * @return string
      */
-    public function getDateNaissance(): \DateTime {
+    public function getDateNaissance(): string {
         return $this->dateNaissance;
     }
 
@@ -309,8 +309,8 @@ class User extends BaseUser {
      *
      * @return User
      */
-    public function setDateNaissance($dateNaissance): self {
-        $this->dateNaissance = new \DateTime($dateNaissance);
+    public function setDateNaissance(string $dateNaissance): self {
+        $this->dateNaissance = $dateNaissance;
 
         return $this;
     }
@@ -492,7 +492,7 @@ class User extends BaseUser {
      *
      * @return Localisation
      */
-    public function getLocalisations(): Localisation {
+    public function getLocalisation(): Localisation {
         return $this->localisations;
     }
 
@@ -503,7 +503,7 @@ class User extends BaseUser {
      * @return User
      *
      */
-    public function setLocalisations(Localisation $localisations = null): self {
+    public function setLocalisation(Localisation $localisations = null): self {
         $this->localisations = $localisations;
 
         return $this;

@@ -46,3 +46,8 @@ services:
     token_change_password:
         class: UserBundle\Utils\RandomTokenGenerator
         public: true
+
+    user.form.registration:
+        class: UserBundle\Form\RegistrationType
+        tags:
+            - { name: form.type, alias: user_registration}

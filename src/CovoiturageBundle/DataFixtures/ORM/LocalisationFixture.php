@@ -30,10 +30,10 @@ class LocalisationFixture extends FakerFixture {
                 $isArrive = !$isDepart;
             }
 
-
             $localisation = new Localisation();
             $localisation->setAdresse($this->getFaker()->streetAddress);
             $localisation->setVille($this->getFaker()->city);
+            $localisation->setCodePostal($this->getFaker()->postcode);
             $localisation->setPays("France");
             $localisation->setLatitude($this->getFaker()->latitude(-5, 8));
             $localisation->setLongitude($this->getFaker()->longitude(40, 50));

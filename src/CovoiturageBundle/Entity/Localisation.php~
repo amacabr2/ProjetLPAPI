@@ -303,26 +303,4 @@ class Localisation {
     public function getTrajets(): array {
         return $this->trajets;
     }
-
-    /**
-     * Get codePostal
-     *
-     * @return string
-     */
-    public function getCodePostal() {
-        return $this->codePostal;
-    }
-
-    /**
-     * Set codePostal
-     *
-     * @param string $codePostal
-     *
-     * @return Localisation
-     */
-    public function setCodePostal($codePostal) {
-        $this->codePostal = $codePostal;
-
-        return $this;
-    }
 }

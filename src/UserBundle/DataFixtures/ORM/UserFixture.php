@@ -34,7 +34,7 @@ class UserFixture extends FakerFixture {
             $randomSex = random_int(0, 1);
             $prenom = $randomSex ? $this->getFaker()->firstnameMale : $this->getFaker()->firstnameFemale;
             $nom = $this->getFaker()->lastname;
-            $dateNaissance = $this->getFaker()->date($format = 'Y-m-d', $max = 'now');
+            $dateNaissance = $this->getFaker()->date($format = 'd/m/Y', $max = 'now');
 
             $user = new User();
             $user->setCivilite($randomSex ? "Monsieur" : "Madame");
@@ -51,7 +51,7 @@ class UserFixture extends FakerFixture {
             $user->setPresentation($this->getFaker()->realText($maxNbChars = 200, $indexSize = 2));
             $user->setCreatedAt();
             $user->setPermis($permis[$i]);
-            $user->setLocalisations($localisations[$i]);
+            $user->setLocalisation($localisations[$i]);
             $user->addVehicule($vehicules[$i]);
 
             $manager->persist($user);

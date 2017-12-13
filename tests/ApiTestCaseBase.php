@@ -53,12 +53,15 @@ class ApiTestCaseBase extends WebTestCase {
      */
     protected function createUser(string $username, string $password): User {
         $userManager = $this->getService('fos_user.user_manager');
+
+        /** @var User $user */
         $user = $userManager->createUser();
         $user->setEnabled(true);
         $user->setUsername($username);
         $user->setPlainPassword($password);
         $user->setEmail('matko@gmail.com');
         $userManager->updateUser($user);
+
         return $user;
     }
 
@@ -82,11 +85,25 @@ class ApiTestCaseBase extends WebTestCase {
      */
     protected function getData(?string $username = null, ?string $email = null, ?string $first =null, ?string $second = null): array {
         return [
-            'username' => $username ?: 'matko',
-            'email' => $email ?: 'matko@gmail.com',
+            'username' => $username ?: 'matko1',
             'plainPassword' => [
                 'first' => $first ?: 'test123',
                 'second' => $second ?: 'test123'
+            ],
+            'email' => $email ?: 'matko1@gmail.com',
+            'prenom' => "Azerty",
+            'nom' => "Qwerty",
+            'civilite' => "Monsieur",
+            'dateNaissance' => "15/02/1997",
+            'telFixe' => "0345678900",
+            'telPortable' => "0654321000",
+            'fichier' => "azerty.jpg",
+            'newsletter' => true,
+            'presentation' => "azerty-qwerty",
+            'localisation' => [
+                'adresse' => "2 rue Ernest Duvillard",
+                'ville' => "Belfort",
+                'codePostal' => "90000"
             ]
         ];
     }

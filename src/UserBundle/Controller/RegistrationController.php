@@ -2,6 +2,7 @@
 
 namespace UserBundle\Controller;
 
+use CovoiturageBundle\Entity\Localisation;
 use FOS\UserBundle\Controller\RegistrationController as BaseController;
 use FOS\UserBundle\Form\Factory\FactoryInterface;
 use FOS\UserBundle\Model\UserManagerInterface;
@@ -45,6 +46,8 @@ class RegistrationController extends BaseController {
             return $event->getResponse();
         }
 
+        $user = $this->buildUser($user, $request);
+
         $form = $formFactory->createForm(['csrf_protection' => false]);
         $form->setData($user);
         $this->processForm($request, $form);
@@ -80,6 +83,7 @@ class RegistrationController extends BaseController {
      * @throws BadRequestHttpException
      */
     private function throwApiProblemValidationException(FormInterface $form) {
+        var_dump($this->getErrorsFromForm($form));
         throw new BadRequestHttpException(
             $this->serialize($this->getErrorsFromForm($form))
         );
@@ -111,5 +115,39 @@ class RegistrationController extends BaseController {
         }
 
         return $errors;
+    }
+
+    /**
+     * @param User $user
+     * @param Request $request
+     * @return User
+     */
+    private function buildUser(User $user, Request $request): User {
+        $user->setPrenom($request->get("prenom"));
+        $user->setNom($request->get("nom"));
+        $user->setCivilite($request->get("civilite"));
+        $user->setDateNaissance($request->get("dateNaissance"));
+        $user->setTelFixe($request->get("telFixe"));
+        $user->setTelPortable($request->get("telPortable"));
+        $user->setFichier($request->get("fichier"));
+        $user->setNewsletter($request->get("newsletter"));
+        $user->setPresentation($request->get("presentation"));
+        $user->setLocalisation($this->buildLocalisation($request));
+
+        return $user;
+    }
+
+    /**
+     * @param Request $request
+     * @return Localisation
+     */
+    private function buildLocalisation(Request $request): Localisation {
+        $localisation = new Localisation();
+        $loc = $request->get("localisation");
+        $localisation->setAdresse($loc["adresse"]);
+        $localisation->setVille($loc["ville"]);
+        $localisation->setCodePostal($loc["codePostal"]);
+
+        return $localisation;
     }
 }
