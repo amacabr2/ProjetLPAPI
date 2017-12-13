@@ -83,7 +83,6 @@ class RegistrationController extends BaseController {
      * @throws BadRequestHttpException
      */
     private function throwApiProblemValidationException(FormInterface $form) {
-        var_dump($this->getErrorsFromForm($form));
         throw new BadRequestHttpException(
             $this->serialize($this->getErrorsFromForm($form))
         );
@@ -133,6 +132,7 @@ class RegistrationController extends BaseController {
         $user->setNewsletter($request->get("newsletter"));
         $user->setPresentation($request->get("presentation"));
         $user->setLocalisation($this->buildLocalisation($request));
+        $user->setCreatedAt();
 
         return $user;
     }
@@ -147,7 +147,6 @@ class RegistrationController extends BaseController {
         $localisation->setAdresse($loc["adresse"]);
         $localisation->setVille($loc["ville"]);
         $localisation->setCodePostal($loc["codePostal"]);
-
         return $localisation;
     }
 }
