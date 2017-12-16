@@ -29,8 +29,6 @@ class TrajetFixture extends FakerFixture {
         for ($i = 0; $i < 30; $i++) {
             $trajet = new Trajet();
             $trajet->setUserConducteur($users[$i]);
-            $trajet->setTimeArrivee($this->getFaker()->dateTimeThisMonth());
-            $trajet->setTimeDepart($this->getFaker()->dateTimeThisMonth($trajet->getTimeArrivee()));
             $trajet->setNbPlaceRestante(4);
             $trajet->addLocalisation($localisations[$i + 30]);
             $trajet->addLocalisation($localisations[$i + 60]);

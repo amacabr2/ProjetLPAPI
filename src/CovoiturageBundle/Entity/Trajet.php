@@ -83,24 +83,6 @@ class Trajet {
     private $users;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="time_depart", type="datetime", nullable=true)
-     *
-     * @Serializer\Groups({"trajet_list", "trajet_detail"})
-     */
-    private $timeDepart;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="time_arrivee", type="datetime", nullable=true)
-     *
-     * @Serializer\Groups({"trajet_list", "trajet_detail"})
-     */
-    private $timeArrivee;
-
-    /**
      * @var Vehicule
      *
      * @ORM\OneToOne(targetEntity="CovoiturageBundle\Entity\Vehicule")
@@ -228,50 +210,6 @@ class Trajet {
      */
     public function getUsers(): Collection {
         return $this->users;
-    }
-
-    /**
-     * Get timeDepart
-     *
-     * @return \DateTime
-     */
-    public function getTimeDepart(): \DateTime {
-        return $this->timeDepart;
-    }
-
-    /**
-     * Set timeDepart
-     *
-     * @param \DateTime $timeDepart
-     *
-     * @return Trajet
-     */
-    public function setTimeDepart(\DateTime $timeDepart) {
-        $this->timeDepart = $timeDepart;
-
-        return $this;
-    }
-
-    /**
-     * Get timeArrivee
-     *
-     * @return \DateTime
-     */
-    public function getTimeArrivee(): \DateTime {
-        return $this->timeArrivee;
-    }
-
-    /**
-     * Set timeArrivee
-     *
-     * @param \DateTime $timeArrivee
-     *
-     * @return Trajet
-     */
-    public function setTimeArrivee(\DateTime $timeArrivee) {
-        $this->timeArrivee = $timeArrivee;
-
-        return $this;
     }
 
     /**

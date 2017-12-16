@@ -40,6 +40,10 @@ class LocalisationFixture extends FakerFixture {
             $localisation->setIsDepart($isDepart);
             $localisation->setIsArrivee($isArrive);
 
+            if ($i >= 30) {
+                $localisation->setHoraire($this->getFaker()->dateTimeThisMonth());
+            }
+
             $manager->persist($localisation);
         }
 

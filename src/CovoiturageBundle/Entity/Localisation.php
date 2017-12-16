@@ -16,6 +16,15 @@ use JMS\Serializer\Annotation as Serializer;
 class Localisation {
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="adresse", type="string", length=255, nullable=true)
@@ -88,20 +97,20 @@ class Localisation {
     private $isArrivee;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $id;
-
-    /**
      * @var Trajet[]
      *
      * @ORM\ManyToMany(targetEntity="CovoiturageBundle\Entity\Trajet", mappedBy="localisations")
      */
     private $trajets;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="horaire", type="datetime", nullable=true)
+     *
+     * @Serializer\Groups({"localisation_always"})
+     */
+    private $horaire;
 
     /**
      * Constructor
@@ -322,6 +331,28 @@ class Localisation {
      */
     public function setCodePostal($codePostal) {
         $this->codePostal = $codePostal;
+
+        return $this;
+    }
+
+    /**
+     * Get horaire
+     *
+     * @return \DateTime
+     */
+    public function getHoraire() {
+        return $this->horaire;
+    }
+
+    /**
+     * Set horaire
+     *
+     * @param \DateTime $horaire
+     *
+     * @return Localisation
+     */
+    public function setHoraire($horaire) {
+        $this->horaire = $horaire;
 
         return $this;
     }
