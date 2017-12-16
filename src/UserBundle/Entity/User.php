@@ -117,7 +117,7 @@ class User extends BaseUser {
      *
      * @ORM\Column(name="presentation", type="text", nullable=true)
      *
-     * @Serializer\Groups({"user_detail"})
+     * @Serializer\Groups({"user_detail", "user_trajet"})
      */
     private $presentation;
 

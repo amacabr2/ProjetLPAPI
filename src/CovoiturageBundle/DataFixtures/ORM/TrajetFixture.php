@@ -13,7 +13,6 @@ use CovoiturageBundle\Entity\Trajet;
 use Doctrine\Common\Persistence\ObjectManager;
 use UserBundle\DataFixtures\FakerFixture;
 use UserBundle\DataFixtures\ORM\UserFixture;
-use UserBundle\Entity\User;
 
 class TrajetFixture extends FakerFixture {
 
@@ -25,6 +24,7 @@ class TrajetFixture extends FakerFixture {
     public function load(ObjectManager $manager) {
         $users = $manager->getRepository('UserBundle:User')->findAll();
         $localisations = $manager->getRepository('CovoiturageBundle:Localisation')->findAll();
+        $vehicules = $manager->getRepository('CovoiturageBundle:Vehicule')->findAll();
 
         for ($i = 0; $i < 30; $i++) {
             $trajet = new Trajet();
@@ -34,6 +34,7 @@ class TrajetFixture extends FakerFixture {
             $trajet->setNbPlaceRestante(4);
             $trajet->addLocalisation($localisations[$i + 30]);
             $trajet->addLocalisation($localisations[$i + 60]);
+            $trajet->setVehicule($vehicules[$i]);
 
             $manager->persist($trajet);
         }
@@ -47,7 +48,8 @@ class TrajetFixture extends FakerFixture {
     public function getDependencies(): array {
         return [
             UserFixture::class,
-            LocalisationFixture::class
+            LocalisationFixture::class,
+            VehiculeFixture::class
         ];
     }
 }

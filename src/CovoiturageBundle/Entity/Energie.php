@@ -3,6 +3,7 @@
 namespace CovoiturageBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Energie
@@ -25,6 +26,8 @@ class Energie {
      * @var string
      *
      * @ORM\Column(name="libelle", type="string", length=45, nullable=true)
+     *
+     * @Serializer\Groups({"energie_always"})
      */
     private $libelle;
 

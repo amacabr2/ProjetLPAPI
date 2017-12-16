@@ -11,7 +11,7 @@ class TrajetController extends Controller {
 
     /**
      * @Rest\Get(path="/trajets", name="covoiturage_trajets_index")
-     * @Rest\View(serializerGroups={"trajet_list", "user_trajet", "localisation_always"})
+     * @Rest\View(serializerGroups={"trajet_list", "user_trajet", "localisation_always", "vehicule_always", "energie_always", "assurance_always", "etat_always"})
      *
      * @return Trajet[]
      */
@@ -21,7 +21,7 @@ class TrajetController extends Controller {
 
     /**
      * @Rest\Get(path="/trajets/{id}", name="covoiturage_trajets_show")
-     * @Rest\View(serializerGroups={"trajet_detail", "user_trajet", "localisation_always"})
+     * @Rest\View(serializerGroups={"trajet_detail", "user_trajet", "localisation_always",  "vehicule_always", "energie_always", "assurance_always", "etat_always"})
      *
      * @param Trajet $trajet
      * @return Trajet

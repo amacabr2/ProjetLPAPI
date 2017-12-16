@@ -3,6 +3,7 @@
 namespace CovoiturageBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Assurance
@@ -13,27 +14,6 @@ use Doctrine\ORM\Mapping as ORM;
 class Assurance {
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="fichier", type="string", length=255, nullable=true)
-     */
-    private $fichier;
-
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="valide", type="boolean", nullable=true)
-     */
-    private $valide;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="date_obtention", type="string", length=45, nullable=true)
-     */
-    private $dateObtention;
-
-    /**
      * @var integer
      *
      * @ORM\Column(name="id", type="integer")
@@ -41,6 +21,33 @@ class Assurance {
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="fichier", type="string", length=255, nullable=true)
+     *
+     * @Serializer\Groups({"assurance_always"})
+     */
+    private $fichier;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="valide", type="boolean", nullable=true)
+     *
+     * @Serializer\Groups({"assurance_always"})
+     */
+    private $valide;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="date_obtention", type="string", length=45, nullable=true)
+     *
+     * @Serializer\Groups({"assurance_always"})
+     */
+    private $dateObtention;
 
     /**
      * Get fichier

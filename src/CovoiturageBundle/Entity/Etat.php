@@ -3,6 +3,7 @@
 namespace CovoiturageBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Etat
@@ -25,6 +26,8 @@ class Etat {
      * @var string
      *
      * @ORM\Column(name="label", type="string", length=45, nullable=true)
+     *
+     * @Serializer\Groups({"etat_always"})
      */
     private $label;
 

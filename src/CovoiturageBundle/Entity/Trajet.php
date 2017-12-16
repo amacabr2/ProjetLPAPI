@@ -100,6 +100,14 @@ class Trajet {
      */
     private $timeArrivee;
 
+    /**
+     * @var Vehicule
+     *
+     * @ORM\OneToOne(targetEntity="CovoiturageBundle\Entity\Vehicule")
+     *
+     * @Serializer\Groups({"trajet_detail"})
+     */
+    private $vehicule;
 
     /**
      * Constructor
@@ -262,6 +270,28 @@ class Trajet {
      */
     public function setTimeArrivee(\DateTime $timeArrivee) {
         $this->timeArrivee = $timeArrivee;
+
+        return $this;
+    }
+
+    /**
+     * Get vehicule
+     *
+     * @return \CovoiturageBundle\Entity\Vehicule
+     */
+    public function getVehicule() {
+        return $this->vehicule;
+    }
+
+    /**
+     * Set vehicule
+     *
+     * @param \CovoiturageBundle\Entity\Vehicule $vehicule
+     *
+     * @return Trajet
+     */
+    public function setVehicule(\CovoiturageBundle\Entity\Vehicule $vehicule = null) {
+        $this->vehicule = $vehicule;
 
         return $this;
     }

@@ -5,6 +5,7 @@ namespace CovoiturageBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
 use UserBundle\Entity\User;
 
 /**
@@ -16,9 +17,23 @@ use UserBundle\Entity\User;
 class Vehicule {
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     *
+     * @Serializer\Groups({"vehicule_always"})
+     */
+    private $id;
+
+
+    /**
      * @var string
      *
      * @ORM\Column(name="marque", type="string", length=255, nullable=true)
+     *
+     * @Serializer\Groups({"vehicule_always"})
      */
     private $marque;
 
@@ -26,6 +41,8 @@ class Vehicule {
      * @var string
      *
      * @ORM\Column(name="immatriculation", type="string", length=45, nullable=true)
+     *
+     * @Serializer\Groups({"vehicule_always"})
      */
     private $immatriculation;
 
@@ -33,6 +50,8 @@ class Vehicule {
      * @var string
      *
      * @ORM\Column(name="modele", type="string", length=45, nullable=true)
+     *
+     * @Serializer\Groups({"vehicule_always"})
      */
     private $modele;
 
@@ -40,6 +59,8 @@ class Vehicule {
      * @var string
      *
      * @ORM\Column(name="couleur", type="string", length=45, nullable=true)
+     *
+     * @Serializer\Groups({"vehicule_always"})
      */
     private $couleur;
 
@@ -47,6 +68,8 @@ class Vehicule {
      * @var integer
      *
      * @ORM\Column(name="nb_place", type="integer", nullable=true)
+     *
+     * @Serializer\Groups({"vehicule_always"})
      */
     private $nbPlace;
 
@@ -54,6 +77,8 @@ class Vehicule {
      * @var string
      *
      * @ORM\Column(name="fichier", type="string", length=255, nullable=true)
+     *
+     * @Serializer\Groups({"vehicule_always"})
      */
     private $fichier;
 
@@ -61,17 +86,10 @@ class Vehicule {
      * @var string
      *
      * @ORM\Column(name="puissance_chevaux", type="string", length=45, nullable=true)
+     *
+     * @Serializer\Groups({"vehicule_always"})
      */
     private $puissanceChevaux;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
 
     /**
      * @var Assurance
@@ -80,6 +98,8 @@ class Vehicule {
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="assurances_id", referencedColumnName="id")
      * })
+     *
+     * @Serializer\Groups({"vehicule_always"})
      */
     private $assurances;
 
@@ -90,6 +110,8 @@ class Vehicule {
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="energies_id", referencedColumnName="id")
      * })
+     *
+     * @Serializer\Groups({"vehicule_always"})
      */
     private $energies;
 
@@ -100,6 +122,8 @@ class Vehicule {
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="etats_id", referencedColumnName="id")
      * })
+     *
+     * @Serializer\Groups({"vehicule_always"})
      */
     private $etats;
 
@@ -107,6 +131,8 @@ class Vehicule {
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="UserBundle\Entity\User", mappedBy="vehicules")
+     *
+     * @Serializer\Groups({"vehicule_users"}))
      */
     private $users;
 
