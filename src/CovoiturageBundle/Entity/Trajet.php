@@ -85,12 +85,20 @@ class Trajet {
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date", type="date", nullable=true)
-     *
+     * @ORM\Column(name="time_depart", type="datetime", nullable=true)
      *
      * @Serializer\Groups({"trajet_list", "trajet_detail"})
      */
-    private $date;
+    private $timeDepart;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="time_arrivee", type="datetime", nullable=true)
+     *
+     * @Serializer\Groups({"trajet_list", "trajet_detail"})
+     */
+    private $timeArrivee;
 
 
     /**
@@ -215,16 +223,46 @@ class Trajet {
     }
 
     /**
+     * Get timeDepart
+     *
      * @return \DateTime
      */
-    public function getDate(): \DateTime {
-        return $this->date;
+    public function getTimeDepart(): \DateTime {
+        return $this->timeDepart;
     }
 
     /**
-     * @param \DateTime $date
+     * Set timeDepart
+     *
+     * @param \DateTime $timeDepart
+     *
+     * @return Trajet
      */
-    public function setDate(\DateTime $date): void {
-        $this->date = $date;
+    public function setTimeDepart(\DateTime $timeDepart) {
+        $this->timeDepart = $timeDepart;
+
+        return $this;
+    }
+
+    /**
+     * Get timeArrivee
+     *
+     * @return \DateTime
+     */
+    public function getTimeArrivee(): \DateTime {
+        return $this->timeArrivee;
+    }
+
+    /**
+     * Set timeArrivee
+     *
+     * @param \DateTime $timeArrivee
+     *
+     * @return Trajet
+     */
+    public function setTimeArrivee(\DateTime $timeArrivee) {
+        $this->timeArrivee = $timeArrivee;
+
+        return $this;
     }
 }
