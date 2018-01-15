@@ -9,6 +9,7 @@ use CovoiturageBundle\Entity\Vehicule;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use FOS\UserBundle\Model\User as BaseUser;
 use JMS\Serializer\Annotation as Serializer;
 
@@ -44,6 +45,7 @@ class User extends BaseUser {
      * @var string
      *
      * @ORM\Column(name="prenom", type="string", length=255, nullable=true)
+     * @Assert\NotBlank()
      *
      * @Serializer\Groups({"user_list", "user_detail", "user_trajet"})
      */
@@ -53,6 +55,7 @@ class User extends BaseUser {
      * @var string
      *
      * @ORM\Column(name="nom", type="string", length=255, nullable=true)
+     * @Assert\NotBlank()
      *
      * @Serializer\Groups({"user_list", "user_detail", "user_trajet"})
      */
@@ -62,6 +65,7 @@ class User extends BaseUser {
      * @var string
      *
      * @ORM\Column(name="civilite", type="string", length=45, nullable=true)
+     * @Assert\NotBlank()
      *
      * @Serializer\Groups({"user_detail"})
      */
@@ -71,6 +75,7 @@ class User extends BaseUser {
      * @var string
      *
      * @ORM\Column(name="date_naissance", type="string", length=45, nullable=true)
+     * @Assert\NotBlank()
      *
      * @Serializer\Groups({"user_detail"})
      */
@@ -153,6 +158,7 @@ class User extends BaseUser {
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="localisations_id", referencedColumnName="id")
      * })
+     * @Assert\NotBlank()
      *
      * @Serializer\Groups({"user_detail"})
      */
@@ -243,7 +249,7 @@ class User extends BaseUser {
      *
      * @return User
      */
-    public function setPrenom(string $prenom): self {
+    public function setPrenom(?string $prenom): self {
         $this->prenom = $prenom;
 
         return $this;
@@ -265,7 +271,7 @@ class User extends BaseUser {
      *
      * @return User
      */
-    public function setNom(string $nom): self {
+    public function setNom(?string $nom): self {
         $this->nom = $nom;
 
         return $this;
@@ -287,7 +293,7 @@ class User extends BaseUser {
      *
      * @return User
      */
-    public function setCivilite(string $civilite): self {
+    public function setCivilite(?string $civilite): self {
         $this->civilite = $civilite;
 
         return $this;
@@ -309,7 +315,7 @@ class User extends BaseUser {
      *
      * @return User
      */
-    public function setDateNaissance(string $dateNaissance): self {
+    public function setDateNaissance(?string $dateNaissance): self {
         $this->dateNaissance = $dateNaissance;
 
         return $this;
@@ -331,7 +337,7 @@ class User extends BaseUser {
      *
      * @return User
      */
-    public function setTelFixe($telFixe): self {
+    public function setTelFixe(?string $telFixe): self {
         $this->telFixe = $telFixe;
 
         return $this;
@@ -353,7 +359,7 @@ class User extends BaseUser {
      *
      * @return User
      */
-    public function setTelPortable($telPortable): self {
+    public function setTelPortable(?string $telPortable): self {
         $this->telPortable = $telPortable;
 
         return $this;
@@ -375,7 +381,7 @@ class User extends BaseUser {
      *
      * @return User
      */
-    public function setFichier($fichier): self {
+    public function setFichier(?string $fichier): self {
         $this->fichier = $fichier;
 
         return $this;
@@ -397,7 +403,7 @@ class User extends BaseUser {
      *
      * @return User
      */
-    public function setNewsletter($newsletter): self {
+    public function setNewsletter(?bool $newsletter): self {
         $this->newsletter = $newsletter;
 
         return $this;
@@ -419,7 +425,7 @@ class User extends BaseUser {
      *
      * @return User
      */
-    public function setPresentation($presentation): self {
+    public function setPresentation(?string $presentation): self {
         $this->presentation = $presentation;
 
         return $this;
@@ -481,7 +487,7 @@ class User extends BaseUser {
      *
      * @return User
      */
-    public function setRole($role): self {
+    public function setRole(?string $role): self {
         $this->role = $role;
 
         return $this;
@@ -503,7 +509,7 @@ class User extends BaseUser {
      * @return User
      *
      */
-    public function setLocalisation(Localisation $localisations = null): self {
+    public function setLocalisation(?Localisation $localisations = null): self {
         $this->localisations = $localisations;
 
         return $this;
@@ -525,7 +531,7 @@ class User extends BaseUser {
      *
      * @return User
      */
-    public function setPermis(Permis $permis = null): self {
+    public function setPermis(?Permis $permis = null): self {
         $this->permis = $permis;
 
         return $this;

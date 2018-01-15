@@ -7,7 +7,7 @@ imports:
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    locale: en
+    locale: fr
 
 framework:
     #esi: ~
@@ -110,6 +110,8 @@ sensio_framework_extra:
 fos_rest:
     body_converter:
         enabled: true
+        validate: true
+        validation_errors_argument: violations
     view:
         formats: { json: true, xml: false, rss: false }
         view_response_listener: true
@@ -124,6 +126,7 @@ fos_rest:
         codes:
             'UserBundle\Exception\BadAuthenticationLoginException': 404
             'UserBundle\Exception\BadAuthenticationPasswordException': 400
+            'UserBundle\Exception\BadRegistrationException': 400
 
 
 vich_uploader:
