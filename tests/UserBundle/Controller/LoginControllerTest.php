@@ -47,7 +47,8 @@ class LoginControllerTest extends ApiTestCaseBase {
 
         $this->assertEquals(404, $this->client->getResponse()->getStatusCode());
         $responseArr = json_decode($this->client->getResponse()->getContent(), true);
-        $this->assertEquals('Not Found', $responseArr['error']['message']);
+        $this->assertEquals('404', $responseArr['code']);
+        $this->assertEquals('Login invalide', $responseArr['message']);
     }
 
     public function testPOSTLoginUserWithWrongPassword() {
@@ -63,6 +64,7 @@ class LoginControllerTest extends ApiTestCaseBase {
 
         $this->assertEquals(400, $this->client->getResponse()->getStatusCode());
         $responseArr = json_decode($this->client->getResponse()->getContent(), true);
-        $this->assertEquals('Bad Request', $responseArr['error']['message']);
+        $this->assertEquals('400', $responseArr['code']);
+        $this->assertEquals('Mot de passe invalide', $responseArr['message']);
     }
 }
