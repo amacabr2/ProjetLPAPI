@@ -2,6 +2,7 @@
 
 namespace CovoiturageBundle\Entity;
 
+use CovoiturageBundle\Entity\Vehicule;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -215,7 +216,7 @@ class Trajet {
     /**
      * Get vehicule
      *
-     * @return \CovoiturageBundle\Entity\Vehicule
+     * @return Vehicule
      */
     public function getVehicule() {
         return $this->vehicule;
@@ -224,11 +225,11 @@ class Trajet {
     /**
      * Set vehicule
      *
-     * @param \CovoiturageBundle\Entity\Vehicule $vehicule
+     * @param Vehicule $vehicule
      *
      * @return Trajet
      */
-    public function setVehicule(\CovoiturageBundle\Entity\Vehicule $vehicule = null) {
+    public function setVehicule(Vehicule $vehicule = null) {
         $this->vehicule = $vehicule;
 
         return $this;

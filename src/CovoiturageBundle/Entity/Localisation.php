@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
+use JsonSerializable;
 
 /**
  * Localisation
@@ -13,7 +14,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @ORM\Table(name="localisations")
  * @ORM\Entity
  */
-class Localisation {
+class Localisation implements JsonSerializable {
 
     /**
      * @var integer
@@ -355,5 +356,47 @@ class Localisation {
         $this->horaire = $horaire;
 
         return $this;
+    }
+
+    /**
+     * Specify data which should be serialized to JSON
+     * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
+     * @return mixed data which can be serialized by <b>json_encode</b>,
+     * which is a value of any type other than a resource.
+     * @since 5.4.0
+     */
+    public function jsonSerialize() {
+        return [
+            'id' => $this->id,
+            'adresse' => $this->adresse,
+            'ville' => $this->ville,
+            'pays' => $this->pays,
+            'latitude' => $this->latitude,
+            'longitude' => $this->longitude,
+            'isDepart' => $this->isDepart,
+            'isArrivee' => $this->isArrivee
+        ];
+    }
+
+    /**
+     * Désérialisation de l'objet
+     *
+     * @param array $object
+     * @return Localisation
+     */
+    public static function jsonDeserialize(array $object) {
+        $localisation = new Localisation();
+        $localisation->id = $object['id'];
+        $localisation->adresse = $object['adresse'];
+        $localisation->ville = $object['ville'];
+        $localisation->codePostal = $object['codePostal'];
+        $localisation->pays = $object['pays'];
+        $localisation->latitude = $object['latitude'];
+        $localisation->longitude = $object['longitude'];
+        $localisation->isDepart = $object['isDepart'];
+        $localisation->isArrivee = $object['isArrivee'];
+        $localisation->horaire = $object['horaire'];
+
+        return $localisation;
     }
 }

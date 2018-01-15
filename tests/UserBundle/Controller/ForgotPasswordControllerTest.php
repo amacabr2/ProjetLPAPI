@@ -17,7 +17,7 @@ class ForgotPasswordControllerTest extends ApiTestCaseBase {
 
     public function testSendEmailWhoExist() {
         $this->createUser("matko", "test123");
-        $this->makePOSTRequest($this->getData());
+        $this->makePOSTRequest($this->getDataUser());
 
         $this->client->request('POST', '/users/resetting', [], [], [
             'CONTENT_TYPE' => 'application/json',
@@ -31,7 +31,7 @@ class ForgotPasswordControllerTest extends ApiTestCaseBase {
 
     public function testSendEmailWhoNotExist() {
         $this->createUser("matko", "test123");
-        $this->makePOSTRequest($this->getData());
+        $this->makePOSTRequest($this->getDataUser());
 
         $this->client->request('POST', '/users/resetting', [], [], [
             'CONTENT_TYPE' => 'application/json',
@@ -74,7 +74,7 @@ class ForgotPasswordControllerTest extends ApiTestCaseBase {
      */
     private function buildForForm(?string $url = null): Crawler {
         $user = $this->createUser("matko", "test123");
-        $this->makePOSTRequest($this->getData());
+        $this->makePOSTRequest($this->getDataUser());
 
         $token_resetting = $this->container->get('token_change_password')->generate(48);
         $user->setPasswordResetToken($token_resetting);

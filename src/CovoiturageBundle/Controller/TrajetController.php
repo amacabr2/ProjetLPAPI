@@ -2,10 +2,14 @@
 
 namespace CovoiturageBundle\Controller;
 
+use CovoiturageBundle\Entity\Localisation;
 use CovoiturageBundle\Entity\Trajet;
 use FOS\RestBundle\Controller\Annotations as Rest;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use UserBundle\Entity\User;
 
 class TrajetController extends Controller {
 
@@ -46,10 +50,29 @@ class TrajetController extends Controller {
     }
 
     /**
-     * @Rest\Put(path="/trajets/{id}")
+     * @Rest\Put(path="/trajets/{id}", name="covoiturage_trajets_update")
      */
     public function updateAction() {
 
+    }
+
+    /**
+     * @Rest\Post(path="/trajets/rejoindre", name="covoiturage_trajets_rejoindre")
+     * @Rest\View(statusCode=Response::HTTP_OK)
+     *
+     * @param Request $request
+     */
+    public function joinTrajetAction(Request $request) {
+        $em = $this->getDoctrine();
+        $trajet = $em->getRepository('CovoiturageBundle:Trajet')->find($request->get('trajet_id'));
+        $user = $em->getRepository('UserBundle:User')->find($request->get('user_id'));
+        /** @var Localisation $localisation */
+        $localisation = Localisation::jsonDeserialize(json_decode($request->get('localisation'), true));
+
+        $trajet->addLocalisation($localisation);
+        $trajet->addUser($user);
+        $em->getManager()->merge($trajet);
+        $em->getManager()->flush();
     }
 
     /**

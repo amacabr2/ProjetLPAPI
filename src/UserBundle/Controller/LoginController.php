@@ -2,12 +2,13 @@
 
 namespace UserBundle\Controller;
 
+use UserBundle\Exception\BadAuthenticationLoginException;
+use UserBundle\Exception\BadAuthenticationPasswordException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use UserBundle\Entity\User;
 use UserBundle\Helper\ControllerHelper;
 
@@ -20,6 +21,9 @@ class LoginController extends Controller {
      * @Method("POST")
      * @param Request $request
      * @return Response
+     * @throws BadAuthenticationPasswordException
+     * @throws BadAuthenticationLoginException
+     * @throws \Lexik\Bundle\JWTAuthenticationBundle\Exception\JWTEncodeFailureException
      */
     public function loginAction(Request $request): Response {
         $data = json_decode($request->getContent());
@@ -31,11 +35,11 @@ class LoginController extends Controller {
             ->findOneBy(['username' => $username]);
 
         if (!$user) {
-            throw $this->createNotFoundException();
+            throw new BadAuthenticationLoginException("Login invalide");
         }
 
         if (!$this->get('security.password_encoder')->isPasswordValid($user, $password)) {
-            throw new BadRequestHttpException();
+            throw new BadAuthenticationPasswordException("Mot de passe invalide");
         }
 
         return $this->setBaseHeaders(new Response(

@@ -105,6 +105,7 @@ lexik_jwt_authentication:
 
 sensio_framework_extra:
     view: { annotations: false }
+    request: { converters: true }
 
 fos_rest:
     body_converter:
@@ -118,6 +119,11 @@ fos_rest:
         rules:
             - { path: '^/', priorities: ['json', 'html'], fallback_format: 'json'}
     param_fetcher_listener: force
+    exception:
+        enabled: true
+        codes:
+            'UserBundle\Exception\BadAuthenticationLoginException': 404
+            'UserBundle\Exception\BadAuthenticationPasswordException': 400
 
 
 vich_uploader:
