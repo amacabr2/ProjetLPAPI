@@ -370,11 +370,13 @@ class Localisation implements JsonSerializable {
             'id' => $this->id,
             'adresse' => $this->adresse,
             'ville' => $this->ville,
+            'code_postal' => $this->codePostal,
             'pays' => $this->pays,
             'latitude' => $this->latitude,
             'longitude' => $this->longitude,
-            'isDepart' => $this->isDepart,
-            'isArrivee' => $this->isArrivee
+            'is_depart' => $this->isDepart,
+            'is_arrivee' => $this->isArrivee,
+            'horaire' => $this->horaire
         ];
     }
 
@@ -385,17 +387,18 @@ class Localisation implements JsonSerializable {
      * @return Localisation
      */
     public static function jsonDeserialize(array $object) {
+//        dump($object['horaire']); die;
         $localisation = new Localisation();
-        $localisation->id = $object['id'];
+        //$localisation->id = $object['id'];
         $localisation->adresse = $object['adresse'];
         $localisation->ville = $object['ville'];
-        $localisation->codePostal = $object['codePostal'];
+        $localisation->codePostal = $object['code_postal'];
         $localisation->pays = $object['pays'];
         $localisation->latitude = $object['latitude'];
         $localisation->longitude = $object['longitude'];
-        $localisation->isDepart = $object['isDepart'];
-        $localisation->isArrivee = $object['isArrivee'];
-        $localisation->horaire = $object['horaire'];
+        $localisation->isDepart = $object['is_depart'];
+        $localisation->isArrivee = $object['is_arrivee'];
+        $localisation->horaire = new \DateTime($object['horaire']);
 
         return $localisation;
     }

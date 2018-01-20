@@ -10,8 +10,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use UserBundle\Entity\User;
+use UserBundle\Helper\ControllerHelper;
 
 class TrajetController extends Controller {
+
+    use ControllerHelper;
 
     /**
      * @Rest\Get(path="/trajets", name="covoiturage_trajets_index")
@@ -61,18 +64,23 @@ class TrajetController extends Controller {
      * @Rest\View(statusCode=Response::HTTP_OK)
      *
      * @param Request $request
+     * @return Response
      */
     public function joinTrajetAction(Request $request) {
         $em = $this->getDoctrine();
+        /** @var Trajet $trajet */
         $trajet = $em->getRepository('CovoiturageBundle:Trajet')->find($request->get('trajet_id'));
+        /** @var User $user */
         $user = $em->getRepository('UserBundle:User')->find($request->get('user_id'));
         /** @var Localisation $localisation */
-        $localisation = Localisation::jsonDeserialize(json_decode($request->get('localisation'), true));
+        $localisation = Localisation::jsonDeserialize($request->get('localisation'));
 
         $trajet->addLocalisation($localisation);
         $trajet->addUser($user);
-        $em->getManager()->merge($trajet);
+        $em->getManager()->persist($trajet);
         $em->getManager()->flush();
+
+        return new Response($this->serialize(['message' => 'Vous avez été ajouté au trajet']), Response::HTTP_CREATED);
     }
 
     /**

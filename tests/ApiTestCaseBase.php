@@ -41,7 +41,7 @@ class ApiTestCaseBase extends WebTestCase {
     }
 
     protected function setUp() {
-        $kernel = static::$kernel;
+        $kernel = static::bootKernel();
         $this->container = $kernel->getContainer();
         $this->doctrine = $kernel->getContainer()->get('doctrine');
         $this->em = $this->doctrine->getManager();
@@ -162,8 +162,6 @@ class ApiTestCaseBase extends WebTestCase {
         $localisation->setIsArrivee($isArrivee);
         $localisation->setHoraire(new \DateTime($horaire));
 
-        $this->em->persist($localisation);
-        $this->em->flush();
         return $localisation;
     }
 

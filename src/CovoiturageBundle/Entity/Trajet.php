@@ -52,7 +52,7 @@ class Trajet {
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="CovoiturageBundle\Entity\Localisation", inversedBy="trajets")
+     * @ORM\ManyToMany(targetEntity="CovoiturageBundle\Entity\Localisation", inversedBy="trajets", cascade={"persist"})
      * @ORM\JoinTable(name="trajets_localisations",
      *   joinColumns={
      *     @ORM\JoinColumn(name="trajets_id", referencedColumnName="id")
