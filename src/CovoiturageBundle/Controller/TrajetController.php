@@ -91,15 +91,15 @@ class TrajetController extends Controller {
     }
 
     /**
+     * @Rest\Get(path="/trajets/search/{q}")
      * @Rest\View(serializerGroups={"trajet_detail", "user_trajet", "localisation_always",  "vehicule_always", "energie_always", "assurance_always", "etat_always"})
-     * @Rest\QueryParam(name="search", default="", description="Rechercher un trajet")
      *
-     * @param ParamFetcher $paramFetcher
+     * @param Request $request
      * @return mixed
      */
-    public function searchAction(ParamFetcher $paramFetcher) {
+    public function searchAction(Request $request) {
         return $this->getDoctrine()
             ->getRepository("CovoiturageBundle:Trajet")
-            ->findAllForSearch($paramFetcher->get('search'));
+            ->findAllForSearch($request->get('q'));
     }
 }
