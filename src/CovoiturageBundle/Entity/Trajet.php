@@ -2,7 +2,6 @@
 
 namespace CovoiturageBundle\Entity;
 
-use CovoiturageBundle\Entity\Vehicule;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -13,7 +12,7 @@ use UserBundle\Entity\User;
  * Trajet
  *
  * @ORM\Table(name="trajets", indexes={@ORM\Index(name="fk_trajets_users1_idx", columns={"user_conducteur_id"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="CovoiturageBundle\Repository\TrajetRepository")
  */
 class Trajet {
 

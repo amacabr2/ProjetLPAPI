@@ -5,7 +5,7 @@ namespace CovoiturageBundle\Controller;
 use CovoiturageBundle\Entity\Localisation;
 use CovoiturageBundle\Entity\Trajet;
 use FOS\RestBundle\Controller\Annotations as Rest;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use FOS\RestBundle\Request\ParamFetcher;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -84,9 +84,22 @@ class TrajetController extends Controller {
     }
 
     /**
-     * @Rest\Delete(path="/trajets/{id}")
+     * @Rest\Delete(path="/trajets/{id}", name="covoiturage_trajets_delete")
      */
     public function deleteAction() {
 
+    }
+
+    /**
+     * @Rest\View(serializerGroups={"trajet_detail", "user_trajet", "localisation_always",  "vehicule_always", "energie_always", "assurance_always", "etat_always"})
+     * @Rest\QueryParam(name="search", default="", description="Rechercher un trajet")
+     *
+     * @param ParamFetcher $paramFetcher
+     * @return mixed
+     */
+    public function searchAction(ParamFetcher $paramFetcher) {
+        return $this->getDoctrine()
+            ->getRepository("CovoiturageBundle:Trajet")
+            ->findAllForSearch($paramFetcher->get('search'));
     }
 }
