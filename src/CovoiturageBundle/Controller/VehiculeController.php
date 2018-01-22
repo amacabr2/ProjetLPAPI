@@ -23,5 +23,18 @@ class VehiculeController extends Controller {
         return $this->getDoctrine()->getRepository("CovoiturageBundle:Vehicule")->findAllByUser($user->getId());
     }
 
+    /**
+     * Détails sur le véhicule voulu
+     *
+     * @Rest\Get(path="/vehicules/{id}", name="covoiturage_vehicules_show")
+     * @Rest\View(serializerGroups={"vehicule_always", "assurance_always", "energie_always", "etat_always"})
+     *
+     * @param Vehicule $vehicule
+     * @return Vehicule
+     */
+    public function showAction(Vehicule $vehicule) {
+        return $vehicule;
+    }
+
 
 }
