@@ -12,7 +12,7 @@ use UserBundle\Entity\User;
  * Vehicule
  *
  * @ORM\Table(name="vehicules", indexes={@ORM\Index(name="fk_vehicules_etats1_idx", columns={"etats_id"}), @ORM\Index(name="fk_vehicules_energies1_idx", columns={"energies_id"}), @ORM\Index(name="fk_vehicules_assurances1_idx", columns={"assurances_id"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="CovoiturageBundle\Repository\VehiculeRepository")
  */
 class Vehicule {
 
