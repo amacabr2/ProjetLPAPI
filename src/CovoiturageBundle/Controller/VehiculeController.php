@@ -5,8 +5,10 @@ namespace CovoiturageBundle\Controller;
 
 use CovoiturageBundle\Entity\Vehicule;
 use FOS\RestBundle\Controller\Annotations as Rest;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use UserBundle\Entity\User;
+use Symfony\Component\HttpFoundation\Response;
 
 class VehiculeController extends Controller {
 
@@ -36,5 +38,25 @@ class VehiculeController extends Controller {
         return $vehicule;
     }
 
+    /**
+     * Ajoute un véhicule à l'utilisateur
+     *
+     * @Rest\Post(path="/users/{user}/vehicules")
+     * @Rest\View(statusCode=Response::HTTP_CREATED)
+     * @ParamConverter("vehicule", converter="fos_rest.request_body")
+     *
+     * @param Vehicule $vehicule
+     * @param User $user
+     * @return Vehicule
+     */
+    public function addAction(Vehicule $vehicule, User $user) {
+        //TODO : relation avec assurance : ManyToOne ou OneToOne ?
+        $user->addVehicule($vehicule);
 
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($user);
+        $em->flush();
+
+        return $vehicule;
+    }
 }
