@@ -11,7 +11,7 @@ use UserBundle\Entity\User;
 /**
  * Trajet
  *
- * @ORM\Table(name="trajets", indexes={@ORM\Index(name="fk_trajets_users1_idx", columns={"user_conducteur_id"})})
+ * @ORM\Table(name="trajets")
  * @ORM\Entity(repositoryClass="CovoiturageBundle\Repository\TrajetRepository")
  */
 class Trajet {
@@ -85,7 +85,10 @@ class Trajet {
     /**
      * @var Vehicule
      *
-     * @ORM\OneToOne(targetEntity="CovoiturageBundle\Entity\Vehicule")
+     * @ORM\ManyToOne(targetEntity="CovoiturageBundle\Entity\Vehicule")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="vehicule_id", referencedColumnName="id")
+     * })
      *
      * @Serializer\Groups({"trajet_detail"})
      */

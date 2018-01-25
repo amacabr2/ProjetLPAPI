@@ -4,8 +4,8 @@ namespace CovoiturageBundle\Controller;
 
 use CovoiturageBundle\Entity\Localisation;
 use CovoiturageBundle\Entity\Trajet;
+use CovoiturageBundle\Entity\Vehicule;
 use FOS\RestBundle\Controller\Annotations as Rest;
-use FOS\RestBundle\Request\ParamFetcher;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -41,15 +41,31 @@ class TrajetController extends Controller {
      * @Rest\Post(path="/trajets", name="covoiturage_trajets_create")
      * @Rest\View(statusCode=Response::HTTP_CREATED)
      *
-     * @param Trajet $trajet
-     * @return Trajet
+     * @param Request $request
+     * @return Response
      */
-    public function addAction(Trajet $trajet) {
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($trajet);
-        $em->flush();
+    public function addAction(Request $request) {
+        $em = $this->getDoctrine();
 
-        return $trajet;
+        /** @var User $userConducteur */
+        $userConducteur = $em->getRepository('UserBundle:User')->find($request->get('user_conducteur'));
+        /** @var  Localisation[] localisations */
+        $localisations = $request->get('localisations');
+        /** @var Vehicule $vehicule */
+        $vehicule = $em->getRepository('CovoiturageBundle:Vehicule')->find($request->get('vehicule'));
+
+        $trajet = new Trajet();
+        $trajet->setUserConducteur($userConducteur);
+        $trajet->setNbPlaceRestante($request->get('nb_place_restante'));
+        foreach ($localisations as $localisation) {
+            $trajet->addLocalisation(Localisation::jsonDeserialize($localisation));
+        }
+        $trajet->setVehicule($vehicule);
+
+        $em->getManager()->persist($trajet);
+        $em->getManager()->flush();
+
+        return new Response($this->serialize(['message' => "Votre trajet a été crée"]), Response::HTTP_CREATED);
     }
 
     /**
@@ -61,13 +77,14 @@ class TrajetController extends Controller {
 
     /**
      * @Rest\Post(path="/trajets/rejoindre", name="covoiturage_trajets_rejoindre")
-     * @Rest\View(statusCode=Response::HTTP_OK)
+     * @Rest\View(statusCode=Response::HTTP_CREATED)
      *
      * @param Request $request
      * @return Response
      */
     public function joinTrajetAction(Request $request) {
         $em = $this->getDoctrine();
+
         /** @var Trajet $trajet */
         $trajet = $em->getRepository('CovoiturageBundle:Trajet')->find($request->get('trajet_id'));
         /** @var User $user */

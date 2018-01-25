@@ -16,7 +16,7 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * User
  *
- * @ORM\Table(name="users", indexes={@ORM\Index(name="fk_users_permis_idx", columns={"permis_id"}), @ORM\Index(name="fk_users_localisations1_idx", columns={"localisations_id"})})
+ * @ORM\Table(name="users")
  * @ORM\Entity
  */
 class User extends BaseUser {
