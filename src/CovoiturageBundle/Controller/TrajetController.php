@@ -46,33 +46,32 @@ class TrajetController extends Controller {
      */
     public function addAction(Request $request) {
         $em = $this->getDoctrine();
-
+        $isConducteur = (bool)$request->get('is_conducteur');
         /** @var User $userConducteur */
-        $userConducteur = $em->getRepository('UserBundle:User')->find($request->get('user_conducteur'));
+        $user = $em->getRepository('UserBundle:User')->find($request->get('user'));
         /** @var  Localisation[] localisations */
         $localisations = $request->get('localisations');
-        /** @var Vehicule $vehicule */
-        $vehicule = $em->getRepository('CovoiturageBundle:Vehicule')->find($request->get('vehicule'));
 
         $trajet = new Trajet();
-        $trajet->setUserConducteur($userConducteur);
-        $trajet->setNbPlaceRestante($request->get('nb_place_restante'));
+        if ($isConducteur) {
+            /** @var Vehicule $vehicule */
+            $vehicule = $em->getRepository('CovoiturageBundle:Vehicule')->find($request->get('vehicule'));
+
+            $trajet->setUserConducteur($user);
+            $trajet->setNbPlaceRestante($request->get('nb_place_restante'));
+            $trajet->setVehicule($vehicule);
+        } else {
+            $trajet->addUser($user);
+        }
+
         foreach ($localisations as $localisation) {
             $trajet->addLocalisation(Localisation::jsonDeserialize($localisation));
         }
-        $trajet->setVehicule($vehicule);
 
         $em->getManager()->persist($trajet);
         $em->getManager()->flush();
 
-        return new Response($this->serialize(['message' => "Votre trajet a été crée"]), Response::HTTP_CREATED);
-    }
-
-    /**
-     * @Rest\Put(path="/trajets/{id}", name="covoiturage_trajets_update")
-     */
-    public function updateAction() {
-
+        return new Response($this->serialize(['message' => "Votre tajet a été crée"]), Response::HTTP_CREATED);
     }
 
     /**
