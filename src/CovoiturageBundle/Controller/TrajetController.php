@@ -6,7 +6,7 @@ use CovoiturageBundle\Entity\Localisation;
 use CovoiturageBundle\Entity\Trajet;
 use CovoiturageBundle\Entity\Vehicule;
 use CovoiturageBundle\Exception\AlreadyExistingDriverException;
-use CovoiturageBundle\Exception\NoPlaceInVehicleException;
+use CovoiturageBundle\Exception\NoPlaceInVehiculeException;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -82,7 +82,7 @@ class TrajetController extends Controller {
      *
      * @param Request $request
      * @return Response
-     * @throws NoPlaceInVehicleException
+     * @throws NoPlaceInVehiculeException
      * @throws AlreadyExistingDriverException
      */
     public function joinTrajetAction(Request $request) {
@@ -108,7 +108,7 @@ class TrajetController extends Controller {
                     $trajet->addLocalisation($localisation);
                     $trajet->setVehicule($vehicule);
                 } else {
-                    throw new NoPlaceInVehicleException("Il y a plus d'utilisateurs que de places dans le vehicule pour ce trajet");
+                    throw new NoPlaceInVehiculeException("Il y a plus d'utilisateurs que de places dans le vehicule pour ce trajet");
                 }
             } else {
                 throw new AlreadyExistingDriverException("Il y a déjà un conducteur pour se trajet");
@@ -121,7 +121,7 @@ class TrajetController extends Controller {
                 $trajet->addLocalisation($localisation);
                 $trajet->setNbPlaceRestante($nbrPlaceInVehicule - 1);
             } else {
-                throw new NoPlaceInVehicleException("Il n'y a plus de place dans le vehicule");
+                throw new NoPlaceInVehiculeException("Il n'y a plus de place dans le vehicule");
             }
         }
 

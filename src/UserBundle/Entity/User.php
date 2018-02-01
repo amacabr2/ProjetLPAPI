@@ -181,7 +181,7 @@ class User extends BaseUser {
      *
      * @ORM\ManyToMany(targetEntity="CovoiturageBundle\Entity\Trajet", mappedBy="users")
      *
-     * @Serializer\Groups({"user_list", "user_detail"})
+     * @Serializer\Groups({"user_detail"})
      */
     private $trajets;
 

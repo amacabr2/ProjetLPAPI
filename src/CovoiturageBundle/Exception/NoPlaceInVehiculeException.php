@@ -9,6 +9,6 @@
 namespace CovoiturageBundle\Exception;
 
 
-class NoPlaceInVehicleException extends \Exception {
+class NoPlaceInVehiculeException extends \Exception {
 
 }
