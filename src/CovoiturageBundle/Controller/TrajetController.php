@@ -73,7 +73,7 @@ class TrajetController extends Controller {
         $em->getManager()->persist($trajet);
         $em->getManager()->flush();
 
-        return new Response($this->serialize(['message' => "Votre tajet a été crée"]), Response::HTTP_CREATED);
+        return $this->setBaseHeaders(new Response($this->serialize(['message' => "Votre tajet a été crée"]), Response::HTTP_CREATED));
     }
 
     /**
@@ -129,7 +129,7 @@ class TrajetController extends Controller {
         $em->getManager()->flush();
 
         $message = 'Vous avez été ajouté au trajet ' . ($isConducteur ? 'antant que conducteur' : 'antant que passagé');
-        return new Response($this->serialize(['message' => $message]), Response::HTTP_CREATED);
+        return $this->setBaseHeaders(new Response($this->serialize(['message' => $message]), Response::HTTP_CREATED));
     }
 
     /**
