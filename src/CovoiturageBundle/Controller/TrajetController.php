@@ -5,6 +5,8 @@ namespace CovoiturageBundle\Controller;
 use CovoiturageBundle\Entity\Localisation;
 use CovoiturageBundle\Entity\Trajet;
 use CovoiturageBundle\Entity\Vehicule;
+use CovoiturageBundle\Exception\AlreadyExistingDriverException;
+use CovoiturageBundle\Exception\NoPlaceInVehicleException;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -48,7 +50,7 @@ class TrajetController extends Controller {
         $em = $this->getDoctrine();
         $isConducteur = (bool)$request->get('is_conducteur');
         /** @var User $userConducteur */
-        $user = $em->getRepository('UserBundle:User')->find($request->get('user'));
+        $user = $em->getRepository('UserBundle:User')->find($request->get('user_id'));
         /** @var  Localisation[] localisations */
         $localisations = $request->get('localisations');
 
@@ -80,23 +82,54 @@ class TrajetController extends Controller {
      *
      * @param Request $request
      * @return Response
+     * @throws NoPlaceInVehicleException
+     * @throws AlreadyExistingDriverException
      */
     public function joinTrajetAction(Request $request) {
         $em = $this->getDoctrine();
-
+        $isConducteur = (bool)$request->get('is_conducteur');
         /** @var Trajet $trajet */
         $trajet = $em->getRepository('CovoiturageBundle:Trajet')->find($request->get('trajet_id'));
         /** @var User $user */
         $user = $em->getRepository('UserBundle:User')->find($request->get('user_id'));
         /** @var Localisation $localisation */
         $localisation = Localisation::jsonDeserialize($request->get('localisation'));
+        $nbrUsersInTrajet = $trajet->getUsers();
 
-        $trajet->addLocalisation($localisation);
-        $trajet->addUser($user);
+        if ($isConducteur) {
+            if ($this->noConducteurForThisTrajet($trajet)) {
+                /** @var Vehicule $vehicule */
+                $vehicule = $em->getRepository('CovoiturageBundle:Vehicule')->find($request->get('vehicule'));
+                $nbrPlaceInVehicule = $request->get('nb_place_restante');
+
+                if ($nbrPlaceInVehicule > $nbrUsersInTrajet ) {
+                    $trajet->setUserConducteur($user);
+                    $trajet->setNbPlaceRestante($nbrPlaceInVehicule - $nbrUsersInTrajet);
+                    $trajet->addLocalisation($localisation);
+                    $trajet->setVehicule($vehicule);
+                } else {
+                    throw new NoPlaceInVehicleException("Il y a plus d'utilisateurs que de places dans le vehicule pour ce trajet");
+                }
+            } else {
+                throw new AlreadyExistingDriverException("Il y a déjà un conducteur pour se trajet");
+            }
+        } else {
+            $nbrPlaceInVehicule = $trajet->getNbPlaceRestante();
+
+            if ($nbrPlaceInVehicule > 0) {
+                $trajet->addUser($user);
+                $trajet->addLocalisation($localisation);
+                $trajet->setNbPlaceRestante($nbrPlaceInVehicule - 1);
+            } else {
+                throw new NoPlaceInVehicleException("Il n'y a plus de place dans le vehicule");
+            }
+        }
+
         $em->getManager()->persist($trajet);
         $em->getManager()->flush();
 
-        return new Response($this->serialize(['message' => 'Vous avez été ajouté au trajet']), Response::HTTP_CREATED);
+        $message = 'Vous avez été ajouté au trajet ' . ($isConducteur ? 'antant que conducteur' : 'antant que passagé');
+        return new Response($this->serialize(['message' => $message]), Response::HTTP_CREATED);
     }
 
     /**
@@ -117,5 +150,13 @@ class TrajetController extends Controller {
         return $this->getDoctrine()
             ->getRepository("CovoiturageBundle:Trajet")
             ->findAllForSearch($request->get('q'));
+    }
+
+    /**
+     * @param Trajet $trajet
+     * @return bool
+     */
+    private function noConducteurForThisTrajet(Trajet $trajet): bool {
+        return $trajet->getUserConducteur() == null;
     }
 }
