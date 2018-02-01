@@ -73,7 +73,7 @@ class TrajetController extends Controller {
         $em->getManager()->persist($trajet);
         $em->getManager()->flush();
 
-        return $this->setBaseHeaders(new Response($this->serialize(['message' => "Votre tajet a été crée"]), Response::HTTP_CREATED));
+        return $this->setBaseHeaders(new Response($this->serialize(['message' => "Votre trajet a été crée"]), Response::HTTP_CREATED));
     }
 
     /**

@@ -115,11 +115,13 @@ fos_rest:
     view:
         formats: { json: true, xml: false, rss: false }
         view_response_listener: true
+        mime_types:
+            json: ['application/json', 'application/json;version=1.0', 'application/json;version=1.1']
     serializer:
         serialize_null: true
     format_listener:
         rules:
-            - { path: '^/', priorities: ['json', 'html'], fallback_format: 'json'}
+            - { path: '^/', priorities: [json, html], fallback_format: json}
     param_fetcher_listener: force
     exception:
         enabled: true
@@ -127,7 +129,8 @@ fos_rest:
             'UserBundle\Exception\BadAuthenticationLoginException': 404
             'UserBundle\Exception\BadAuthenticationPasswordException': 400
             'UserBundle\Exception\BadRegistrationException': 400
-
+            'CovoiturageBundle\Exception\AlreadyExistingDriverException': 400
+            'CovoiturageBundle\Exception\NoPlaceInVehiculeException': 400
 
 vich_uploader:
     db_driver: orm
