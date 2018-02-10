@@ -49,12 +49,13 @@ class TrajetController extends Controller {
     public function addAction(Request $request) {
         $em = $this->getDoctrine();
         $isConducteur = (bool)$request->get('is_conducteur');
-        /** @var User $userConducteur */
+        /** @var User $user */
         $user = $em->getRepository('UserBundle:User')->find($request->get('user_id'));
         /** @var  Localisation[] localisations */
         $localisations = $request->get('localisations');
 
         $trajet = new Trajet();
+        $trajet->setUserDemandeur($user);
         if ($isConducteur) {
             /** @var Vehicule $vehicule */
             $vehicule = $em->getRepository('CovoiturageBundle:Vehicule')->find($request->get('vehicule'));

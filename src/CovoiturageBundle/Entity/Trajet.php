@@ -41,6 +41,18 @@ class Trajet {
      *
      * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
      * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="user_demandeur_id", referencedColumnName="id")
+     * })
+     *
+     * @Serializer\Groups({"trajet_list", "trajet_detail"})
+     */
+    private $userDemandeur;
+
+    /**
+     * @var User
+     *
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
+     * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="user_conducteur_id", referencedColumnName="id")
      * })
      *
@@ -131,6 +143,23 @@ class Trajet {
      */
     public function getId(): int {
         return $this->id;
+    }
+
+    /**
+     * @return User
+     */
+    public function getUserDemandeur(): User {
+        return $this->userDemandeur;
+    }
+
+    /**
+     * @param User $userDemandeur
+     * @return Trajet
+     */
+    public function setUserDemandeur(User $userDemandeur): self {
+        $this->userDemandeur = $userDemandeur;
+
+        return $this;
     }
 
     /**
