@@ -37,6 +37,20 @@ class User extends BaseUser {
     /**
      * @var string
      *
+     * @Serializer\Groups({"user_list", "user_detail", "user_trajet"})
+     */
+    protected $username;
+
+    /**
+     * @var string
+     *
+     * @Serializer\Groups({"user_list", "user_detail", "user_trajet"})
+     */
+    protected $email;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="password_reset_token", type="string", nullable=true)
      */
     private $passwordResetToken;
