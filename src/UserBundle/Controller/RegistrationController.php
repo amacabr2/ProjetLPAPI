@@ -67,62 +67,11 @@ class RegistrationController extends BaseController {
             $userManager->updateUser($user);
             $response = new Response($this->serialize(['message' => 'Votre compte a été crée.']), Response::HTTP_CREATED);
         } else {
-            throw $this->throwApiProblemValidationException($form);
+            return $this->throwApiProblemValidationException($form);
         }
 
         /** @var Response $response */
         return $this->setBaseHeaders($response);
-    }
-
-    /**
-     * @param  Request $request
-     * @param  FormInterface $form
-     * @throws BadRequestHttpException
-     */
-    private function processForm(Request $request, FormInterface $form) {
-        $data = json_decode($request->getContent(), true);
-        if ($data === null) {
-            throw new BadRequestHttpException();
-        }
-        $form->submit($data);
-    }
-
-    /**
-     * @param FormInterface $form
-     * @throws BadRegistrationException
-     */
-    private function throwApiProblemValidationException(FormInterface $form) {
-        throw new BadRegistrationException(
-            $this->serialize($this->getErrorsFromForm($form))
-        );
-    }
-
-    /**
-     * @param FormInterface $form
-     * @return array
-     */
-    private function getErrorsFromForm(FormInterface $form): array {
-        $errors = [];
-
-        foreach ($form->getErrors() as $key => $error) {
-            $template = $error->getMessageTemplate();
-            $parameters = $error->getMessageParameters();
-
-            foreach ($parameters as $var => $value) {
-                $template = str_replace($var, $value, $template);
-            }
-            $errors[$key] = $template;
-        }
-
-        foreach ($form->all() as $childform) {
-            if ($childform instanceof FormInterface) {
-                if ($childErrors = $this->getErrorsFromForm($childform)) {
-                    $errors[$childform->getName()] = $childErrors;
-                }
-            }
-        }
-
-        return $errors;
     }
 
     /**
@@ -157,5 +106,15 @@ class RegistrationController extends BaseController {
         $localisation->setVille($loc["ville"]);
         $localisation->setCodePostal($loc["codePostal"]);
         return $localisation;
+    }
+
+    /**
+     * @param FormInterface $form
+     * @throws BadRegistrationException
+     */
+    private function throwApiProblemValidationException(FormInterface $form) {
+        throw new BadRegistrationException(
+            $this->serialize($this->getErrorsFromForm($form))
+        );
     }
 }
