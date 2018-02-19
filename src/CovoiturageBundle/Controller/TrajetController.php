@@ -7,6 +7,7 @@ use CovoiturageBundle\Entity\Trajet;
 use CovoiturageBundle\Entity\Vehicule;
 use CovoiturageBundle\Exception\AlreadyExistingDriverException;
 use CovoiturageBundle\Exception\NoPlaceInVehiculeException;
+use CovoiturageBundle\Representation\Trajets;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,12 +21,26 @@ class TrajetController extends Controller {
 
     /**
      * @Rest\Get(path="/trajets", name="covoiturage_trajets_index")
-     * @Rest\View(serializerGroups={"trajet_list", "user_trajet", "localisation_always", "vehicule_always", "energie_always", "assurance_always", "etat_always"})
+     * @Rest\View(serializerGroups={"trajet_list", "user_trajet", "localisation_always"})
      *
      * @return Trajet[]
      */
     public function indexAction() {
         return $this->getDoctrine()->getRepository('CovoiturageBundle:Trajet')->findAll();
+    }
+
+    /**
+     * @Rest\Get(path="/trajets/list/{offset}", name="covoiturage_trajets_list")
+     *
+     * @Rest\View()
+     *
+     * @param int $offset
+     * @return Trajets
+     */
+    public function listAction(int $offset): Trajets {
+        $pager = $this->getDoctrine()->getRepository('CovoiturageBundle:Trajet')->findAllForPagination('asc', 5, $offset);
+
+        return new Trajets($pager);
     }
 
     /**
@@ -103,7 +118,7 @@ class TrajetController extends Controller {
                 $vehicule = $em->getRepository('CovoiturageBundle:Vehicule')->find($request->get('vehicule'));
                 $nbrPlaceInVehicule = $request->get('nb_place_restante');
 
-                if ($nbrPlaceInVehicule > $nbrUsersInTrajet ) {
+                if ($nbrPlaceInVehicule > $nbrUsersInTrajet) {
                     $trajet->setUserConducteur($user);
                     $trajet->setNbPlaceRestante($nbrPlaceInVehicule - $nbrUsersInTrajet);
                     $trajet->addLocalisation($localisation);
@@ -134,6 +149,14 @@ class TrajetController extends Controller {
     }
 
     /**
+     * @param Trajet $trajet
+     * @return bool
+     */
+    private function noConducteurForThisTrajet(Trajet $trajet): bool {
+        return $trajet->getUserConducteur() == null;
+    }
+
+    /**
      * @Rest\Delete(path="/trajets/{id}", name="covoiturage_trajets_delete")
      */
     public function deleteAction() {
@@ -151,13 +174,5 @@ class TrajetController extends Controller {
         return $this->getDoctrine()
             ->getRepository("CovoiturageBundle:Trajet")
             ->findAllForSearch($request->get('q'));
-    }
-
-    /**
-     * @param Trajet $trajet
-     * @return bool
-     */
-    private function noConducteurForThisTrajet(Trajet $trajet): bool {
-        return $trajet->getUserConducteur() == null;
     }
 }

@@ -24,6 +24,7 @@ class Trajet {
      * @ORM\GeneratedValue(strategy="IDENTITY")
      *
      * @Serializer\Groups({"trajet_list"})
+     * @Serializer\Expose()
      */
     private $id;
 
@@ -56,7 +57,7 @@ class Trajet {
      *   @ORM\JoinColumn(name="user_conducteur_id", referencedColumnName="id")
      * })
      *
-     * @Serializer\Groups({"trajet_list", "trajet_detail"})
+     * @Serializer\Groups({"trajet_detail"})
      */
     private $userConducteur;
 

@@ -21,6 +21,7 @@ class AppKernel extends Kernel
             new \Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new \Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle(),
             new \Vich\UploaderBundle\VichUploaderBundle(),
+            new \WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
             new AppBundle\AppBundle(),
             new UserBundle\UserBundle(),
             new CovoiturageBundle\CovoiturageBundle(),
