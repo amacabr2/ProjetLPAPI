@@ -6,7 +6,7 @@
  * Time: 11:19
  */
 
-namespace UserBundle\Controller;
+namespace UserBundle\Exception;
 
 
 class BadEditUserException extends \Exception {

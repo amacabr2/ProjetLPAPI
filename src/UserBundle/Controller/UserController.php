@@ -14,7 +14,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use UserBundle\Entity\User;
 use Symfony\Component\HttpFoundation\Response;
-use UserBundle\Exception\BadRegistrationException;
+use UserBundle\Exception\BadEditUserException;
 use UserBundle\Helper\ControllerHelper;
 
 class UserController extends Controller {
@@ -43,7 +43,7 @@ class UserController extends Controller {
     }
 
     /**
-     * @Resst\Put(path="/users/{user}", name="users_update")
+     * @Rest\Put(path="/profil/{user}", name="users_update")
      *
      * @param Request $request
      * @param User $user
@@ -64,6 +64,7 @@ class UserController extends Controller {
         if (count($errors)) {
             throw new BadEditUserException($this->serialize($errors));
         }
+        $userProfil = $this->buildUser($user, $request, false);
 
         $event = new GetResponseUserEvent($user, $request);
         $dispatcher->dispatch(FOSUserEvents::PROFILE_EDIT_INITIALIZE);
@@ -72,14 +73,15 @@ class UserController extends Controller {
             return $event->getResponse();
         }
 
-        $form = $formFactory->createForm(['csrf_protection' => false]);
-        $form->setData($user);
+        $form = $formFactory->createForm(['csrf_protection' => false, 'allow_extra_fields' => true]);
+        $form->remove('current_password');
+        $form->setData($userProfil);
         $this->processForm($request, $form);
 
         if ($form->isValid()) {
             $event = new FormEvent($form, $request);
             $dispatcher->dispatch(FOSUserEvents::PROFILE_EDIT_SUCCESS, $event);
-            $userManager->updateUser($user);
+            $userManager->updateUser($userProfil);
             $response = new Response($this->serialize(['message' => 'Votre compte a été modifié']));
         } else {
             throw $this->throwApiProblemValidationException($form);

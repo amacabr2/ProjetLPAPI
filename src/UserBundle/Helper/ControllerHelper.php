@@ -8,11 +8,13 @@
 
 namespace UserBundle\Helper;
 
+use CovoiturageBundle\Entity\Localisation;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use JMS\Serializer\SerializationContext;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use UserBundle\Entity\User;
 use UserBundle\Exception\BadRegistrationException;
 
 trait ControllerHelper {
@@ -69,6 +71,46 @@ trait ControllerHelper {
         }
 
         return $errors;
+    }
+
+    /**
+     * @param User $user
+     * @param Request $request
+     * @param bool $isNew
+     * @return User
+     */
+    public function buildUser(User $user, Request $request, bool $isNew): User {
+        $user->setPrenom($request->get("prenom"));
+        $user->setNom($request->get("nom"));
+        $user->setCivilite($request->get("civilite"));
+        $user->setDateNaissance($request->get("dateNaissance"));
+        $user->setTelFixe($request->get("telFixe"));
+        $user->setTelPortable($request->get("telPortable"));
+        $user->setFichier($request->get("fichier"));
+        $user->setNewsletter($request->get("newsletter"));
+        $user->setPresentation($request->get("presentation"));
+        $user->setLocalisation($this->buildLocalisation($request));
+
+        if ($isNew) {
+            $user->setCreatedAt();
+        } else {
+            $user->setUpdatedAt();
+        }
+
+        return $user;
+    }
+
+    /**
+     * @param Request $request
+     * @return Localisation
+     */
+    public function buildLocalisation(Request $request): Localisation {
+        $localisation = new Localisation();
+        $loc = $request->get("localisation");
+        $localisation->setAdresse($loc["adresse"]);
+        $localisation->setVille($loc["ville"]);
+        $localisation->setCodePostal($loc["codePostal"]);
+        return $localisation;
     }
 
     /**

@@ -55,7 +55,7 @@ class RegistrationController extends BaseController {
             return $event->getResponse();
         }
 
-        $user = $this->buildUser($user, $request);
+        $user = $this->buildUser($user, $request, true);
 
         $form = $formFactory->createForm(['csrf_protection' => false]);
         $form->setData($user);
@@ -72,40 +72,6 @@ class RegistrationController extends BaseController {
 
         /** @var Response $response */
         return $this->setBaseHeaders($response);
-    }
-
-    /**
-     * @param User $user
-     * @param Request $request
-     * @return User
-     */
-    private function buildUser(User $user, Request $request): User {
-        $user->setPrenom($request->get("prenom"));
-        $user->setNom($request->get("nom"));
-        $user->setCivilite($request->get("civilite"));
-        $user->setDateNaissance($request->get("dateNaissance"));
-        $user->setTelFixe($request->get("telFixe"));
-        $user->setTelPortable($request->get("telPortable"));
-        $user->setFichier($request->get("fichier"));
-        $user->setNewsletter($request->get("newsletter"));
-        $user->setPresentation($request->get("presentation"));
-        $user->setLocalisation($this->buildLocalisation($request));
-        $user->setCreatedAt();
-
-        return $user;
-    }
-
-    /**
-     * @param Request $request
-     * @return Localisation
-     */
-    private function buildLocalisation(Request $request): Localisation {
-        $localisation = new Localisation();
-        $loc = $request->get("localisation");
-        $localisation->setAdresse($loc["adresse"]);
-        $localisation->setVille($loc["ville"]);
-        $localisation->setCodePostal($loc["codePostal"]);
-        return $localisation;
     }
 
     /**
