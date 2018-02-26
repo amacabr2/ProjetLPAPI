@@ -23,7 +23,7 @@ class UserController extends Controller {
 
     /**
      * @Rest\Get(path="/users", name="users_users")
-     * @Rest\View(serializerGroups={"user_list"})
+     * @Rest\View(serializerGroups={"user_list", "formation_always"})
      *
      * @return array|\CovoiturageBundle\Entity\Localisation[]|\CovoiturageBundle\Entity\Trajet[]|User[]
      */
@@ -33,7 +33,7 @@ class UserController extends Controller {
 
     /**
      * @Rest\Get(path="/users/{id}", name="users_user")
-     * @Rest\View(serializerGroups={"user_detail", "user_trajet", "trajet_list", "localisation_always", "vehicule_always", "etat_always", "energie_always", "assurance_always"})
+     * @Rest\View(serializerGroups={"user_detail", "user_trajet", "trajet_list", "localisation_always", "vehicule_always", "etat_always", "energie_always", "assurance_always", "formation_always"})
      *
      * @param User $user
      * @return User

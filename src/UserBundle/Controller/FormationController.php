@@ -20,7 +20,7 @@ class FormationController extends Controller{
 
     /**
      * @Rest\Get(path="/formations", name="users_index")
-     * @Rest\View()
+     * @Rest\View(serializerGroups={"formation_always"})
      *
      * @param Request $request
      * @return array|\CovoiturageBundle\Entity\Etat[]|\CovoiturageBundle\Entity\Localisation[]|\CovoiturageBundle\Entity\Permis[]|\CovoiturageBundle\Entity\Vehicule[]|\UserBundle\Entity\Formation[]

@@ -18,6 +18,8 @@ class Formation {
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     *
+     * @Serializer\Groups({"formation_always"})
      */
     private $id;
 
@@ -25,6 +27,8 @@ class Formation {
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+     *
+     * @Serializer\Groups({"formation_always"})
      */
     private $name;
 

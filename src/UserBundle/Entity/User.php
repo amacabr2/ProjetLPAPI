@@ -223,6 +223,8 @@ class User extends BaseUser {
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="formation_id", referencedColumnName="id")
      * })
+     *
+     * @Serializer\Groups({"user_detail"})
      */
     private $formation;
 
