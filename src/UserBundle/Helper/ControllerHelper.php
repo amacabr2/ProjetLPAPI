@@ -107,11 +107,16 @@ trait ControllerHelper {
      * @return Localisation
      */
     public function buildLocalisation(Request $request): Localisation {
+        $em = $this->getDoctrine()->getManager();
+
         $localisation = new Localisation();
         $loc = $request->get("localisation");
         $localisation->setAdresse($loc["adresse"]);
         $localisation->setVille($loc["ville"]);
         $localisation->setCodePostal($loc["codePostal"]);
+
+        $em->persist($localisation);
+        $em->flush();
         return $localisation;
     }
 

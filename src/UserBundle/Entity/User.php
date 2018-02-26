@@ -223,6 +223,7 @@ class User extends BaseUser {
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="formation_id", referencedColumnName="id")
      * })
+     * @Assert\NotBlank()
      *
      * @Serializer\Groups({"user_detail"})
      */
