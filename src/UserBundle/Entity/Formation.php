@@ -3,6 +3,7 @@
 namespace UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Formation
@@ -19,7 +20,7 @@ class Formation {
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      *
-     * @Serializer\Groups(serializerGroups={"formation_always"})
+     * @Serializer\Groups({"formation_always"})
      */
     private $id;
 
@@ -28,7 +29,7 @@ class Formation {
      *
      * @ORM\Column(name="name", type="string", length=255)
      *
-     * @Serializer\Groups(serializerGroups={"formation_always"})
+     * @Serializer\Groups({"formation_always"})
      */
     private $name;
 
