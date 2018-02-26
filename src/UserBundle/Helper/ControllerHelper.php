@@ -89,6 +89,7 @@ trait ControllerHelper {
         $user->setFichier($request->get("fichier"));
         $user->setNewsletter($request->get("newsletter"));
         $user->setPresentation($request->get("presentation"));
+        $user->setFormation($request->get('formation'));
         $user->setLocalisation($this->buildLocalisation($request));
 
         if ($isNew) {
