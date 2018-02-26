@@ -25,8 +25,8 @@ class RegistrationType extends AbstractType {
             ->add("fichier")
             ->add("newsletter")
             ->add("presentation")
-            ->add("formation")
-            ->add('localisation', LocalisationType::class)
+            ->add("formation", FormationType::class)
+            ->add("localisation", LocalisationType::class)
         ;
     }
 
