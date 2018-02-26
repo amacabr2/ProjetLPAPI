@@ -26,6 +26,7 @@ class UserFixture extends FakerFixture {
      * @param ObjectManager $manager
      */
     public function load(ObjectManager $manager) {
+        $formations = $manager->getRepository('UserBundle:Formation')->findAll();
         $permis = $manager->getRepository('CovoiturageBundle:Permis')->findAll();
         $localisations = $manager->getRepository('CovoiturageBundle:Localisation')->findAll();
         $vehicules = $manager->getRepository('CovoiturageBundle:Vehicule')->findAll();
@@ -53,6 +54,7 @@ class UserFixture extends FakerFixture {
             $user->setPermis($permis[$i]);
             $user->setLocalisation($localisations[$i]);
             $user->addVehicule($vehicules[$i]);
+            $user->setFormation($formations[$i % 2]);
 
             $manager->persist($user);
         }
@@ -67,7 +69,8 @@ class UserFixture extends FakerFixture {
         return [
             PermisFixture::class,
             LocalisationFixture::class,
-            VehiculeFixture::class
+            VehiculeFixture::class,
+            FormationFixture::class
         ];
     }
 }

@@ -217,6 +217,16 @@ class User extends BaseUser {
     private $vehicules;
 
     /**
+     * @var Formation
+     *
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\Formation")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="formation_id", referencedColumnName="id")
+     * })
+     */
+    private $formation;
+
+    /**
      * Constructor
      */
     public function __construct() {
@@ -612,5 +622,22 @@ class User extends BaseUser {
      */
     public function getVehicules(): Collection {
         return $this->vehicules;
+    }
+
+    /**
+     * @return Formation
+     */
+    public function getFormation(): Formation {
+        return $this->formation;
+    }
+
+    /**
+     * @param Formation $formation
+     * @return User
+     */
+    public function setFormation(Formation $formation): self {
+        $this->formation = $formation;
+
+        return $this;
     }
 }
