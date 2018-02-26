@@ -219,7 +219,7 @@ class User extends BaseUser {
     /**
      * @var Formation
      *
-     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\Formation")
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\Formation", cascade={"persist"})
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="formation_id", referencedColumnName="id")
      * })
