@@ -12,6 +12,7 @@ namespace UserBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use UserBundle\Helper\ControllerHelper;
+use FOS\RestBundle\Controller\Annotations as Rest;
 
 class FormationController extends Controller{
 
