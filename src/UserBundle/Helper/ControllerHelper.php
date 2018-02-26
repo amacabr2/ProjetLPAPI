@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use JMS\Serializer\SerializationContext;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use UserBundle\Entity\Formation;
 use UserBundle\Entity\User;
 use UserBundle\Exception\BadRegistrationException;
 
@@ -89,7 +90,7 @@ trait ControllerHelper {
         $user->setFichier($request->get("fichier"));
         $user->setNewsletter($request->get("newsletter"));
         $user->setPresentation($request->get("presentation"));
-        $user->setFormation($request->get('formation'));
+        $user->setFormation($this->buildFormation($request));
         $user->setLocalisation($this->buildLocalisation($request));
 
         if ($isNew) {
@@ -112,6 +113,17 @@ trait ControllerHelper {
         $localisation->setVille($loc["ville"]);
         $localisation->setCodePostal($loc["codePostal"]);
         return $localisation;
+    }
+
+    /**
+     * @param Request $request
+     * @return Formation
+     */
+    private function buildFormation(Request $request): Formation {
+        $for = $request->get("formation");
+        $formation = new Formation();
+        $formation->setName($for['name']);
+        return $formation;
     }
 
     /**
