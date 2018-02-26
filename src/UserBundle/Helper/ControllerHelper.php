@@ -120,10 +120,7 @@ trait ControllerHelper {
      * @return Formation
      */
     private function buildFormation(Request $request): Formation {
-        $for = $request->get("formation");
-        $formation = new Formation();
-        $formation->setName($for['name']);
-        return $formation;
+        return $this->getDoctrine()->getRepository("UserBundle:Formation")->find($request->get("formation"));
     }
 
     /**
